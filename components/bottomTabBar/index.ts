@@ -1,0 +1,1 @@
+export * as BottomTabBar from './TabBar';
