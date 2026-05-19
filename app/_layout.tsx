@@ -6,6 +6,7 @@ import '../global.css';
 
 import { ThemeProvider } from "@react-navigation/native";
 
+import FontProvider from '@/provider/Font';
 import { useThemeStore } from '@/store/theme-store';
 import { Stack } from 'expo-router';
 import { HeroUINativeProvider } from 'heroui-native/provider';
@@ -23,18 +24,24 @@ export default function Layout() {
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>
-        <HeroUINativeProvider>
-          <ThemeProvider value={navigationTheme}>
-            <StatusBar barStyle={navigationTheme.dark ? 'light-content' : 'dark-content'} />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-              }}
-            >
-              <Stack.Screen name="(tab)" />
-            </Stack>
-          </ThemeProvider>
-        </HeroUINativeProvider>
+        <FontProvider>
+          <HeroUINativeProvider
+            config={{
+              devInfo: { stylingPrinciples: false },
+            }}
+          >
+            <ThemeProvider value={navigationTheme}>
+              <StatusBar barStyle={navigationTheme.dark ? 'light-content' : 'dark-content'} />
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                }}
+              >
+                <Stack.Screen name="(tab)" />
+              </Stack>
+            </ThemeProvider>
+          </HeroUINativeProvider>
+        </FontProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

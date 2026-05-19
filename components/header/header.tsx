@@ -10,8 +10,13 @@ import Animated, {
     withSpring
 } from 'react-native-reanimated';
 
+import Fontisto from '@expo/vector-icons/Fontisto';
+import { Image } from 'expo-image';
+import { Avatar } from 'heroui-native/avatar';
+import { Button } from 'heroui-native/button';
 import { Surface } from 'heroui-native/surface';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ThemeText from '../ui/ThemeText';
 
 type Props = {
     scrollY: SharedValue<number>;
@@ -22,15 +27,15 @@ const Header = ({
     scrollY,
 }: Props) => {
     const { top } = useSafeAreaInsets();
-    const colors = useThemeStore(state => state.colors);
     const isDark = useThemeStore(state => state.isDark);
+    const { text, textSecondary } = useThemeStore(state => state.colors);
 
 
     const containerStyle = useAnimatedStyle(() => {
 
         const topMargin = interpolate(
             scrollY.value,
-            [0, 250],
+            [0, 300],
             [top + 20, -100],
             Extrapolation.CLAMP
         );
@@ -44,7 +49,7 @@ const Header = ({
 
         const scale = interpolate(
             scrollY.value,
-            [250, 260],
+            [300, 310],
             [0, 1],
             Extrapolation.CLAMP
         );
@@ -84,22 +89,37 @@ const Header = ({
                 className="absolute z-50 self-end "
             >
                 <Surface
-                    className="flex-row w-full items-center justify-between rounded-full overflow-hidden p-2"
+                    className="flex-row w-full items-center justify-between overflow-hidden p-2"
                     style={{
                         backgroundColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
                     }}
                 >
                     {/* left item */}
-                    <View >
-                        <View
-                            className=" size-14 rounded-full bg-white "
-                        />
+                    <View className='flex-row items-center'>
+                        <Avatar >
+                            <Avatar.Image source={{ uri: "https://tse1.mm.bing.net/th/id/OIP.axox6gfX5G9P4KscalXBiQHaEJ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" }} asChild>
+                                <Image style={{ width: '100%', height: '100%' }} contentFit="cover" />
+                            </Avatar.Image>
+                            <Avatar.Fallback>
+                                <ThemeText>
+                                    JD
+                                </ThemeText>
+                            </Avatar.Fallback>
+                        </Avatar>
+                        <View className='ml-3'>
+                            <ThemeText style={{ color: text }}>
+                                Bapparaj sk
+                            </ThemeText>
+                            <ThemeText className="text-xs" style={{ color: textSecondary }}>
+                                @bapparajsk
+                            </ThemeText>
+                        </View>
                     </View>
 
                     {/* right item */}
-                    <View
-                        className=" size-14 rounded-full bg-white "
-                    />
+                    <Button variant='outline' isIconOnly>
+                        <Fontisto name="search" size={20} color={text} />
+                    </Button>
                 </Surface>
             </Animated.View>
             {/* <AnimatedButton
