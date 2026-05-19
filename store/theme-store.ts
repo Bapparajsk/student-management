@@ -3,6 +3,7 @@ import {
     DarkTheme,
     DefaultTheme,
 } from "@react-navigation/native";
+import { Uniwind } from "uniwind";
 
 import { create } from "zustand";
 
@@ -86,7 +87,7 @@ export const useThemeStore =
                             "light"
                             ? "dark"
                             : "light";
-
+                    Uniwind.setTheme(nextTheme);
                     set(
                         getThemeValues(
                             nextTheme
@@ -119,6 +120,7 @@ export const useThemeStore =
                     const mode =
                         state?.mode ??
                         "light";
+                    Uniwind.setTheme(mode);
 
                     return {
                         ...currentState,

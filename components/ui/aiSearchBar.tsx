@@ -29,23 +29,21 @@ export const AiSearchBar = () => {
         >
             <View
                 style={{ borderRadius: 10, overflow: 'hidden', }}
-                className='border-10'
             >
                 <Button
-                    className="w-full bg-black rounded-[20px] px-2"
+                    className="w-full px-2"
                     variant='ghost'
+                    style={{ backgroundColor: colors.card, borderRadius: 20, }}
                 >
                     <View className='w-full flex-row items-center justify-between'>
                         <Ionicons name="sparkles-outline" size={24} color={"#1FA8D5"} className='rotate-90' />
                         <ThemeText numberOfLines={1} style={{ maxWidth: '80%' }} className='text-sm text-gray-400' >
                             Ask me anything about your classes, assignments, or schedule!
                         </ThemeText>
-                        <Button isDisabled variant='primary' isIconOnly size='sm' className='rounded-2xl'>
+                        <Button variant='primary' isIconOnly size='sm' className='rounded-2xl'>
                             <Feather name="send" size={18} color={"#FFF"} />
                         </Button>
                     </View>
-
-
                 </Button>
             </View>
         </LinearGradient>
