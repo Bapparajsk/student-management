@@ -1,3 +1,4 @@
+import { useThemeStore } from '@/store/theme-store';
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 
@@ -22,8 +23,8 @@ const windowWidth =
 const ChatHeader = ({
     scrollY,
 }: Props) => {
-    const { top } =
-        useSafeAreaInsets();
+    const { top } = useSafeAreaInsets();
+    const colors = useThemeStore(state => state.colors);
 
     /*
       STEP 1
@@ -31,14 +32,6 @@ const ChatHeader = ({
     */
     const leftItemStyle =
         useAnimatedStyle(() => {
-            const width =
-                interpolate(
-                    scrollY.value,
-                    [0, 20],
-                    [56, 0],
-                    Extrapolation.CLAMP
-                );
-
             const marginRight =
                 interpolate(
                     scrollY.value,
@@ -47,22 +40,19 @@ const ChatHeader = ({
                     Extrapolation.CLAMP
                 );
 
-            const translateX =
+            const scale =
                 interpolate(
                     scrollY.value,
                     [0, 20],
-                    [0, -80],
+                    [1, 0],
                     Extrapolation.CLAMP
                 );
 
             return {
-                width,
-
                 marginRight,
-
                 transform: [
                     {
-                        translateX,
+                        scale
                     },
                 ],
 
@@ -70,12 +60,26 @@ const ChatHeader = ({
             };
         });
 
+    const leftContainerWidth = useAnimatedStyle(() => {
+        const width =
+            interpolate(
+                scrollY.value,
+                [20, 30],
+                [56 + 12, 0],
+                Extrapolation.CLAMP
+            );
+
+        return {
+            width,
+        };
+    })
+
     const containerStyle =
         useAnimatedStyle(() => {
             const width =
                 interpolate(
                     scrollY.value,
-                    [20, 40],
+                    [30, 50],
                     [windowWidth - 16, 56 + 8],
                     Extrapolation.CLAMP
                 );
@@ -97,43 +101,34 @@ const ChatHeader = ({
                 },
                 containerStyle,
             ]}
-            className="
-        absolute
-        z-50
-        self-end
-      "
+            className="absolute z-50 self-end"
         >
             <Animated.View
-                className="
-          flex-row
-          items-center
-          justify-between
-          bg-blue-500
-          rounded-full
-          overflow-hidden
-          p-2
-        "
+                className="flex-row items-center justify-between rounded-full overflow-hidden p-2"
+                style={{
+                    backgroundColor: colors.card,
+                    shadowColor: '#000',
+                    shadowOffset: {
+                        width: 0,
+                        height: 10,
+                    },
+                    shadowOpacity: 0.15,
+                    shadowRadius: 3.5,
+                    elevation: 3,
+                }}
             >
                 {/* left item */}
                 <Animated.View
-                    style={leftItemStyle}
+                    style={[leftItemStyle, leftContainerWidth]}
                 >
                     <View
-                        className="
-              size-14
-              rounded-full
-              bg-white
-            "
+                        className=" size-14 rounded-full bg-white "
                     />
                 </Animated.View>
 
                 {/* right item */}
                 <View
-                    className="
-            size-14
-            rounded-full
-            bg-white
-          "
+                    className=" size-14 rounded-full bg-white "
                 />
             </Animated.View>
         </Animated.View>
