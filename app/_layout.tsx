@@ -9,6 +9,7 @@ import { ThemeProvider } from "@react-navigation/native";
 import { useThemeStore } from '@/store/theme-store';
 import { Stack } from 'expo-router';
 import { HeroUINativeProvider } from 'heroui-native/provider';
+import { StatusBar } from 'react-native';
 
 export default function Layout() {
 
@@ -17,11 +18,14 @@ export default function Layout() {
       state =>
         state.navigationTheme
     );
+
+
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>
         <HeroUINativeProvider>
           <ThemeProvider value={navigationTheme}>
+            <StatusBar barStyle={navigationTheme.dark ? 'light-content' : 'dark-content'} />
             <Stack
               screenOptions={{
                 headerShown: false,

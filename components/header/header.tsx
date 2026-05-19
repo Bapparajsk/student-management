@@ -10,6 +10,7 @@ import Animated, {
     withSpring
 } from 'react-native-reanimated';
 
+import { Surface } from 'heroui-native/surface';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = {
@@ -22,6 +23,7 @@ const Header = ({
 }: Props) => {
     const { top } = useSafeAreaInsets();
     const colors = useThemeStore(state => state.colors);
+    const isDark = useThemeStore(state => state.isDark);
 
 
     const containerStyle = useAnimatedStyle(() => {
@@ -81,18 +83,10 @@ const Header = ({
                 ]}
                 className="absolute z-50 self-end "
             >
-                <View
+                <Surface
                     className="flex-row w-full items-center justify-between rounded-full overflow-hidden p-2"
                     style={{
-                        backgroundColor: colors.card,
-                        shadowColor: '#000',
-                        shadowOffset: {
-                            width: 0,
-                            height: 10,
-                        },
-                        shadowOpacity: 0.15,
-                        shadowRadius: 3.5,
-                        elevation: 3,
+                        backgroundColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
                     }}
                 >
                     {/* left item */}
@@ -106,7 +100,7 @@ const Header = ({
                     <View
                         className=" size-14 rounded-full bg-white "
                     />
-                </View>
+                </Surface>
             </Animated.View>
             {/* <AnimatedButton
                 variant={"tertiary"}
