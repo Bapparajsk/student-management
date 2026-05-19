@@ -1,7 +1,8 @@
 import { ScreenContent } from '@/components/ui/ScreenContent';
 import { useThemeStore } from '@/store/theme-store';
+import { Button } from 'heroui-native/button';
 
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 
 export default function Classes() {
@@ -11,7 +12,7 @@ export default function Classes() {
     return (
         <ScreenContent path='(tab)/classes'>
             <View className='flex-1 items-center justify-center'>
-                <Button title='Toggle Theme' onPress={toggleTheme} />
+                <Button onPress={toggleTheme} variant='ghost'>Get Started</Button>
             </View>
             {Array.from({ length: 30 }).map((_, i) => (
                 <View

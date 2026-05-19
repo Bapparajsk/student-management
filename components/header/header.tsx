@@ -1,5 +1,4 @@
 import { useThemeStore } from '@/store/theme-store';
-import Fontisto from '@expo/vector-icons/Fontisto';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -11,7 +10,6 @@ import Animated, {
     withSpring
 } from 'react-native-reanimated';
 
-import { AnimatedButton } from "@/components/ui/Button";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = {
@@ -110,24 +108,13 @@ const Header = ({
                     />
                 </View>
             </Animated.View>
-            <AnimatedButton
+            {/* <AnimatedButton
+                variant={"tertiary"}
                 className={"absolute top-20 right-10 size-16 rounded-full z-50 items-center justify-center"}
-                style={[{
-                    backgroundColor: colors.card,
-                    borderColor: colors.border,
-                    borderWidth: 1,
-                    shadowColor: '#000',
-                    shadowOffset: {
-                        width: 0,
-                        height: 10,
-                    },
-                    shadowOpacity: 0.15,
-                    shadowRadius: 3.5,
-                    elevation: 3,
-                }, SearchButtonStyle]}
+                style={[SearchButtonStyle]}
             >
                 <Fontisto name="search" size={20} color={colors.text} />
-            </AnimatedButton>
+            </AnimatedButton> */}
         </>
     );
 };

@@ -8,6 +8,7 @@ import { ThemeProvider } from "@react-navigation/native";
 
 import { useThemeStore } from '@/store/theme-store';
 import { Stack } from 'expo-router';
+import { HeroUINativeProvider } from 'heroui-native/provider';
 
 export default function Layout() {
 
@@ -19,15 +20,17 @@ export default function Layout() {
   return (
     <GestureHandlerRootView>
       <SafeAreaProvider>
-        <ThemeProvider value={navigationTheme}>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="(tab)" />
-          </Stack>
-        </ThemeProvider>
+        <HeroUINativeProvider>
+          <ThemeProvider value={navigationTheme}>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="(tab)" />
+            </Stack>
+          </ThemeProvider>
+        </HeroUINativeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
