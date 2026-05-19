@@ -1,7 +1,7 @@
 import type { StaticScreenProps } from '@react-navigation/native';
 import { ScreenContent } from 'components/ui/ScreenContent';
 
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 type Props = StaticScreenProps<{
     name: string;
@@ -9,11 +9,11 @@ type Props = StaticScreenProps<{
 
 export default function Classes({ route }: Props) {
     return (
-        <View style={styles.container}>
-            <ScreenContent
-                path="screens/classes.tsx"
-            />
-        </View>
+        <ScreenContent
+            path="screens/classes.tsx"
+        >
+
+        </ScreenContent>
     );
 }
 

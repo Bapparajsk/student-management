@@ -1,20 +1,59 @@
-import { Header } from "components/header";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React from 'react';
 
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Header } from 'components/header';
 
 interface ScreenContentProps {
   path: string;
   children?: React.ReactNode;
 }
 
-export const ScreenContent: React.FC<ScreenContentProps> = ({ path, children }) => {
-  return (
-    <SafeAreaView className='flex-1' key={path}>
-      <Header />
-      <View className="flex-1 px-4">
-        {children}
-      </View>
-    </SafeAreaView>
+const AnimatedScrollView =
+  Animated.createAnimatedComponent(
+    Animated.ScrollView
   );
-};
+
+export const ScreenContent: React.FC<
+  ScreenContentProps
+> = ({
+  path,
+  children,
+}) => {
+    const scrollY = useSharedValue(0);
+
+    const onScroll =
+      useAnimatedScrollHandler({
+        onScroll: (event) => {
+          scrollY.value =
+            event.contentOffset.y;
+        },
+      });
+
+    return (
+      <SafeAreaView
+        className="flex-1"
+        key={path}
+      >
+        <Header scrollY={scrollY} />
+
+        <AnimatedScrollView
+          onScroll={onScroll}
+          scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingTop: 120,
+            paddingHorizontal: 16,
+            paddingBottom: 40,
+          }}
+        >
+          {children}
+        </AnimatedScrollView>
+      </SafeAreaView>
+    );
+  };

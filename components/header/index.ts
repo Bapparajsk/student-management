@@ -1,4 +1,4 @@
-import { Header } from './header';
+import { ChatHeader } from './chat-header';
 
 
-export { Header };
+export { ChatHeader };
