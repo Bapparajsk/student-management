@@ -76,7 +76,6 @@ const Header = ({
 
     return (
         <>
-
             <Animated.View
                 style={[
                     {
