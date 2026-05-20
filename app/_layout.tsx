@@ -21,7 +21,7 @@ export default function Layout() {
 
 
   return (
-    <GestureHandlerRootView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <FontProvider>
           <HeroUINativeProvider
@@ -32,7 +32,6 @@ export default function Layout() {
 
           >
             <ThemeProvider value={navigationTheme}>
-              {/* <StatusBar barStyle={navigationTheme.dark ? 'light-content' : 'dark-content'} /> */}
               <Stack
                 screenOptions={{
                   headerShown: false,

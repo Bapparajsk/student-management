@@ -39,7 +39,6 @@ export const ScreenContent: React.FC<
         key={path}
       >
         <Header scrollY={scrollY} />
-
         <AnimatedScrollView
           onScroll={onScroll}
           scrollEventThrottle={16}
