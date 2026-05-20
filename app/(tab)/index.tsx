@@ -8,17 +8,6 @@ export default function Classes() {
     return (
         <ScreenContent path='(tab)/classes'>
             <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-            <HeroSection />
-
         </ScreenContent>
     );
 }

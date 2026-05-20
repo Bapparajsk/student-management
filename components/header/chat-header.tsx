@@ -1,4 +1,3 @@
-import { useThemeStore } from '@/store/theme-store';
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 
@@ -11,6 +10,7 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 
+import { colors } from "@/utils/theme";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = {
@@ -24,7 +24,6 @@ const ChatHeader = ({
     scrollY,
 }: Props) => {
     const { top } = useSafeAreaInsets();
-    const colors = useThemeStore(state => state.colors);
 
     /*
       STEP 1

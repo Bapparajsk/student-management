@@ -1,4 +1,3 @@
-import { useThemeStore } from '@/store/theme-store';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -10,6 +9,7 @@ import Animated, {
     withSpring
 } from 'react-native-reanimated';
 
+import { colors } from "@/utils/theme";
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { Image } from 'expo-image';
 import { Avatar } from 'heroui-native/avatar';
@@ -27,8 +27,6 @@ const Header = ({
     scrollY,
 }: Props) => {
     const { top } = useSafeAreaInsets();
-    const isDark = useThemeStore(state => state.isDark);
-    const { text, textSecondary } = useThemeStore(state => state.colors);
 
 
     const containerStyle = useAnimatedStyle(() => {
@@ -90,7 +88,7 @@ const Header = ({
                 <Surface
                     className="flex-row w-full items-center justify-between overflow-hidden p-2"
                     style={{
-                        backgroundColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.05)"
+                        backgroundColor: "rgba(255, 255, 255, 0.1)"
                     }}
                 >
                     {/* left item */}
@@ -106,10 +104,10 @@ const Header = ({
                             </Avatar.Fallback>
                         </Avatar>
                         <View className='ml-3'>
-                            <ThemeText style={{ color: text }}>
+                            <ThemeText style={{ color: colors.text }}>
                                 Bapparaj sk
                             </ThemeText>
-                            <ThemeText className="text-xs" style={{ color: textSecondary }}>
+                            <ThemeText className="text-xs" style={{ color: colors.textSecondary }}>
                                 @bapparajsk
                             </ThemeText>
                         </View>
@@ -118,10 +116,10 @@ const Header = ({
                     {/* right item */}
                     <View className='flex-row items-center gap-2'>
                         <Button hitSlop={10} variant='ghost' isIconOnly>
-                            <Fontisto name="bell" size={20} color={text} />
+                            <Fontisto name="bell" size={20} color={colors.text} />
                         </Button>
                         <Button hitSlop={10} variant='ghost' isIconOnly>
-                            <Fontisto name="search" size={20} color={text} />
+                            <Fontisto name="search" size={20} color={colors.text} />
                         </Button>
                     </View>
 

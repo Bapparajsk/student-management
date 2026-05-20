@@ -1,5 +1,5 @@
+import { colors } from "@/utils/theme";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { useTheme } from '@react-navigation/native';
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Tab from "./Tab";
@@ -7,7 +7,6 @@ import Tab from "./Tab";
 export default function BottomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
     const insets = useSafeAreaInsets();
-    const { dark, colors } = useTheme();
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -21,21 +20,13 @@ export default function BottomTabBar({ state, descriptors, navigation }: BottomT
                 position: 'absolute',
                 alignSelf: 'center',
                 borderRadius: 999999,
-                backgroundColor: dark ? colors.card : colors.background,
+                backgroundColor: colors.background,
                 flexDirection: 'row',
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 paddingVertical: 3,
                 paddingHorizontal: 5,
-                shadowColor: '#000',
                 width: 'auto',
-                shadowOffset: {
-                    width: 0,
-                    height: 10,
-                },
-                shadowOpacity: 0.15,
-                shadowRadius: 3.5,
-                elevation: 3,
             }, animatedStyle]}
             pointerEvents="box-none"
 

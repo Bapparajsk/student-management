@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 
+import { colors } from "@/utils/theme";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import {
     NavigationRoute,
     ParamListBase,
-    useTheme
 } from '@react-navigation/native';
 
 import Animated, {
@@ -41,7 +41,6 @@ export default function Tab({
     navigation,
 }: TabProps) {
 
-    const { colors } = useTheme();
     const { options } = descriptors[route.key];
 
     const label =

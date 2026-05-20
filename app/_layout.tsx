@@ -4,21 +4,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 //@ts-ignore
 import '../global.css';
 
-import { ThemeProvider } from "@react-navigation/native";
-
 import FontProvider from '@/provider/Font';
-import { useThemeStore } from '@/store/theme-store';
+import {
+  DarkTheme,
+  ThemeProvider
+} from "@react-navigation/native";
 import { Stack } from 'expo-router';
 import { HeroUINativeProvider } from 'heroui-native/provider';
+import { Uniwind } from "uniwind";
 
 export default function Layout() {
 
-  const navigationTheme =
-    useThemeStore(
-      state =>
-        state.navigationTheme
-    );
-
+  Uniwind.setTheme("dark");
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -29,9 +26,8 @@ export default function Layout() {
               devInfo: { stylingPrinciples: false },
 
             }}
-
           >
-            <ThemeProvider value={navigationTheme}>
+            <ThemeProvider value={DarkTheme}>
               <Stack
                 screenOptions={{
                   headerShown: false,

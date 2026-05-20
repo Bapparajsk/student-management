@@ -4,13 +4,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { View } from 'react-native';
 
-import { useThemeStore } from '@/store/theme-store';
+import { colors } from "@/utils/theme";
 import { Button } from 'heroui-native/button';
 import ThemeText from './ThemeText';
 
 export const AiSearchBar = () => {
-
-    const colors = useThemeStore(state => state.colors);
 
     return (
         <LinearGradient
