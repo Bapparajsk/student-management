@@ -76,7 +76,6 @@ const Header = ({
 
     return (
         <>
-
             <Animated.View
                 style={[
                     {
@@ -117,9 +116,15 @@ const Header = ({
                     </View>
 
                     {/* right item */}
-                    <Button variant='outline' isIconOnly>
-                        <Fontisto name="search" size={20} color={text} />
-                    </Button>
+                    <View className='flex-row items-center gap-2'>
+                        <Button hitSlop={10} variant='ghost' isIconOnly>
+                            <Fontisto name="bell" size={20} color={text} />
+                        </Button>
+                        <Button hitSlop={10} variant='ghost' isIconOnly>
+                            <Fontisto name="search" size={20} color={text} />
+                        </Button>
+                    </View>
+
                 </Surface>
             </Animated.View>
             {/* <AnimatedButton

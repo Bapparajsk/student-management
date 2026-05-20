@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -37,7 +35,7 @@ export const ScreenContent: React.FC<
 
     return (
       <SafeAreaView
-        className="flex-1"
+        className="flex-1 overflow-hidden bg-[#050816]"
         key={path}
       >
         <Header scrollY={scrollY} />
@@ -47,7 +45,7 @@ export const ScreenContent: React.FC<
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingTop: 120,
+            paddingTop: 100,
             paddingHorizontal: 16,
             paddingBottom: 40,
           }}
