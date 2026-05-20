@@ -1,0 +1,30 @@
+{
+    "overview": {
+        "class": {
+            "time": "date",
+            "name": "string",
+            "room": "string",
+            "building": "string",
+            "teacher": "string",
+            "color": "string",
+            "departments": [
+                "string"
+            ]
+        },
+        "attendance-card": {
+            "percentage": "number",
+            "status": "string",
+            "total": "number"
+        },
+        "study-hours-weekly": {
+            "hours": "float",
+            "week": {
+                "monday": "number",
+                "tuesday": "number",
+                "wednesday": "number",
+                "thursday": "number",
+                "friday": "number"
+            }
+        }
+    }
+}
