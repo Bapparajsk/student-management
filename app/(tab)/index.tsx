@@ -6,7 +6,6 @@ import { StyleSheet } from 'react-native';
 
 export default function Classes() {
 
-
     return (
         <ScreenContent path='(tab)/classes'>
             <HeroSection />

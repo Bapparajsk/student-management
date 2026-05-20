@@ -12,5 +12,4 @@ const config = getDefaultConfig(__dirname);
 module.exports = withUniwindConfig(wrapWithReanimatedMetroConfig(config), {
     cssEntryFile: './global.css',
     dtsFile: './uniwind-types.d.ts',
-    extraThemes: ['ocean-light', 'ocean-dark'],
 });

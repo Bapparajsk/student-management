@@ -87,6 +87,8 @@ export const useThemeStore =
                             "light"
                             ? "dark"
                             : "light";
+
+
                     Uniwind.setTheme(nextTheme);
                     set(
                         getThemeValues(
