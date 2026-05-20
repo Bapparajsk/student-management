@@ -10,6 +10,7 @@ import { Header } from 'components/header';
 interface ScreenContentProps {
   path: string;
   children?: React.ReactNode;
+  bottomBarHeight?: number;
 }
 
 const AnimatedScrollView =
@@ -22,6 +23,7 @@ export const ScreenContent: React.FC<
 > = ({
   path,
   children,
+  bottomBarHeight = 0,
 }) => {
     const scrollY = useSharedValue(0);
 
@@ -35,7 +37,11 @@ export const ScreenContent: React.FC<
 
     return (
       <SafeAreaView
-        className="flex-1 overflow-hidden bg-[#050816]"
+        style={{
+          flex: 1,
+          overflow: "visible",
+          backgroundColor: "#050816",
+        }}
         key={path}
       >
         <Header scrollY={scrollY} />
@@ -46,7 +52,7 @@ export const ScreenContent: React.FC<
           contentContainerStyle={{
             paddingTop: 100,
             paddingHorizontal: 16,
-            paddingBottom: 40,
+            paddingBottom: 40 + bottomBarHeight,
           }}
         >
           {children}

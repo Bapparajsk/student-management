@@ -14,7 +14,7 @@ export const ClassesSection = () => {
     const keyExtractor: FlashListProps<number>['keyExtractor'] = useCallback((item) => item.toString(), []);
 
     return (
-        <View className='mt-2'>
+        <View className='mt-3'>
             <View className='flex-row justify-between items-center'>
                 <ThemeText className='text-3xl'>
                     Today&apos;s classes
@@ -36,7 +36,7 @@ export const ClassesSection = () => {
                 snapToAlignment="start"
                 scrollEventThrottle={16}
                 contentContainerStyle={{
-                    marginTop: 16,
+                    marginTop: 8,
                 }}
                 ItemSeparatorComponent={() => (
                     <View style={{ width: 16 }} />

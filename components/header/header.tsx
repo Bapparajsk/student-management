@@ -77,16 +77,18 @@ const Header = ({
             <Animated.View
                 style={[
                     {
+                        position: "absolute",
                         top: top + 20,
                         right: 8,
                         left: 8,
+                        zIndex: 99999,
+                        elevation: 9999
                     },
                     containerStyle,
                 ]}
-                className="absolute z-50 self-end "
             >
                 <Surface
-                    className="flex-row w-full items-center justify-between overflow-hidden p-2"
+                    className="flex-row w-full items-center justify-between p-2"
                     style={{
                         backgroundColor: "rgba(255, 255, 255, 0.1)"
                     }}
@@ -114,7 +116,7 @@ const Header = ({
                     </View>
 
                     {/* right item */}
-                    <View className='flex-row items-center gap-2'>
+                    <View className='flex-row items-center'>
                         <Button hitSlop={10} variant='ghost' isIconOnly>
                             <Fontisto name="bell" size={20} color={colors.text} />
                         </Button>
@@ -125,13 +127,13 @@ const Header = ({
 
                 </Surface>
             </Animated.View>
-            {/* <AnimatedButton
+            {/* <Button
                 variant={"tertiary"}
                 className={"absolute top-20 right-10 size-16 rounded-full z-50 items-center justify-center"}
                 style={[SearchButtonStyle]}
             >
                 <Fontisto name="search" size={20} color={colors.text} />
-            </AnimatedButton> */}
+            </Button> */}
         </>
     );
 };
