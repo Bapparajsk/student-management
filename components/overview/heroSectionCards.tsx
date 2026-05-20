@@ -83,7 +83,7 @@ export const HeroSectionCards = () => {
                     <Card className={cardStyle}>
                         <View className=" flex-row items-center gap-2">
                             <MaterialIcons name="auto-graph" size={24} color={colors.text} />
-                            <Text className="text-xs uppercase tracking-[2px] text-zinc-400">
+                            <Text className="text-xs font-poppins-medium uppercase tracking-[2px] text-zinc-400">
                                 Study Hours
                             </Text>
                         </View>
