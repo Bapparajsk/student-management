@@ -18,22 +18,27 @@ export default function Layout() {
   Uniwind.setTheme("dark");
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView
+      style={{
+        flex: 1,
+        backgroundColor: "#000",
+      }}
+    >
       <SafeAreaProvider>
         <FontProvider>
-          <HeroUINativeProvider
-            config={{
-              devInfo: { stylingPrinciples: false },
-
-            }}
-          >
+          <HeroUINativeProvider config={{ devInfo: { stylingPrinciples: false } }}>
             <ThemeProvider value={DarkTheme}>
               <Stack
                 screenOptions={{
                   headerShown: false,
+                  animation: "fade",
+                  contentStyle: {
+                    backgroundColor: "#000",
+                  },
                 }}
               >
                 <Stack.Screen name="(tab)" />
+                <Stack.Screen name="study" />
               </Stack>
             </ThemeProvider>
           </HeroUINativeProvider>

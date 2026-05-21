@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { colors } from "@/utils/theme";
+import { useRouter } from 'expo-router';
 import { PressableFeedback } from 'heroui-native/pressable-feedback';
 
 const bars = [40, 60, 30, 90, 50];
@@ -13,10 +14,13 @@ const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
 
 
 export const HeroSectionCards = () => {
+
+    const router = useRouter();
+
     return (
         <View className='w-full flex-row mt-4 h-36'>
             <View className='w-1/2 pr-2 h-full'>
-                <PressableFeedback>
+                <PressableFeedback onPress={() => router.navigate('/study')}>
                     <Card className={cardStyle}>
                         <View className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-violet-400/20 blur-3xl" />
                         <Card.Header>

@@ -11,6 +11,9 @@ interface ScreenContentProps {
   path: string;
   children?: React.ReactNode;
   bottomBarHeight?: number;
+  header?: {
+    showBackButton?: boolean;
+  }
 }
 
 const AnimatedScrollView =
@@ -24,6 +27,7 @@ export const ScreenContent: React.FC<
   path,
   children,
   bottomBarHeight = 0,
+  header
 }) => {
     const scrollY = useSharedValue(0);
 
@@ -44,7 +48,7 @@ export const ScreenContent: React.FC<
         }}
         key={path}
       >
-        <Header scrollY={scrollY} />
+        <Header scrollY={scrollY} showBackButton={header?.showBackButton} pathName={path} />
         <AnimatedScrollView
           onScroll={onScroll}
           scrollEventThrottle={16}
