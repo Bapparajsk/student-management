@@ -3,8 +3,8 @@ import { FlashList, FlashListProps } from "@shopify/flash-list";
 
 import { useCallback } from 'react';
 import { View } from 'react-native';
-import ThemeText from '../ui/ThemeText';
 import { CARD_WIDTH, ClassCard } from "../ui/classCard";
+import { HeaderTitle } from "./headerTitle";
 
 
 
@@ -15,14 +15,11 @@ export const ClassesSection = () => {
 
     return (
         <View className='mt-3'>
-            <View className='flex-row justify-between items-center'>
-                <ThemeText className='text-3xl'>
-                    Today&apos;s classes
-                </ThemeText>
-                <ThemeText className='text-gray-500 mt-1' style={{ color: colors.info }}>
-                    see all
-                </ThemeText>
-            </View>
+            <HeaderTitle
+                leftText="Today&apos;s classes"
+                rightText="see all"
+                rightTextColor={colors.info}
+            />
 
             <FlashList
                 horizontal

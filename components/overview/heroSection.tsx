@@ -10,7 +10,7 @@ export const HeroSection = () => {
         <View>
             <View className='h-20'>
                 <ThemeText className='text-2xl font-poppins-semibold' >
-                    Good Morning, John Doe
+                    Good Morning, Bappa Raj
                 </ThemeText>
                 <ThemeText className='text-sm font-poppins-light' >
                     Here&apos;s what&apos;s happening with your classes today.

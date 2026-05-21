@@ -33,7 +33,7 @@ const Header = ({
 
         const topMargin = interpolate(
             scrollY.value,
-            [0, 300],
+            [0, 250],
             [top + 20, -100],
             Extrapolation.CLAMP
         );

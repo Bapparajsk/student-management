@@ -6,7 +6,7 @@ export default function TabsLayout() {
     return (
         <Tabs
             tabBar={(props) => <BottomTabBar {...props} />}
-            screenOptions={{ headerShown: false }}
+            screenOptions={{ headerShown: false, animation: "shift" }}
         >
             <Tabs.Screen name="index" options={{ title: "Overview", }} />
             <Tabs.Screen name="classes" options={{ title: "Classes", }} />

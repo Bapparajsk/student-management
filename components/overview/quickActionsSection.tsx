@@ -4,6 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Button } from 'heroui-native/button';
 import { View } from 'react-native';
 import ThemeText from '../ui/ThemeText';
+import { HeaderTitle } from './headerTitle';
 
 const actions = [
     {
@@ -71,11 +72,9 @@ const actions = [
 export const QuickActionsSection = () => {
     return (
         <View className='mt-3'>
-            <View className='flex-row justify-between items-center'>
-                <ThemeText className='text-3xl'>
-                    Quick Actions
-                </ThemeText>
-            </View>
+            <HeaderTitle
+                leftText="Quick Actions"
+            />
             <View className="flex-row flex-wrap justify-center items-center gap-y-5 mt-2">
                 {actions.map(({ label, name, color, Icon }, index) => (
                     <View
