@@ -1,6 +1,9 @@
-import { useTheme } from "@react-navigation/native";
 import { Text, TextProps } from 'react-native';
 import { cn } from 'utils/ch';
+
+/**
+ * @field textColor: Optional prop to set the text color. If not provided, it defaults to white.
+ */
 
 export type ThemeTextProps = TextProps & {
     children: React.ReactNode;
@@ -9,15 +12,13 @@ export type ThemeTextProps = TextProps & {
 
 export default function ThemeText({ children, className, textColor, ...rest }: ThemeTextProps) {
 
-    const { colors } = useTheme();
 
     return (
         <Text
             className={cn(
-                "text-base font-poppins-medium",
+                "text-base font-poppins-medium text-white",
                 className
             )}
-            style={[{ color: textColor || colors.text }]}
             {...rest}
         >
             {children}

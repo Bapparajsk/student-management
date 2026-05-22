@@ -1,4 +1,5 @@
 import { colors } from '@/utils/theme';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Chip } from 'heroui-native';
 import { Avatar } from "heroui-native/avatar";
@@ -23,10 +24,23 @@ export const ClassCard = () => {
                     <View className="mb-3 flex-row items-center justify-between">
 
                         {/* Time Badge */}
-                        <View className="rounded-full border border-purple-400/20 bg-purple-400/10 px-3 py-1">
-                            <ThemeText className="text-xs" textColor={colors.secondary}>
-                                10:00 AM
-                            </ThemeText>
+                        <View className='flex-row gap-1'>
+                            <View className="rounded-full border border-purple-400/20 bg-purple-400/10 px-3 py-1">
+                                <ThemeText className="text-xs" style={{ color: colors.secondary }}>
+                                    10:00 AM
+                                </ThemeText>
+                            </View>
+                            <View className="rounded-full border border-white/20 px-3 py-1">
+                                <ThemeText className="text-xs" style={{ color: colors.textMuted }}>
+                                    1h
+                                </ThemeText>
+                            </View>
+                            <View className="rounded-full flex-row gap-1 border border-white/20 px-3 py-1">
+                                <FontAwesome name="book" size={12} color={colors.textMuted} />
+                                <ThemeText className="text-xs" style={{ color: colors.textMuted }} >
+                                    Theory
+                                </ThemeText>
+                            </View>
                         </View>
 
                         <Button variant="outline" size="sm" isIconOnly>

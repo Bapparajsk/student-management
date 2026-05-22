@@ -1,30 +1,17 @@
 import type { StaticScreenProps } from '@react-navigation/native';
 import { ScreenContent } from 'components/ui/ScreenContent';
-import { Button } from 'heroui-native/button';
 
-import { StyleSheet } from 'react-native';
+import { HeroSection, WeekCalendar } from "components/classes";
 
 type Props = StaticScreenProps<{
     name: string;
 }>;
 
-export default function Classes({ route }: Props) {
-
-
+export default function ClassesScreen({ route }: Props) {
     return (
-        <ScreenContent
-            path="screens/classes.tsx"
-        >
-            <Button >
-                {/* {mode} */}
-            </Button>
+        <ScreenContent path="classes" >
+            <HeroSection />
+            <WeekCalendar />
         </ScreenContent>
     );
 }
-
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-    },
-});
