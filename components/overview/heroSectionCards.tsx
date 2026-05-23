@@ -20,7 +20,7 @@ export const HeroSectionCards = () => {
     return (
         <View className='w-full flex-row mt-4 h-36'>
             <View className='w-1/2 pr-2 h-full'>
-                <PressableFeedback onPress={() => router.navigate('/study')}>
+                <PressableFeedback>
                     <Card className={cardStyle}>
                         <View className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-violet-400/20 blur-3xl" />
                         <Card.Header>
@@ -83,7 +83,7 @@ export const HeroSectionCards = () => {
                 </PressableFeedback>
             </View>
             <View className='w-1/2 pl-2 h-full'>
-                <PressableFeedback>
+                <PressableFeedback onPress={() => router.navigate('/study')}>
                     <Card className={cardStyle}>
                         <View className=" flex-row items-center gap-2">
                             <MaterialIcons name="auto-graph" size={24} color={colors.text} />

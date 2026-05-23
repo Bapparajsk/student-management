@@ -21,6 +21,8 @@ const AnimatedScrollView =
     Animated.ScrollView
   );
 
+export const SCREEN_HORIZONTAL_PADDING = 16;
+
 export const ScreenContent: React.FC<
   ScreenContentProps
 > = ({
@@ -55,7 +57,7 @@ export const ScreenContent: React.FC<
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingTop: 100,
-            paddingHorizontal: 16,
+            paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
             paddingBottom: 40 + bottomBarHeight,
           }}
         >
