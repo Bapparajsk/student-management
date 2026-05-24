@@ -7,6 +7,7 @@ import Svg, { Path } from 'react-native-svg';
 import { colors } from "@/utils/theme";
 import { useRouter } from 'expo-router';
 import { PressableFeedback } from 'heroui-native/pressable-feedback';
+import ThemeText from '../ui/ThemeText';
 
 const bars = [40, 60, 30, 90, 50];
 const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
@@ -35,14 +36,14 @@ export const HeroSectionCards = () => {
                             <View className="flex-row items-end justify-between">
                                 {/* Left */}
                                 <View>
-                                    <Text className="text-5xl font-poppins-semibold">
+                                    <ThemeText className="text-5xl font-poppins-semibold">
                                         85
-                                        <Text className="text-2xl text-zinc-600 dark:text-zinc-300">%</Text>
-                                    </Text>
+                                        <ThemeText className="text-2xl text-zinc-300">%</ThemeText>
+                                    </ThemeText>
 
-                                    <Text className="mt-1 text-xs font-poppins-light text-emerald-400 tracking-tight">
+                                    <ThemeText className="mt-1 text-xs font-poppins-light text-emerald-400 tracking-tight">
                                         On Track
-                                    </Text>
+                                    </ThemeText>
                                 </View>
 
                                 {/* Circular Progress */}
@@ -72,7 +73,7 @@ export const HeroSectionCards = () => {
                                             stroke={colors.secondary}
                                             strokeWidth={3}
                                             strokeLinecap="round"
-                                            strokeDasharray="10, 100"
+                                            strokeDasharray="85, 100"
                                         />
                                     </Svg>
                                 </View>
@@ -93,13 +94,13 @@ export const HeroSectionCards = () => {
 
                         {/* Content */}
                         <View className='mt-2'>
-                            <Text className="text-3xl font-poppins-semibold">
+                            <ThemeText className="text-3xl font-poppins-semibold">
                                 14.5
-                                <Text className="ml-1 text-base font-medium text-zinc-400">
+                                <ThemeText className="ml-1  text-zinc-400">
                                     {' '}
                                     hrs
-                                </Text>
-                            </Text>
+                                </ThemeText>
+                            </ThemeText>
 
                             {/* Chart */}
                             <View className=" h-10 flex-row items-end gap-1">
