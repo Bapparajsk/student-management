@@ -1,7 +1,7 @@
-import { StudyActivityCard } from "./activitySection";
+import { StudyActivitySection } from "./activitySection";
 import { HeroSection } from "./heroSection";
 
 export {
     HeroSection,
-    StudyActivityCard
+    StudyActivitySection
 };
