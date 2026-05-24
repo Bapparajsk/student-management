@@ -1,8 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Card } from 'heroui-native/card';
-import { Text } from 'heroui-native/text';
 import React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import { colors } from "@/utils/theme";

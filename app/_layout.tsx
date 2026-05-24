@@ -10,7 +10,7 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
-import { HeroUINativeProvider } from 'heroui-native/provider';
+import { HeroUINativeProvider } from 'heroui-native';
 import { Uniwind } from "uniwind";
 
 export default function Layout() {

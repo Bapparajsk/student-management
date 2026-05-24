@@ -3,6 +3,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { View } from 'react-native'
 import { Button, Card } from '../hero-ui'
 import ThemeText from '../ui/ThemeText'
+import HeroHeading from '../ui/heroHeading'
 
 export const HeroSection = () => {
     return (
@@ -20,14 +21,10 @@ export const HeroSection = () => {
                 {/* Top Section */}
                 <View className='flex-row justify-between items-start'>
                     <View className="gap-2">
-                        <View>
-                            <ThemeText className="text-3xl leading-tight">
-                                Ready for your day,{' '}
-                            </ThemeText>
-                            <ThemeText className="text-3xl leading-tight text-cyan-400">
-                                Alex?
-                            </ThemeText>
-                        </View>
+                        <HeroHeading
+                            title="Ready for your day"
+                            highlight="Alex?"
+                        />
 
                         <View className="flex-row items-center gap-2 ">
                             <MaterialIcons
