@@ -17,7 +17,14 @@ export const ClassesSection = () => {
                 rightTextColor={colors.info}
             />
 
-            <ClassesList horizontal />
+            <ClassesList
+                horizontal
+                flashListProps={{
+                    contentContainerStyle: {
+                        marginTop: 0,
+                    }
+                }}
+            />
         </View>
     )
 }

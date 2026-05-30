@@ -15,7 +15,7 @@ export type HeaderTitleProps = {
 
 export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor, startIcon }: HeaderTitleProps) => {
     return (
-        <View className='flex-row justify-between items-center'>
+        <View className='flex-row justify-between items-center mb-2'>
             <View className='flex-row items-center gap-2'>
                 {startIcon}
                 <If condition={(leftText && typeof leftText === 'string') === true}>

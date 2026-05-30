@@ -16,7 +16,7 @@ export const ContinueLearningCard = () => {
                 leftText={"Continue Learning"}
             />
 
-            <View className="rounded-2xl border border-white/5 bg-white/3 p-4 relative overflow-hidden">
+            <View className="rounded-2xl border border-white/10 bg-white/5 p-4 relative overflow-hidden">
                 <View className="absolute right-0 top-0 size-20 rounded-bl-full bg-violet-500/10" />
 
                 {/* Mobile Friendly Layout */}

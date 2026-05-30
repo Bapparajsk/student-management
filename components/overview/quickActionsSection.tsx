@@ -75,7 +75,7 @@ export const QuickActionsSection = () => {
             <HeaderTitle
                 leftText="Quick Actions"
             />
-            <View className="flex-row flex-wrap justify-center items-center gap-y-5 mt-2">
+            <View className="flex-row flex-wrap justify-center items-center gap-y-5">
                 {actions.map(({ label, name, color, Icon }, index) => (
                     <View
                         key={index}

@@ -31,7 +31,7 @@ export const CampusNewsSection = () => {
                 rightText="see all"
                 rightTextColor={colors.info}
             />
-            <View className="gap-2 mt-2">
+            <View className="gap-2">
                 {updates.map((item, index) => (
                     <PressableFeedback
                         key={index}
