@@ -14,6 +14,7 @@ interface SparklineProps {
     height?: number;
     color?: string;
     showDot?: boolean;
+    glow?: boolean;
 }
 
 export const Sparkline = ({
@@ -21,7 +22,8 @@ export const Sparkline = ({
     width = 120,
     height = 50,
     color = '#00D5BE',
-    showDot = false
+    showDot = false,
+    glow = false,
 }: SparklineProps) => {
     if (data.length < 2) return null;
 
@@ -107,20 +109,20 @@ export const Sparkline = ({
                 />
             )}
 
-            <Path
+            {glow && <Path
                 d={linePath}
                 fill="none"
                 stroke={color}
                 strokeWidth={6}
                 opacity={0.15}
-            />
+            />}
 
-            <Path
+            {glow && <Path
                 d={linePath}
                 fill="none"
                 stroke={color}
                 strokeWidth={2.5}
-            />
+            />}
         </Svg>
     );
 };

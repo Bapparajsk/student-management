@@ -1,7 +1,10 @@
+import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Chip } from 'heroui-native';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Sparkline } from './sparkline';
+import ThemeText from './ThemeText';
 
 type SubjectStatus =
     | 'ON_TRACK'
@@ -80,7 +83,6 @@ export const SubjectProgressCard = ({
         getSubjectStatus(progress)
     );
 
-    console.log([...Array(20)].map(() => Math.floor(Math.random() * 100)));
 
     return (
         <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4">
@@ -98,42 +100,34 @@ export const SubjectProgressCard = ({
                     </View>
 
                     <View>
-                        <Text className="text-base font-bold text-white">
+                        <ThemeText className="font-poppins-semibold">
                             {subjectName}
-                        </Text>
+                        </ThemeText>
 
-                        <Text className="text-[10px] uppercase tracking-widest text-zinc-500">
+                        <ThemeText className="text-[10px] uppercase tracking-widest" textColor={colors.textMuted}>
                             {category}
-                        </Text>
+                        </ThemeText>
                     </View>
                 </View>
 
                 {/* Status Badge */}
-                <View
-                    className="flex-row items-center gap-1 rounded-full px-2.5 py-1"
-                    style={{
-                        backgroundColor: status.bg,
-                        borderWidth: 1,
-                        borderColor: status.border,
-                    }}
-                >
-                    <View
-                        className="h-1.5 w-1.5 rounded-full"
-                        style={{
-                            backgroundColor: status.color,
-                        }}
-                    />
-
-                    <Text
-                        style={{
-                            color: status.color,
-                            fontSize: 10,
-                            fontWeight: '700',
-                        }}
-                    >
-                        {status.label.toUpperCase()}
-                    </Text>
-                </View>
+                <Chip style={{
+                    backgroundColor: status.bg,
+                    borderWidth: 1,
+                    borderColor: status.border,
+                }}>
+                    <View className='flex-row gap-x-1 items-center'>
+                        <View
+                            className="h-1.5 w-1.5 rounded-full"
+                            style={{
+                                backgroundColor: status.color,
+                            }}
+                        />
+                        <Chip.Label style={{ color: status.color, fontFamily: "PoppinsLight", fontSize: 10, lineHeight: 15 }}>
+                            {status.label.toUpperCase()}
+                        </Chip.Label>
+                    </View>
+                </Chip>
             </View>
 
             {/* Teacher + Progress */}
@@ -147,14 +141,14 @@ export const SubjectProgressCard = ({
                             className="h-6 w-6 rounded-full border border-zinc-700"
                         />
 
-                        <Text className="text-xs font-medium text-zinc-300">
+                        <ThemeText className="text-xs" textColor={"#d4d4d8"}>
                             {teacherName}
-                        </Text>
+                        </ThemeText>
                     </View>
 
-                    <Text className="text-xs text-zinc-400">
+                    <ThemeText className="text-xs" textColor={"#9f9fa9"}>
                         {completedLessons}/{totalLessons} Lessons
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 {/* Trend Graph */}
@@ -162,6 +156,8 @@ export const SubjectProgressCard = ({
                     <Sparkline
                         color={status.color}
                         data={[...Array(20)].map(() => Math.floor(Math.random() * 100))}
+                        width={100}
+                        height={40}
                     />
                 </View>
             </View>
@@ -178,18 +174,18 @@ export const SubjectProgressCard = ({
             </View>
 
             <View className="flex-row items-center justify-between">
-                <Text className="text-xs text-zinc-500">
+                <ThemeText className="text-xs" textColor={"#71717b"}>
                     Progress
-                </Text>
+                </ThemeText>
 
-                <Text
-                    className="text-xs font-semibold"
+                <ThemeText
+                    className="text-xs font-poppins-semibold"
                     style={{
                         color: status.color,
                     }}
                 >
                     {progress}%
-                </Text>
+                </ThemeText>
             </View>
         </View>
     );

@@ -53,7 +53,6 @@ export const ContinueLearningCard = () => {
                                     maxValue={100}
                                     step={1}
                                     formatOptions={{ style: "percent" }}
-
                                     value={80}
                                 >
                                     <View className="flex-row items-center justify-end">
