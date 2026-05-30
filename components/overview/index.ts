@@ -1,7 +1,5 @@
-import { CampusNewsSection } from "./campusNewsSection";
-import { ClassesSection } from "./classesSection";
-import { HeroSection } from "./heroSection";
-import { QuickActionsSection } from "./quickActionsSection";
-
-export { CampusNewsSection, ClassesSection, HeroSection, QuickActionsSection };
+export { CampusNewsSection } from "./campusNewsSection";
+export { ClassesSection } from "./classesSection";
+export { HeroSection } from "./heroSection";
+export { QuickActionsSection } from "./quickActionsSection";
 

@@ -5,28 +5,16 @@ import React from 'react'
 import { View } from 'react-native'
 import If from '../If'
 import ThemeText from '../ui/ThemeText'
-import AreaChart from '../ui/areaChart'
+import { Sparkline } from '../ui/sparkline'
 
-export const rankingAnalyticsMonthData = [
-    {
-        value: 128,
-    },
-    {
-        value: 112,
-    },
-    {
-        value: 86,
-    },
-    {
-        value: 64,
-    },
-];
+export const rankingAnalyticsMonthData = [128, 112, 86, 0]
+
 
 export const RangingChartCard = () => {
 
-    const isGrow = rankingAnalyticsMonthData[0].value < rankingAnalyticsMonthData[3].value;
+    const isGrow = rankingAnalyticsMonthData[0] < rankingAnalyticsMonthData[3];
 
-    const graphColor = isGrow ? colors.graph.ranging : colors.error;
+    const currentColor = isGrow ? colors.graph.ranging : colors.error;
 
     return (
         <View className="mt-3 rounded-3xl border border-white/10 bg-white/5 p-3 overflow-hidden" >
@@ -61,27 +49,12 @@ export const RangingChartCard = () => {
                     last month
                 </ThemeText>
             </View>
-            <View className="mt-2 w-full overflow-hidden">
-                <AreaChart
+            <View className="mt-2 w-full items-center overflow-hidden">
+                <Sparkline
+                    color={currentColor}
                     data={rankingAnalyticsMonthData}
-                    color={graphColor}
-                    dataPointsColor={graphColor}
-                    startFillColor={graphColor}
-                    endFillColor={graphColor}
-                    height={50}
-                    maxValue={130}
-                    initialSpacing={0}
-                    endSpacing={0}
-                    spacing={(rankingAnalyticsMonthData.length - 1) * 13}
-                    hideRules
-                    hideYAxisText
-                    hideAxesAndRules
-                    xAxisThickness={0}
-                    yAxisThickness={0}
-                    hideDataPoints
-                    disableScroll
-                    curved
-                    areaChart
+                    height={80}
+                    width={150}
                 />
             </View>
         </View>

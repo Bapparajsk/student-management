@@ -2,34 +2,19 @@ import { colors } from '@/utils/theme'
 import { MaterialIcons } from '@expo/vector-icons'
 import React from 'react'
 import { View } from 'react-native'
-import AreaChart from '../ui/areaChart'
+import { Sparkline } from '../ui/sparkline'
 import ThemeText from '../ui/ThemeText'
 
-export const aiProductivityAnalytics = {
-    "Last Month": [
-        {
-            value: 22,
-        },
-        {
-            value: 28,
-        },
-        {
-            value: 24,
-        },
-        {
-            value: 31,
-        },
-    ],
-};
+export const aiProductivityAnalytics = [22, 28, 24, 31];
+
 
 export const AiProductivityChartCard = () => {
 
-    const maxValue = Math.max(...aiProductivityAnalytics["Last Month"].map(d => d.value));
 
     const upColor = colors.graph.aiProductivity;
     const downColor = colors.error;
 
-    const currentColor = aiProductivityAnalytics["Last Month"][0].value < aiProductivityAnalytics["Last Month"][3].value ? upColor : downColor;
+    const currentColor = aiProductivityAnalytics[0] < aiProductivityAnalytics[3] ? upColor : downColor;
 
 
     return (
@@ -52,29 +37,12 @@ export const AiProductivityChartCard = () => {
                     87.5% last month
                 </ThemeText>
             </View>
-            <View className="mt-2 w-full overflow-hidden">
-                <AreaChart
-                    data={aiProductivityAnalytics["Last Month"]}
+            <View className="mt-2 w-full overflow-hidden items-center ">
+                <Sparkline
                     color={currentColor}
-                    dataPointsColor={currentColor}
-                    startFillColor={currentColor}
-                    endFillColor={currentColor}
-                    height={50}
-                    maxValue={maxValue + 2}
-                    initialSpacing={0}
-                    endSpacing={0}
-                    spacing={(aiProductivityAnalytics["Last Month"].length - 1) * 13}
-                    hideRules
-                    hideYAxisText
-                    hideAxesAndRules
-                    xAxisThickness={0}
-                    yAxisThickness={0}
-                    hideDataPoints
-                    disableScroll
-                    curved
-                    areaChart
-                    startOpacity={0.25}
-                    endOpacity={0.02}
+                    data={aiProductivityAnalytics}
+                    height={80}
+                    width={150}
                 />
             </View>
         </View>
