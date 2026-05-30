@@ -2,7 +2,7 @@ import { colors } from "@/utils/theme";
 
 import { View } from 'react-native';
 import ClassesList from "../ui/classList";
-import { HeaderTitle } from "./headerTitle";
+import { HeaderTitle } from "../ui/headerTitle";
 
 
 

@@ -17,6 +17,7 @@ export default function ThemeText({ children, className, textColor, style, ...re
             )}
 
             style={[{ color: textColor || 'white' }, style]}
+            numberOfLines={1}
 
             {...rest}
         >

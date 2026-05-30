@@ -39,7 +39,7 @@ const Header = ({
 
         const topMargin = interpolate(
             scrollY.value,
-            [0, 250],
+            [0, 300],
             [top + 20, -100],
             Extrapolation.CLAMP
         );
@@ -95,9 +95,9 @@ const Header = ({
             >
                 <Surface
                     className="flex-row w-full items-center justify-between p-2"
-                    style={{
-                        backgroundColor: "rgba(255, 255, 255, 0.1)"
-                    }}
+                // style={{
+                //     backgroundColor: "rgba(255, 255, 255)"
+                // }}
                 >
                     {/* left item */}
                     {showBackButton ? (

@@ -1,10 +1,10 @@
 import { colors } from '@/utils/theme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { PressableFeedback } from 'heroui-native';
 import React from 'react';
 import { View } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
-import { HeaderTitle } from './headerTitle';
+import { HeaderTitle } from '../ui/headerTitle';
 
 const updates = [
     {

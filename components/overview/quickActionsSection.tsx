@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Button } from 'heroui-native/button';
 import { View } from 'react-native';
 import ThemeText from '../ui/ThemeText';
-import { HeaderTitle } from './headerTitle';
+import { HeaderTitle } from '../ui/headerTitle';
 
 const actions = [
     {

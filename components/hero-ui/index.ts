@@ -1,7 +1,4 @@
-import { Button, Card, Dialog, PressableFeedback, Select, Surface } from 'heroui-native';
-
 export {
-    Button,
-    Card, Dialog, PressableFeedback, Select, Surface
-};
+    Button, Card, Dialog, PressableFeedback, Select, Slider, Surface
+} from 'heroui-native';
 
