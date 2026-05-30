@@ -1,5 +1,6 @@
-import { setActiveOption, useStudyActivityStore } from '@/store/study';
+import { setActiveOption, StudyActivityTimeframe, useStudyActivityStore } from '@/store/study';
 import { cn } from '@/utils/ch';
+import { getOptionByValue } from '@/utils/getOptionByValue';
 import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -15,19 +16,19 @@ const screenWidth = Dimensions.get("window").width;
 export const analyticsData = {
     Today: {
         studyHoursData: [
-            { value: 2, label: '8 AM' },
-            { value: 1, label: '10 AM' },
+            { value: 1, label: '8 AM' },
+            { value: 2, label: '10 AM' },
             { value: 3, label: '12 PM' },
-            { value: 2, label: '2 PM' },
-            { value: 1, label: '4 PM' },
+            { value: 3, label: '2 PM' },
+            { value: 3, label: '4 PM' },
         ],
 
         attendanceData: [
-            { value: 1, label: '8 AM' },
+            { value: 0, label: '8 AM' },
             { value: 1, label: '10 AM' },
-            { value: 1, label: '12 PM' },
-            { value: 0, label: '2 PM' },
-            { value: 1, label: '4 PM' },
+            { value: 2, label: '12 PM' },
+            { value: 2, label: '2 PM' },
+            { value: 3, label: '4 PM' },
         ],
     },
 
@@ -54,17 +55,33 @@ export const analyticsData = {
             { value: 22, label: 'Week 1' },
             { value: 26, label: 'Week 2' },
             { value: 24, label: 'Week 3' },
-            { value: 28, label: 'Week 4' },
+            { value: 100, label: 'Week 4' },
         ],
 
         attendanceData: [
             { value: 24, label: 'Week 1' },
             { value: 23, label: 'Week 2' },
             { value: 25, label: 'Week 3' },
-            { value: 24, label: 'Week 4' },
+            { value: 10, label: 'Week 4' },
         ],
     },
 };
+
+// transform: [{ translateX: activeOption === 'Last Month' ? 20 : activeOption === 'Last Week' ? 10 : 12 }],
+
+
+const translateXOptions = [
+    { label: 'Today', value: 12 },
+    { label: 'Last Week', value: 10 },
+    { label: 'Last Month', value: 20 },
+];
+
+
+const spacingOptions = [
+    { label: 'Today', value: ((screenWidth - 80) / 5) },
+    { label: 'Last Week', value: ((screenWidth - 80) / 5) },
+    { label: 'Last Month', value: ((screenWidth - 80) / 4) },
+]
 
 export const AttendanceStudyHoursChartCard = () => {
 
@@ -72,11 +89,6 @@ export const AttendanceStudyHoursChartCard = () => {
 
     const options = useStudyActivityStore(s => s.options);
     const activeOption = useStudyActivityStore(s => s.activeOption);
-
-    const maxStudyHours = Math.max(...analyticsData[activeOption].studyHoursData.map(d => d.value));
-    const maxAttendance = Math.max(...analyticsData[activeOption].attendanceData.map(d => d.value));
-
-    const maxValue = Math.max(maxStudyHours, maxAttendance) + 2; // Adding some padding
 
 
     return (
@@ -176,23 +188,7 @@ export const AttendanceStudyHoursChartCard = () => {
 
             {/* Chart */}
             <View className="w-full">
-                <AreaChart
-                    key={activeOption}
-                    data={
-                        analyticsData[activeOption]
-                            .studyHoursData
-                    }
-                    data2={
-                        analyticsData[activeOption]
-                            .attendanceData
-                    }
-
-                    maxValue={maxValue}
-                    initialSpacing={activeOption === 'Last Month' ? 20 : 15}
-                    width={screenWidth - 80}
-                    spacing={activeOption === 'Last Month' ? ((screenWidth - 80) / 4) : activeOption === 'Last Week' ? ((screenWidth - 80) / 5) : ((screenWidth - 80) / 5)}
-                />
-
+                <Chart activeOption={activeOption} />
 
                 {/* Current Week */}
                 <View className="mt-3 flex-row items-center justify-between px-1">
@@ -212,4 +208,53 @@ export const AttendanceStudyHoursChartCard = () => {
 
         </View >
     )
+}
+
+function Chart({ activeOption }: { activeOption: StudyActivityTimeframe }) {
+
+    const studyHours = analyticsData[activeOption].studyHoursData;
+    const attendance = analyticsData[activeOption].attendanceData;
+
+    const maxStudyHours = Math.max(...studyHours.map(d => d.value));
+    const maxAttendance = Math.max(...attendance.map(d => d.value));
+
+    const maxValue = Math.max(maxStudyHours, maxAttendance) + 2;
+
+    const dataColor = studyHours[0].value > studyHours[studyHours.length - 1].value ? colors.error : colors.graph.studyHours;
+    const data2Color = attendance[0].value > attendance[attendance.length - 1].value ? colors.error : colors.graph.attendance;
+
+    return (
+        <AreaChart
+            key={activeOption}
+            data={
+                analyticsData[activeOption]
+                    .studyHoursData
+            }
+            data2={
+                analyticsData[activeOption]
+                    .attendanceData
+            }
+
+            // colors
+            color={dataColor}
+            color2={data2Color}
+
+            startFillColor={dataColor}
+            endFillColor={dataColor}
+
+            startFillColor2={data2Color}
+            endFillColor2={data2Color}
+
+            dataPointsColor={dataColor}
+            dataPointsColor2={data2Color}
+
+            maxValue={maxValue}
+            initialSpacing={0}
+            xAxisLabelTextStyle={{
+                transform: [{ translateX: getOptionByValue(translateXOptions, activeOption) ?? 10 }],
+            }}
+            width={screenWidth - 80}
+            spacing={getOptionByValue(spacingOptions, activeOption) ?? spacingOptions[0].value}
+        />
+    );
 }

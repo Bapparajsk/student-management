@@ -1,16 +1,12 @@
 import { Text, TextProps } from 'react-native';
 import { cn } from 'utils/ch';
 
-/**
- * @field textColor: Optional prop to set the text color. If not provided, it defaults to white.
- */
-
 export type ThemeTextProps = TextProps & {
     children: React.ReactNode;
     textColor?: string;
 }
 
-export default function ThemeText({ children, className, textColor, ...rest }: ThemeTextProps) {
+export default function ThemeText({ children, className, textColor, style, ...rest }: ThemeTextProps) {
 
 
     return (
@@ -19,6 +15,9 @@ export default function ThemeText({ children, className, textColor, ...rest }: T
                 "text-base font-poppins-medium text-white",
                 className
             )}
+
+            style={[{ color: textColor || 'white' }, style]}
+
             {...rest}
         >
             {children}

@@ -1,3 +1,4 @@
+
 export const colors = {
     background: "#020617",
     surface: "#0F172A",
@@ -27,6 +28,14 @@ export const colors = {
     placeholder: "#64748B",
 
     shadow: "#000000",
+
+    // graphs 
+    graph: {
+        ranging: "#38BDF8",
+        aiProductivity: "#A855F7",
+        attendance: "#22C55E",
+        studyHours: "#38BDF8"
+    }
 };
 
 export type ThemeColors = typeof colors;

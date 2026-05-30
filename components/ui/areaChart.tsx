@@ -4,12 +4,20 @@ import { LineChart, LineChartPropsType } from 'react-native-gifted-charts';
 
 export default function AreaChart(props: LineChartPropsType) {
 
+    const { yAxisTextStyle, xAxisLabelTextStyle, ...rest } = props;
+    const safeYAxisTextStyle =
+        yAxisTextStyle && typeof yAxisTextStyle === 'object' && !Array.isArray(yAxisTextStyle)
+            ? yAxisTextStyle
+            : {};
+    const safeXAxisLabelTextStyle =
+        xAxisLabelTextStyle && typeof xAxisLabelTextStyle === 'object' && !Array.isArray(xAxisLabelTextStyle)
+            ? xAxisLabelTextStyle
+            : {};
 
     return (
         <LineChart
             areaChart
             curved
-
             height={130}
             hideRules={false}
             rulesColor="rgba(255,255,255,0.06)"
@@ -37,14 +45,16 @@ export default function AreaChart(props: LineChartPropsType) {
                 color: '#71717A',
                 fontSize: 10,
                 fontFamily: 'PoppinsMedium',
+                ...safeYAxisTextStyle,
             }}
             xAxisLabelTextStyle={{
                 color: '#A1A1AA',
                 fontSize: 11,
                 fontFamily: 'PoppinsMedium',
+                ...safeXAxisLabelTextStyle,
             }}
             maxValue={10}
-            {...props}
+            {...rest}
         />
     )
 }
