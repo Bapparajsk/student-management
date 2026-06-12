@@ -1,4 +1,4 @@
-import { ContinueLearningCard, HeroSection, StudyActivitySection, StudyAssistantCard, SubjectsSection } from '@/components/study';
+import { AssignmentsCard, ContinueLearningCard, HeroSection, StudyActivitySection, StudyAssistantCard, SubjectsSection } from '@/components/study';
 import { ScreenContent } from '@/components/ui/ScreenContent';
 
 export default function StudyScreen() {
@@ -9,6 +9,7 @@ export default function StudyScreen() {
             <ContinueLearningCard />
             <SubjectsSection />
             <StudyAssistantCard />
+            <AssignmentsCard />
         </ScreenContent>
     );
 }

@@ -1,45 +1,78 @@
-import { FlashList, FlashListProps } from '@shopify/flash-list';
+import {
+    FlashList,
+    FlashListProps,
+    ListRenderItem,
+} from '@shopify/flash-list';
+import { ReactNode, useCallback } from 'react';
 import { Dimensions, View } from 'react-native';
-import { ClassCard } from './classCard';
-import { SCREEN_HORIZONTAL_PADDING } from './ScreenContent';
 
-export type ClassesListProps = {
+const SCREEN_WIDTH = Dimensions.get('window').width;
+
+export type ListProps<T> = {
+    data: T[];
+    renderItem: ListRenderItem<T>;
     horizontal?: boolean;
-    flashListProps?: Omit<FlashListProps<number>, 'data' | 'renderItem' | 'keyExtractor'>;
-}
+    estimatedItemSize?: number;
+    separatorSize?: number;
+    emptyComponent?: ReactNode;
+    loadingComponent?: ReactNode;
+    isLoading?: boolean;
+    keyExtractor?: (item: T, index: number) => string;
+} & Omit<
+    FlashListProps<T>,
+    'data' | 'renderItem' | 'keyExtractor'
+>;
 
-export const CARD_WIDTH = 332;
-const ScreenWidth = Dimensions.get('window').width - SCREEN_HORIZONTAL_PADDING;
-
-export default function ClassesList({ flashListProps, horizontal }: ClassesListProps) {
-    const renderItem: FlashListProps<number>['renderItem'] = ({ item }) => (
-        <ClassCard isFullWidth={!horizontal} />
+export default function List<T>({
+    data,
+    renderItem,
+    horizontal = false,
+    estimatedItemSize = 300,
+    separatorSize = 16,
+    emptyComponent,
+    loadingComponent,
+    isLoading,
+    keyExtractor,
+    ...flashListProps
+}: ListProps<T>) {
+    const separator = useCallback(
+        () => (
+            <View
+                style={{
+                    width: horizontal ? separatorSize : 0,
+                    height: horizontal ? 0 : separatorSize,
+                }}
+            />
+        ),
+        [horizontal, separatorSize]
     );
-    const keyExtractor: FlashListProps<number>['keyExtractor'] = (item) => item.toString();
+
+    if (isLoading && loadingComponent) {
+        return <>{loadingComponent}</>;
+    }
 
     return (
         <FlashList
+            data={data}
             horizontal={horizontal}
-            data={[1, 2]}
             renderItem={renderItem}
-            keyExtractor={keyExtractor}
+            keyExtractor={
+                keyExtractor ??
+                ((_, index) => index.toString())
+            }
+            ItemSeparatorComponent={separator}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             removeClippedSubviews
-            drawDistance={horizontal ? CARD_WIDTH * 2 : ScreenWidth * 2}
-            decelerationRate="fast"
-            snapToAlignment="start"
+            drawDistance={horizontal ? 800 : SCREEN_WIDTH * 2}
             scrollEventThrottle={16}
-            contentContainerStyle={{
-                marginTop: 8,
-            }}
-            ItemSeparatorComponent={() => (
-                <View style={{
-                    width: horizontal ? 16 : 0,
-                    height: horizontal ? 0 : 16
-                }} />
-            )}
+            ListEmptyComponent={
+                <>
+                    {emptyComponent}
+                </>
+            }
             {...flashListProps}
+
         />
-    )
+    );
 }

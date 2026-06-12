@@ -28,7 +28,6 @@ export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor,
                         {leftText}
                     </If.Else>
                 </If>
-
             </View>
 
             {rightText && (
@@ -36,7 +35,6 @@ export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor,
                     <ThemeText
                         className='text-gray-500 mt-1'
                         style={{ color: rightTextColor || colors.info }}
-
                     >
                         {rightText}
                     </ThemeText>

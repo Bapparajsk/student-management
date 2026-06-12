@@ -1,6 +1,7 @@
 import { colors } from "@/utils/theme";
 
 import { View } from 'react-native';
+import { ClassCard } from "../ui/classCard";
 import ClassesList from "../ui/classList";
 import { HeaderTitle } from "../ui/headerTitle";
 
@@ -19,12 +20,18 @@ export const ClassesSection = () => {
 
             <ClassesList
                 horizontal
-                flashListProps={{
-                    contentContainerStyle: {
-                        marginTop: 0,
-                    }
-                }}
+                // contentContainerStyle = {
+                //         marginTop: 0,
+                //     }
+                data={[1, 2, 3]}
+                renderItem={({ item }) => (
+                    <ClassCard
+                        // classData
+                        isFullWidth={false}
+                    />
+                )}
             />
+
         </View>
     )
 }
