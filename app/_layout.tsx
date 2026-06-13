@@ -37,6 +37,7 @@ export default function Layout() {
             >
               <Stack.Screen name="(tab)" />
               <Stack.Screen name="study" />
+              <Stack.Screen name="subject" />
             </Stack>
           </ThemeProvider>
         </FontProvider>
