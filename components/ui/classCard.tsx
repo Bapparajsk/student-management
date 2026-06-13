@@ -10,6 +10,7 @@ import { PressableFeedback } from "heroui-native/pressable-feedback";
 import { FC } from "react";
 import { View } from 'react-native';
 import ThemeText from './ThemeText';
+import { useRouter } from 'expo-router';
 
 const chips = ["SCT", "ETCE", "CE", "EE"];
 
@@ -19,8 +20,11 @@ export type ClassCardProps = {
 
 
 export const ClassCard: FC<ClassCardProps> = ({ isFullWidth }) => {
+
+    const router = useRouter();
+
     return (
-        <PressableFeedback className={cn("overflow-hidden rounded-3xl", isFullWidth ? "w-full" : "w-80")}>
+        <PressableFeedback onPress={() => router.push("subject/abc")} className={cn("overflow-hidden rounded-3xl", isFullWidth ? "w-full" : "w-80")}>
             <View className="absolute h-full w-1 bottom-0 bg-purple-400" />
 
             <Card className="min-w-60 rounded-3xl border border-white/10 bg-white/5 relative">

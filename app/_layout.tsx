@@ -9,7 +9,7 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
-import { HeroUINativeProvider, } from 'heroui-native';
+import { HeroUINativeProvider } from 'heroui-native';
 import { Uniwind } from "uniwind";
 
 Uniwind.setTheme("dark");

@@ -20,9 +20,6 @@ export const ClassesSection = () => {
 
             <ClassesList
                 horizontal
-                // contentContainerStyle = {
-                //         marginTop: 0,
-                //     }
                 data={[1, 2, 3]}
                 renderItem={({ item }) => (
                     <ClassCard
