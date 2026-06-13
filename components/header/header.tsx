@@ -12,7 +12,7 @@ import Animated, {
 import Feather from '@expo/vector-icons/Feather';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { Href, useRouter } from 'expo-router';
 import { Avatar } from 'heroui-native/avatar';
 import { Button } from 'heroui-native/button';
 import { Surface } from 'heroui-native/surface';
@@ -20,16 +20,22 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from "utils/theme";
 import ThemeText from '../ui/ThemeText';
 
+export type BackButtonProps = {
+    showBackButton?: boolean;
+    title?: string
+    href?: Href;
+}
+
 type Props = {
     scrollY: SharedValue<number>;
-    showBackButton?: boolean;
     pathName?: string;
+    backButton?: BackButtonProps
 };
 
 
 const Header = ({
     scrollY,
-    showBackButton,
+    backButton,
     pathName
 }: Props) => {
     const { top } = useSafeAreaInsets();
@@ -78,6 +84,14 @@ const Header = ({
         };
     });
 
+    const onPressBack = () => {
+        if (backButton?.href) {
+            router.push(backButton.href);
+        } else {
+            router.back();
+        }
+    }
+
     return (
         <>
             <Animated.View
@@ -100,14 +114,12 @@ const Header = ({
                 // }}
                 >
                     {/* left item */}
-                    {showBackButton ? (
-                        <Button onPress={() => {
-                            router.back();
-                        }} hitSlop={10} variant='ghost'>
+                    {backButton ? (
+                        <Button onPress={onPressBack} hitSlop={10} variant='ghost'>
                             <View className='flex-row gap-1 items-center'>
                                 <Feather name="arrow-left" size={24} color={colors.info} />
                                 <ThemeText textColor={colors.info} className='capitalize'>
-                                    {pathName}
+                                    {backButton.title ?? pathName}
                                 </ThemeText>
                             </View>
                         </Button>

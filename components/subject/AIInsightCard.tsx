@@ -1,6 +1,9 @@
+import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { Text, View } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
+import ThemeText from '../ui/ThemeText';
 
 type InsightType =
     | 'STUDY'
@@ -65,11 +68,11 @@ const getInsightConfig = (type: InsightType) => {
     }
 };
 
-export const AIInsightCard = () => {
-    const config = getInsightConfig(insight.type);
+export const AIInsightCard = ({ type }: { type?: InsightType }) => {
+    const config = getInsightConfig(type ?? "STUDY");
 
     return (
-        <View className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5">
+        <View className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5 mt-3">
 
             {/* Background Glow */}
             <View
@@ -102,14 +105,14 @@ export const AIInsightCard = () => {
                     {/* Header */}
                     <View className="mb-3 flex-row items-center justify-between">
 
-                        <Text
-                            className="text-xs font-bold uppercase tracking-[2px]"
+                        <ThemeText
+                            className="text-xs font-poppins-semibold uppercase tracking-[2px]"
                             style={{
                                 color: config.color,
                             }}
                         >
                             {insight.title}
-                        </Text>
+                        </ThemeText>
 
                         <View
                             className="rounded-full px-2 py-1"
@@ -121,7 +124,7 @@ export const AIInsightCard = () => {
                                 style={{
                                     color: config.color,
                                     fontSize: 10,
-                                    fontWeight: '700',
+                                    fontWeight: 700,
                                 }}
                             >
                                 {insight.confidence}% Confidence
@@ -130,26 +133,28 @@ export const AIInsightCard = () => {
                     </View>
 
                     {/* Message */}
-                    <Text className="text-sm leading-6 text-zinc-300">
+                    <ThemeText numberOfLines={10} className="text-xs leading-6" textColor={colors.textSecondary}>
                         {insight.message}
-                    </Text>
+                    </ThemeText>
 
                     {/* Action Button */}
-                    <Pressable
+                    <PressableFeedback
                         className="mt-4 self-start rounded-xl px-4 py-2"
                         style={{
                             backgroundColor: config.bg,
                         }}
                     >
-                        <Text
-                            style={{
-                                color: config.color,
-                                fontWeight: '700',
-                            }}
-                        >
-                            {insight.action} →
-                        </Text>
-                    </Pressable>
+                        <View className='flex-row items-center gap-2'>
+                            <ThemeText
+                                className="text-xs font-poppins-semibold"
+                                textColor={config.color}
+                            >
+                                {insight.action}
+
+                            </ThemeText>
+                            <FontAwesome6 name="arrow-right-long" size={10} color={config.color} />
+                        </View>
+                    </PressableFeedback>
                 </View>
             </View>
         </View>

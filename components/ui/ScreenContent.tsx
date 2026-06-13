@@ -6,13 +6,14 @@ import Animated, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Header } from 'components/header';
+import { BackButtonProps } from '../header/header';
 
 interface ScreenContentProps {
   path: string;
   children?: React.ReactNode;
   bottomBarHeight?: number;
   header?: {
-    showBackButton?: boolean;
+    backButton?: BackButtonProps
   }
 }
 
@@ -50,7 +51,7 @@ export const ScreenContent: React.FC<
         }}
         key={path}
       >
-        <Header scrollY={scrollY} showBackButton={header?.showBackButton} pathName={path} />
+        <Header scrollY={scrollY} backButton={header?.backButton} pathName={path} />
         <AnimatedScrollView
           onScroll={onScroll}
           scrollEventThrottle={16}

@@ -1,16 +1,31 @@
-import { ScreenContent } from '@/components/ui/ScreenContent';
-import { useLocalSearchParams } from 'expo-router';
-import React from 'react';
-import { Text } from 'react-native';
+import { ScreenContent } from "@/components/ui/ScreenContent";
+import { Portal, PortalHost } from "heroui-native";
+import { Text, View } from "react-native";
 
-export default function Index() {
-    const { id } = useLocalSearchParams<{
-        id: string;
-    }>();
-
+export default function AppLayout() {
     return (
-        <ScreenContent path={`${id}`} bottomBarHeight={80} header={{ showBackButton: true }}>
-            <Text className={"text-red-700"}>{`Subject ID: ${id}`}</Text>
+        <ScreenContent path="quiz">
+            <View className="p-5">
+                <Text>Header Content</Text>
+            </View>
+
+            <View className="flex-1 p-5">
+                <Text>Main Content Area</Text>
+                <CustomNotification />
+            </View>
+
+            {/* Portal host positioned at the top of the screen */}
+            <PortalHost name="notification-host" />
         </ScreenContent>
-    )
+    );
+}
+
+function CustomNotification() {
+    return (
+        <Portal name="notification-portal" hostName="notification-host">
+            <View className="absolute top-0 left-0 right-0 bg-blue-500 p-4">
+                <Text>This notification appears at the top via Portal</Text>
+            </View>
+        </Portal>
+    );
 }
