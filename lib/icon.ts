@@ -1,4 +1,6 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 
@@ -42,6 +44,46 @@ export const iconMap: Record<string, RecordValueType> = {
         inactive: {
             Icon: Ionicons,
             name: "settings-outline"
+        }
+    },
+    subject: {
+        active: {
+            Icon: FontAwesome5,
+            name: "book"
+        },
+        inactive: {
+            Icon: Feather,
+            name: "book"
+        }
+    },
+    notes: {
+        active: {
+            Icon: Ionicons,
+            name: "document-text"
+        },
+        inactive: {
+            Icon: Ionicons,
+            name: "document-text-outline"
+        }
+    },
+    tasks: {
+        active: {
+            Icon: Ionicons,
+            name: "checkmark-done-circle"
+        },
+        inactive: {
+            Icon: Ionicons,
+            name: "checkmark-done-circle-outline"
+        }
+    },
+    quiz: {
+        active: {
+            Icon: Ionicons,
+            name: "help-circle"
+        },
+        inactive: {
+            Icon: Ionicons,
+            name: "help-circle-outline"
         }
     }
 };

@@ -6,7 +6,7 @@ export default function SubjectLayout() {
     return (
         <Tabs
             tabBar={(props) => <BottomTabBar {...props} />}
-            screenOptions={{ headerShown: false, animation: "shift" }}
+            screenOptions={{ headerShown: false, animation: "fade" }}
         >
             <Tabs.Screen name="index" options={{ title: "Subject", }} />
             <Tabs.Screen name="notes" options={{ title: "Notes", }} />
