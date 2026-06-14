@@ -1,15 +1,8 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
-import Svg, { Circle } from 'react-native-svg';
 
-import Animated, {
-    useAnimatedProps,
-    useSharedValue,
-    withTiming,
-} from "react-native-reanimated";
-
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+import { ProgressRing } from '@/components/ui/progressRing';
 
 interface MasteryCardProps {
     progress?: number;
@@ -49,28 +42,8 @@ export const StudyProgressCard = ({
     mastered = 18,
     accuracy = 92,
 }: MasteryCardProps) => {
-    const radius = 42;
-    const circumference = 2 * Math.PI * radius;
 
     const level = getLevel(progress);
-
-    const progressAnimated = useSharedValue(0);
-
-    useEffect(() => {
-        progressAnimated.value = withTiming(progress, {
-            duration: 1200,
-        });
-    }, [progress]);
-
-    const animatedProps = useAnimatedProps(() => {
-        const strokeDashoffset =
-            circumference -
-            (circumference * progressAnimated.value) / 100;
-
-        return {
-            strokeDashoffset,
-        };
-    });
 
     return (
         <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5">
@@ -101,47 +74,14 @@ export const StudyProgressCard = ({
 
             {/* Content */}
             <View className="flex-row items-center gap-5">
+                <ProgressRing
+                    size="sm"
+                    progress={progress}
+                    linerGradient={level.color as any}
+                    subtitle={"Complete"}
+                    title={{ text: `${progress}`, color: level.color }}
+                />
 
-                {/* Progress Ring */}
-                <View className="relative">
-                    <Svg
-                        width={100}
-                        height={100}
-                        viewBox="0 0 100 100"
-                    >
-                        <Circle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            stroke="rgba(255,255,255,0.08)"
-                            strokeWidth="8"
-                            fill="none"
-                        />
-
-                        <AnimatedCircle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            stroke={level.color}
-                            strokeWidth="8"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeDasharray={circumference}
-                            animatedProps={animatedProps}
-                            transform="rotate(-90, 50, 50)"
-                        />
-                    </Svg>
-
-                    <View className="absolute inset-0 items-center justify-center">
-                        <Text className="text-2xl font-bold text-white">
-                            {progress}%
-                        </Text>
-
-                        <Text className="text-[10px] text-zinc-500">
-                            Mastery
-                        </Text>
-                    </View>
-                </View>
 
                 {/* Stats */}
                 <View className="flex-1 gap-3">

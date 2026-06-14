@@ -2,21 +2,10 @@ import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { View } from 'react-native';
-import Svg, {
-    Circle,
-    Defs,
-    LinearGradient,
-    Stop,
-} from 'react-native-svg';
 import ThemeText from '../ui/ThemeText';
+import { ProgressRing } from '../ui/progressRing';
 
 const progress = 90.96;
-
-const radius = 45;
-const circumference = 2 * Math.PI * radius;
-const strokeDashoffset =
-    circumference -
-    (progress / 100) * circumference;
 
 export const SemesterProgressCard = () => {
     return (
@@ -28,68 +17,15 @@ export const SemesterProgressCard = () => {
 
             {/* Progress Ring */}
             <View className="mb-6 items-center justify-center">
-                <View className="relative h-40 w-40 items-center justify-center">
-
-                    <Svg
-                        width={160}
-                        height={160}
-                        viewBox="0 0 100 100"
-                    >
-                        <Defs>
-                            <LinearGradient
-                                id="progressGradient"
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="0%"
-                            >
-                                <Stop
-                                    offset="0%"
-                                    stopColor="#C4C0FF"
-                                />
-                                <Stop
-                                    offset="100%"
-                                    stopColor="#3CD7FF"
-                                />
-                            </LinearGradient>
-                        </Defs>
-
-                        {/* Background Ring */}
-                        <Circle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            stroke="rgba(255,255,255,0.08)"
-                            strokeWidth="8"
-                            fill="none"
-                        />
-
-                        {/* Progress Ring */}
-                        <Circle
-                            cx="50"
-                            cy="50"
-                            r={radius}
-                            stroke="url(#progressGradient)"
-                            strokeWidth="8"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeDasharray={circumference}
-                            strokeDashoffset={strokeDashoffset}
-                            transform="rotate(-90, 50, 50)"
-                        />
-                    </Svg>
-
-                    {/* Center */}
-                    <View className="absolute items-center">
-                        <ThemeText className="text-3xl font-poppins-semibold" textColor='#53eafd'>
-                            {progress}%
-                        </ThemeText>
-
-                        <ThemeText className="text-xs" textColor={colors.textSecondary}>
-                            Complete
-                        </ThemeText>
-                    </View>
-                </View>
+                <ProgressRing
+                    progress={progress}
+                    linerGradient={["#C4C0FF", "#3CD7FF"]}
+                    subtitle={"Complete"}
+                    title={{
+                        text: `${progress}`,
+                        color: '#53eafd',
+                    }}
+                />
             </View>
 
             {/* Stats */}
