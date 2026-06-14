@@ -8,6 +8,7 @@ import { colors } from "@/utils/theme";
 import { useRouter } from 'expo-router';
 import { PressableFeedback } from 'heroui-native/pressable-feedback';
 import ThemeText from '../ui/ThemeText';
+import { AnimatedDigit } from '../ui/animatedCounter';
 
 const bars = [40, 60, 30, 90, 50];
 const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
@@ -16,6 +17,8 @@ const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
 export const HeroSectionCards = () => {
 
     const router = useRouter();
+
+    const digits = "85".split('');
 
     return (
         <View className='w-full flex-row mt-4 h-36'>
@@ -36,11 +39,17 @@ export const HeroSectionCards = () => {
                             <View className="flex-row items-end justify-between">
                                 {/* Left */}
                                 <View>
-                                    <ThemeText className="text-5xl font-poppins-semibold">
-                                        85
-                                        <ThemeText className="text-2xl text-zinc-300">%</ThemeText>
-                                    </ThemeText>
-
+                                    <View className='flex-row items-end'>
+                                        {digits.map((digit, index) => (
+                                            <AnimatedDigit
+                                                key={index}
+                                                digit={parseInt(digit, 10)}
+                                                size="xl"
+                                                color={colors.text}
+                                            />
+                                        ))}
+                                        <ThemeText className="text-2xl text-zinc-300 mb-2">%</ThemeText>
+                                    </View>
                                     <ThemeText className="mt-1 text-xs font-poppins-light text-emerald-400 tracking-tight">
                                         On Track
                                     </ThemeText>

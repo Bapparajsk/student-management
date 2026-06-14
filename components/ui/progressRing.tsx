@@ -10,6 +10,7 @@ import Svg, {
     Stop,
 } from 'react-native-svg';
 import ThemeText from './ThemeText';
+import { AnimatedNumber } from './animatedCounter';
 
 export type Size = 'sm' | 'md' | 'lg';
 type GradientColor =
@@ -158,9 +159,9 @@ export const ProgressRing = ({ progress, size = 'md', linerGradient, prefix, suf
 
             {/* Center */}
             <View className="absolute items-center">
-                <ThemeText className={cn("text-3xl font-poppins-semibold", variant.title, formattedTitle.className)} textColor={formattedTitle.color}>
-                    {prefix}{formattedTitle.text}{suffix}
-                </ThemeText>
+                <View className='flex-row items-center'>
+                    <AnimatedNumber prefix={prefix} suffix={suffix} color={formattedTitle.color} value={formattedTitle.text || "0"} size={size} />
+                </View>
 
                 <ThemeText className={cn("text-xs", variant.subtitle, formattedSubtitle.className)} textColor={formattedSubtitle.color}>
                     {formattedSubtitle.text}

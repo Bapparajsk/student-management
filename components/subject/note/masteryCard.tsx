@@ -110,7 +110,7 @@ export const StudyProgressCard = ({
             </View>
 
             {/* Footer */}
-            <View className="mt-5 rounded-2xl border border-white/5 bg-white/[0.03] p-3">
+            <View className="mt-5 rounded-2xl border border-white/5 bg-white/3 p-3">
                 <Text className="text-xs text-zinc-500">
                     AI Recommendation
                 </Text>

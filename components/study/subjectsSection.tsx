@@ -59,21 +59,15 @@ export const SubjectsSection = () => {
 
 function BottomSheetContent({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (open: boolean) => void }) {
     return (
-        <BottomSheet isOpen={isOpen} onOpenChange={setIsOpen} style={{
-
-        }}>
-            <BottomSheet.Portal
-
-            >
-                <BottomSheet.Overlay
-
-                />
+        <BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
+            <BottomSheet.Portal >
+                <BottomSheet.Overlay />
                 <BottomSheet.Content
-                    snapPoints={["45%", "80%", "100%"]}
+                    snapPoints={["80%", "100%"]}
                     enableOverDrag={false}
                     enableDynamicSizing={false}
                     contentContainerClassName="h-full"
-                    topInset={50}
+                    topInset={100}
                 >
                     <BottomSheetScrollView>
                         <View className="items-center mb-5">

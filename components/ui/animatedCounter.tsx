@@ -1,51 +1,141 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TextProps } from 'react-native';
-import {
-    useAnimatedReaction,
+import { cn } from '@/utils/ch';
+import { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
     useSharedValue,
     withTiming,
 } from 'react-native-reanimated';
 
-import { runOnJS } from "react-native-worklets";
+type Size = "sm" | "md" | "lg" | "xl";
+const sizeMap = {
+    sm: {
+        height: 24,
+        textSize: "text-2xl",
+    },
+    md: {
+        height: 30,
+        textSize: "text-3xl",
+    },
+    lg: {
+        height: 36,
+        textSize: "text-4xl",
+    },
+    xl: {
+        height: 48,
+        textSize: "text-5xl",
+    },
+}
 
-type AnimatedCounterProps = TextProps & {
-    value: number;
-    duration?: number;
+export type AnimatedNumberProps = {
+    value: string
+    size?: Size
+    color?: string
     prefix?: string;
     suffix?: string;
-    decimals?: number;
-};
+}
 
-export default function AnimatedCounter({
-    value,
-    duration = 1200,
-    prefix = '',
-    suffix = '',
-    decimals = 0,
-    ...props
-}: AnimatedCounterProps) {
-    const progress = useSharedValue(0);
+const idDigit = (digit: string): boolean => /^[0-9]$/.test(digit);
 
-    const [displayValue, setDisplayValue] = useState(0);
+export const AnimatedNumber = ({ size = "md", value, color, prefix, suffix }: AnimatedNumberProps) => {
 
-    useEffect(() => {
-        progress.value = withTiming(value, {
-            duration,
-        });
-    }, [value, duration]);
-
-    useAnimatedReaction(
-        () => progress.value,
-        (current) => {
-            runOnJS(setDisplayValue)(current);
-        }
-    );
+    const digits = value.toString().split('');
 
     return (
-        <Text {...props}>
-            {prefix}
-            {displayValue.toFixed(decimals)}
-            {suffix}
-        </Text>
+        <View className='flex-row'>
+            {prefix && <Text
+                style={{
+                    color: color || "white",
+                }}
+                className={cn(`font-poppins-semibold ${sizeMap[size].textSize}`)}
+            >
+                {prefix}
+            </Text>}
+            {digits.map((digit, index) => (
+                idDigit(digit) ? (
+                    <AnimatedDigit
+                        key={index}
+                        digit={parseInt(digit, 10)}
+                        size={size}
+                        color={color}
+                    />
+                ) : (
+                    <Text
+                        key={index}
+                        style={{
+                            color: color || "white",
+                        }}
+                        className={cn(`font-poppins-semibold ${sizeMap[size].textSize}`)}
+                    >
+                        {digit}
+                    </Text>
+                )
+            ))}
+            {suffix && <Text
+                style={{
+                    color: color || "white",
+                }}
+                className={cn(`font-poppins-semibold ${sizeMap[size].textSize}`)}
+            >
+                {suffix}
+            </Text>}
+        </View>
+    );
+}
+
+export const AnimatedDigit = ({
+    digit,
+    size = "md",
+    color = "white",
+}: {
+    digit: number;
+    size?: Size;
+    color?: string;
+}) => {
+    const translateY = useSharedValue(0);
+
+    const DIGIT_HEIGHT = sizeMap[size].height;
+
+    useEffect(() => {
+        translateY.value = withTiming(
+            -digit * DIGIT_HEIGHT,
+            {
+                duration: 2000,
+            }
+        );
+    }, [digit]);
+
+    const animatedStyle = useAnimatedStyle(() => ({
+        transform: [
+            {
+                translateY: translateY.value,
+            },
+        ],
+    }));
+
+    return (
+        <View
+            style={{
+                height: DIGIT_HEIGHT,
+                overflow: 'hidden',
+
+            }}
+        >
+            <Animated.View style={animatedStyle}>
+                {Array.from({ length: 10 }).map((_, i) => (
+                    <Text
+                        key={i}
+                        style={{
+                            height: DIGIT_HEIGHT,
+                            textAlign: 'center',
+                            color: color,
+                        }}
+                        className={cn('font-poppins-semibold', sizeMap[size].textSize)}
+                    >
+                        {i}
+                    </Text>
+                ))}
+            </Animated.View>
+        </View>
     );
 }
