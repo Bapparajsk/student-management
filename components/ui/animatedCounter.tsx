@@ -1,6 +1,6 @@
 import { cn } from '@/utils/ch';
-import { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { ReactNode, useEffect } from 'react';
+import { Text, View, ViewProps } from 'react-native';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
@@ -31,26 +31,27 @@ export type AnimatedNumberProps = {
     value: string
     size?: Size
     color?: string
-    prefix?: string;
-    suffix?: string;
+    prefix?: string | ReactNode;
+    suffix?: string | ReactNode;
+    wrapperStyle?: ViewProps['style'];
 }
 
 const idDigit = (digit: string): boolean => /^[0-9]$/.test(digit);
 
-export const AnimatedNumber = ({ size = "md", value, color, prefix, suffix }: AnimatedNumberProps) => {
+export const AnimatedNumber = ({ size = "md", value, color, prefix, suffix, wrapperStyle }: AnimatedNumberProps) => {
 
     const digits = value.toString().split('');
 
     return (
-        <View className='flex-row'>
-            {prefix && <Text
+        <View className='flex-row' style={wrapperStyle}>
+            {typeof prefix === "string" ? <Text
                 style={{
                     color: color || "white",
                 }}
                 className={cn(`font-poppins-semibold ${sizeMap[size].textSize}`)}
             >
                 {prefix}
-            </Text>}
+            </Text> : prefix}
             {digits.map((digit, index) => (
                 idDigit(digit) ? (
                     <AnimatedDigit
@@ -71,14 +72,14 @@ export const AnimatedNumber = ({ size = "md", value, color, prefix, suffix }: An
                     </Text>
                 )
             ))}
-            {suffix && <Text
+            {typeof suffix === "string" ? <Text
                 style={{
                     color: color || "white",
                 }}
                 className={cn(`font-poppins-semibold ${sizeMap[size].textSize}`)}
             >
                 {suffix}
-            </Text>}
+            </Text> : suffix}
         </View>
     );
 }

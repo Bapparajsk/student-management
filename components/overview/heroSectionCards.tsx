@@ -8,7 +8,7 @@ import { colors } from "@/utils/theme";
 import { useRouter } from 'expo-router';
 import { PressableFeedback } from 'heroui-native/pressable-feedback';
 import ThemeText from '../ui/ThemeText';
-import { AnimatedDigit } from '../ui/animatedCounter';
+import { AnimatedNumber } from '../ui/animatedCounter';
 
 const bars = [40, 60, 30, 90, 50];
 const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
@@ -17,8 +17,6 @@ const cardStyle = "border h-full border-white/10 bg-white/5 border-border";
 export const HeroSectionCards = () => {
 
     const router = useRouter();
-
-    const digits = "85".split('');
 
     return (
         <View className='w-full flex-row mt-4 h-36'>
@@ -40,15 +38,12 @@ export const HeroSectionCards = () => {
                                 {/* Left */}
                                 <View>
                                     <View className='flex-row items-end'>
-                                        {digits.map((digit, index) => (
-                                            <AnimatedDigit
-                                                key={index}
-                                                digit={parseInt(digit, 10)}
-                                                size="xl"
-                                                color={colors.text}
-                                            />
-                                        ))}
-                                        <ThemeText className="text-2xl text-zinc-300 mb-2">%</ThemeText>
+                                        <AnimatedNumber color={colors.text} value="85" size="xl"
+                                            suffix={
+                                                <ThemeText className="text-2xl text-zinc-300 mb-2">%</ThemeText>
+                                            }
+                                            wrapperStyle={{ alignItems: 'flex-end' }}
+                                        />
                                     </View>
                                     <ThemeText className="mt-1 text-xs font-poppins-light text-emerald-400 tracking-tight">
                                         On Track
@@ -103,13 +98,16 @@ export const HeroSectionCards = () => {
 
                         {/* Content */}
                         <View className='mt-2'>
-                            <ThemeText className="text-3xl font-poppins-semibold">
-                                14.5
-                                <ThemeText className="ml-1  text-zinc-400">
-                                    {' '}
-                                    hrs
-                                </ThemeText>
-                            </ThemeText>
+
+                            <AnimatedNumber color={colors.text} value="14.5"
+                                suffix={
+                                    <ThemeText className="ml-1  text-zinc-400">
+                                        hrs
+                                    </ThemeText>
+                                }
+                                wrapperStyle={{ alignItems: 'flex-end' }}
+                            />
+
 
                             {/* Chart */}
                             <View className=" h-10 flex-row items-end gap-1">
