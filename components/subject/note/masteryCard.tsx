@@ -1,8 +1,10 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { ProgressRing } from '@/components/ui/progressRing';
+import ThemeText from '@/components/ui/ThemeText';
+import { colors } from '@/utils/theme';
 
 interface MasteryCardProps {
     progress?: number;
@@ -50,9 +52,9 @@ export const StudyProgressCard = ({
 
             {/* Header */}
             <View className="mb-4 flex-row items-center justify-between">
-                <Text className="text-xl font-bold text-white">
+                <ThemeText className="text-xl font-poppins-semibold">
                     Study Progress
-                </Text>
+                </ThemeText>
 
                 <View
                     className="rounded-full px-3 py-1"
@@ -60,15 +62,15 @@ export const StudyProgressCard = ({
                         backgroundColor: `${level.color}20`,
                     }}
                 >
-                    <Text
+                    <ThemeText
                         style={{
                             color: level.color,
-                            fontSize: 11,
-                            fontWeight: '700',
+                            lineHeight: 12,
                         }}
+                        className='text-[10px]'
                     >
                         {level.label}
-                    </Text>
+                    </ThemeText>
                 </View>
             </View>
 
@@ -111,14 +113,14 @@ export const StudyProgressCard = ({
 
             {/* Footer */}
             <View className="mt-5 rounded-2xl border border-white/5 bg-white/3 p-3">
-                <Text className="text-xs text-zinc-500">
+                <ThemeText className="text-xs" textColor={colors.textMuted}>
                     AI Recommendation
-                </Text>
+                </ThemeText>
 
-                <Text className="mt-1 text-sm text-zinc-300">
+                <ThemeText numberOfLines={5} className="mt-1 text-xs" textColor={colors.textSecondary}>
                     Review 2 weak topics today to reach
                     80% mastery this week.
-                </Text>
+                </ThemeText>
             </View>
         </View>
     );
@@ -144,14 +146,14 @@ function Stat({
             />
 
             <View className="flex-1">
-                <Text className="text-xs text-zinc-500">
+                <ThemeText className="text-[10px]" textColor={colors.textMuted}>
                     {label}
-                </Text>
+                </ThemeText>
             </View>
 
-            <Text className="font-bold text-white">
+            <ThemeText className="font-semibold text-xs">
                 {value}
-            </Text>
+            </ThemeText>
         </View>
     );
 }
