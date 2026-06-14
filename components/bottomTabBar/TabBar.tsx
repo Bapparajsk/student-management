@@ -10,7 +10,7 @@ export default function BottomTabBar({ state, descriptors, navigation }: BottomT
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
-            bottom: withTiming(10 + Math.round(insets.bottom)),
+            bottom: withTiming(15 + Math.round(insets.bottom)),
         }
     })
 
@@ -28,8 +28,6 @@ export default function BottomTabBar({ state, descriptors, navigation }: BottomT
                 paddingHorizontal: 5,
                 width: 'auto',
             }, animatedStyle]}
-            pointerEvents="box-none"
-
         >
             {state.routes.map((route, index) => (
                 <Tab

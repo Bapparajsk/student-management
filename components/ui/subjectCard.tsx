@@ -1,8 +1,7 @@
 import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Chip } from 'heroui-native';
-import React from 'react';
 import { Image, View } from 'react-native';
+import { Chip, PressableFeedback } from '../hero-ui';
 import { Sparkline } from './sparkline';
 import ThemeText from './ThemeText';
 
@@ -13,6 +12,7 @@ type SubjectStatus =
     | 'AT_RISK';
 
 interface SubjectCardProps {
+    subjectId?: string;
     subjectName: string;
     category: string;
     teacherName: string;
@@ -20,6 +20,7 @@ interface SubjectCardProps {
     completedLessons: number;
     totalLessons: number;
     progress: number;
+    onPress?: (subjectId?: string) => void;
 }
 
 const getSubjectStatus = (
@@ -71,6 +72,7 @@ const getSubjectStatusConfig = (
 };
 
 export const SubjectProgressCard = ({
+    subjectId = "abc123",
     subjectName,
     category,
     teacherName,
@@ -78,6 +80,7 @@ export const SubjectProgressCard = ({
     completedLessons,
     totalLessons,
     progress,
+    onPress,
 }: SubjectCardProps) => {
     const status = getSubjectStatusConfig(
         getSubjectStatus(progress)
@@ -85,7 +88,10 @@ export const SubjectProgressCard = ({
 
 
     return (
-        <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4">
+        <PressableFeedback
+            className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4"
+            onPress={() => onPress?.(subjectId)}
+        >
 
             {/* Header */}
             <View className="mb-4 flex-row items-start justify-between">
@@ -187,6 +193,6 @@ export const SubjectProgressCard = ({
                     {progress}%
                 </ThemeText>
             </View>
-        </View>
+        </PressableFeedback>
     );
 };

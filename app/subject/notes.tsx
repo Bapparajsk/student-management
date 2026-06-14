@@ -9,7 +9,7 @@ export default function Index() {
     }>();
 
     return (
-        <ScreenContent path={`${id}`} bottomBarHeight={80} header={{ showBackButton: true }}>
+        <ScreenContent path={"subject/notes"} bottomBarHeight={80} header={{ backButton: { title: "Subject Notes", } }}>
             <Text className={"text-red-700"}>{`Subject ID: ${id}`}</Text>
         </ScreenContent>
     )
