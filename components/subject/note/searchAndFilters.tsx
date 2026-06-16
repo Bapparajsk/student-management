@@ -8,16 +8,11 @@ import Animated, {
     FadeOut,
 } from 'react-native-reanimated';
 import {
-    Button,
-    ControlField,
-    Description,
-    Input,
     InputGroup,
-    Label,
-    Tabs,
-    TextField
+    Tabs
 } from '../../hero-ui';
 import { AllContainer } from './allContainer';
+import { NotesSection } from './notesSection';
 
 
 const tabs = [
@@ -30,16 +25,12 @@ const tabs = [
         icon: 'menu-book',
     },
     {
-        label: 'PDFs',
-        icon: 'picture-as-pdf',
-    },
-    {
         label: 'AI Notes',
         icon: 'psychology',
     },
     {
         label: 'Saved',
-        icon: 'favorite',
+        icon: 'cloud-done',
     },
 ];
 
@@ -60,10 +51,6 @@ const AnimatedContentContainer = ({
 
 export const SearchAndFilters = () => {
     const [activeTab, setActiveTab] = useState('All');
-
-    const [showSidebar, setShowSidebar] = useState(true);
-    const [accountActivity, setAccountActivity] = useState(true);
-    const [name, setName] = useState('');
 
     const handleTabChange = (nextTab: string) => {
         setActiveTab(nextTab);
@@ -116,72 +103,14 @@ export const SearchAndFilters = () => {
                     <AnimatedContentContainer
                         key="Notes"
                     >
-                        <ControlField
-                            isSelected={accountActivity}
-                            onSelectedChange={setAccountActivity}
-                        >
-                            <ControlField.Indicator variant="checkbox" />
-
-                            <View className="flex-1">
-                                <Label>
-                                    Account activity
-                                </Label>
-
-                                <Description>
-                                    Notifications about your account activity
-                                </Description>
-                            </View>
-                        </ControlField>
-                    </AnimatedContentContainer>
-                </Tabs.Content>
-
-
-                <Tabs.Content value="PDFs">
-                    <AnimatedContentContainer
-                        key="PDFs"
-                    >
-                        <TextField isRequired>
-                            <Label>
-                                Name
-                            </Label>
-
-                            <Input
-                                value={name}
-                                onChangeText={setName}
-                                placeholder="Enter your full name"
-                            />
-                        </TextField>
-
-                        <Button
-                            size="sm"
-                            className="self-start"
-                        >
-                            <Button.Label>
-                                Update profile
-                            </Button.Label>
-                        </Button>
+                        <NotesSection showHeader={false} />
                     </AnimatedContentContainer>
                 </Tabs.Content>
                 <Tabs.Content value="AI Notes">
                     <AnimatedContentContainer
                         key="AI Notes"
                     >
-                        <ControlField
-                            isSelected={showSidebar}
-                            onSelectedChange={setShowSidebar}
-                        >
-                            <ControlField.Indicator variant="checkbox" />
-
-                            <View className="flex-1">
-                                <Label>
-                                    Show sidebar
-                                </Label>
-
-                                <Description>
-                                    Display the sidebar navigation panel
-                                </Description>
-                            </View>
-                        </ControlField>
+                        <NotesSection showHeader={false} />
                     </AnimatedContentContainer>
                 </Tabs.Content>
 
@@ -189,22 +118,7 @@ export const SearchAndFilters = () => {
                     <AnimatedContentContainer
                         key="Saved"
                     >
-                        <ControlField
-                            isSelected={accountActivity}
-                            onSelectedChange={setAccountActivity}
-                        >
-                            <ControlField.Indicator variant="checkbox" />
-
-                            <View className="flex-1">
-                                <Label>
-                                    Account activity
-                                </Label>
-
-                                <Description>
-                                    Notifications about your account activity
-                                </Description>
-                            </View>
-                        </ControlField>
+                        <NotesSection showHeader={false} />
                     </AnimatedContentContainer>
                 </Tabs.Content>
             </Animated.View>

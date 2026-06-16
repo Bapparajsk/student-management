@@ -1,3 +1,4 @@
+import { cn } from '@/utils/ch'
 import { colors } from '@/utils/theme'
 import { PressableFeedback } from 'heroui-native'
 import { ReactNode } from 'react'
@@ -11,11 +12,12 @@ export type HeaderTitleProps = {
     onRightPress?: () => void;
     rightTextColor?: string;
     startIcon?: ReactNode
+    className?: string;
 }
 
-export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor, startIcon }: HeaderTitleProps) => {
+export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor, startIcon, className }: HeaderTitleProps) => {
     return (
-        <View className='flex-row justify-between items-center mb-2'>
+        <View className={cn('flex-row justify-between items-center mb-2', className)}>
             <View className='flex-row items-center gap-2'>
                 {startIcon}
                 <If condition={(leftText && typeof leftText === 'string') === true}>

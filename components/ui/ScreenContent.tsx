@@ -53,8 +53,6 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
     });
   }, [trigger]);
 
-  console.log(children);
-
   return (
     <SafeAreaView
       style={{

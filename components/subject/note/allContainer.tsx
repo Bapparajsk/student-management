@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { AIStudyToolsCard } from './aIStudyToolsCard';
 import { CurriculumSection } from './chaptersSection';
+import { NotesSection } from './notesSection';
 
 const chapters = [
     {
@@ -44,6 +45,7 @@ export const AllContainer = () => {
                 }}
             />
             <CurriculumSection chapters={chapters} />
+            <NotesSection />
         </View>
     )
 }
