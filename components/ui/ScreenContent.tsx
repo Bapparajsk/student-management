@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useScrollStore } from "@/store/useScrollStore";
 import { Header } from "components/header";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { BackButtonProps } from "../header/header";
 
 interface ScreenContentProps {
@@ -19,6 +19,7 @@ interface ScreenContentProps {
     backButton?: BackButtonProps;
   };
   stickyHeaderIndices?: number[];
+  fab?: ReactNode;
 }
 
 const AnimatedScrollView = Animated.createAnimatedComponent(Animated.ScrollView);
@@ -30,7 +31,8 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
   children,
   bottomBarHeight = 0,
   header,
-  stickyHeaderIndices
+  stickyHeaderIndices,
+  fab,
 }) => {
   const scrollY = useSharedValue(0);
   const aref = useAnimatedRef<Animated.ScrollView>();
@@ -72,11 +74,13 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
           paddingTop: 100,
           paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
           paddingBottom: 40 + bottomBarHeight,
+          position: "relative",
         }}
         stickyHeaderIndices={stickyHeaderIndices}
       >
         {children}
       </AnimatedScrollView>
+      {fab}
     </SafeAreaView>
   );
 };
