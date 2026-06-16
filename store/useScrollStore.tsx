@@ -2,14 +2,17 @@ import { create } from 'zustand';
 
 type ScrollStore = {
     y: number;
-    updatedAt: number;
+    commandId: number;
 };
 
 export const useScrollStore = create<ScrollStore>(() => ({
     y: 0,
-    updatedAt: Date.now(),
+    commandId: 0,
 }));
 
 export const setScrollTo = (y: number) => {
-    useScrollStore.setState({ y, updatedAt: Date.now() });
+    useScrollStore.setState((state) => ({
+        y,
+        commandId: state.commandId + 1,
+    }));
 };

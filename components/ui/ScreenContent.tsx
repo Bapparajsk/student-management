@@ -18,6 +18,7 @@ interface ScreenContentProps {
   header?: {
     backButton?: BackButtonProps;
   };
+  stickyHeaderIndices?: number[];
 }
 
 const AnimatedScrollView = Animated.createAnimatedComponent(Animated.ScrollView);
@@ -29,11 +30,12 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
   children,
   bottomBarHeight = 0,
   header,
+  stickyHeaderIndices
 }) => {
   const scrollY = useSharedValue(0);
   const aref = useAnimatedRef<Animated.ScrollView>();
   const scrollTo = useScrollStore((state) => state.y);
-  const trigger = useScrollStore((state) => state.updatedAt);
+  const trigger = useScrollStore((state) => state.commandId);
 
 
   const onScroll = useAnimatedScrollHandler({
@@ -51,6 +53,7 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
     });
   }, [trigger]);
 
+  console.log(children);
 
   return (
     <SafeAreaView
@@ -72,6 +75,7 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
           paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
           paddingBottom: 40 + bottomBarHeight,
         }}
+        stickyHeaderIndices={stickyHeaderIndices}
       >
         {children}
       </AnimatedScrollView>
