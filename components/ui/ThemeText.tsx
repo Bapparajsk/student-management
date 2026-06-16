@@ -8,6 +8,7 @@ export type ThemeTextProps = TextProps & {
 
 export default function ThemeText({ children, className, textColor, style, ...rest }: ThemeTextProps) {
 
+    const color = textColor ? { color: textColor } : {};
 
     return (
         <Text
@@ -16,7 +17,7 @@ export default function ThemeText({ children, className, textColor, style, ...re
                 className
             )}
 
-            style={[{ color: textColor || 'white' }, style]}
+            style={[color, style]}
             numberOfLines={1}
 
             {...rest}

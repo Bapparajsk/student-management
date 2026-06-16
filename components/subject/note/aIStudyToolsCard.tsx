@@ -1,6 +1,9 @@
+import ThemeText from '@/components/ui/ThemeText';
+import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
-import React, { useMemo } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { useMemo } from 'react';
+import { View } from 'react-native';
+import { Button, PressableFeedback } from '../../hero-ui';
 
 type SubjectContext = {
     subjectName: string;
@@ -118,32 +121,34 @@ export const AIStudyToolsCard = ({
                     </View>
 
                     <View>
-                        <Text className="text-lg font-bold text-white">
+                        <ThemeText className="text-lg font-poppins-semibold">
                             AI Study Tools
-                        </Text>
+                        </ThemeText>
 
-                        <Text className="text-xs text-zinc-500">
+                        <ThemeText className="text-xs text-zinc-500">
                             Personalized for {context.subjectName}
-                        </Text>
+                        </ThemeText>
                     </View>
                 </View>
 
-                <MaterialIcons
-                    name="chevron-right"
-                    size={22}
-                    color="#71717A"
-                />
+                <Button isIconOnly feedbackVariant="scale-highlight" variant='outline'>
+                    <MaterialIcons
+                        name="chevron-right"
+                        size={22}
+                        color="#71717A"
+                    />
+                </Button>
             </View>
 
             {/* Primary Tools */}
             <View className="mb-4 flex-row flex-wrap justify-between gap-y-3">
                 {tools.map(tool => (
-                    <Pressable
+                    <PressableFeedback
                         key={tool.id}
-                        className="w-[48%] rounded-2xl border border-white/5 bg-white/[0.03] p-4"
+                        className="w-[48%] flex-row gap-x-3 rounded-2xl border border-white/5 bg-white/3 p-4"
                     >
                         <View
-                            className="mb-3 h-10 w-10 items-center justify-center rounded-xl"
+                            className="h-10 w-10 items-center justify-center rounded-xl"
                             style={{
                                 backgroundColor: `${tool.color}20`,
                             }}
@@ -155,31 +160,34 @@ export const AIStudyToolsCard = ({
                             />
                         </View>
 
-                        <Text className="font-semibold text-white">
-                            {tool.title}
-                        </Text>
+                        <View className='justify-center'>
+                            <ThemeText className="text-sm font-poppins-medium">
+                                {tool.title}
+                            </ThemeText>
 
-                        <Text
-                            numberOfLines={1}
-                            className="mt-1 text-xs text-zinc-500"
-                        >
-                            {tool.subtitle}
-                        </Text>
-                    </Pressable>
+                            <ThemeText
+                                numberOfLines={1}
+                                className="mt-1 text-xs font-poppins-light"
+                                textColor={colors.textMuted}
+                            >
+                                {tool.subtitle}
+                            </ThemeText>
+                        </View>
+                    </PressableFeedback>
                 ))}
             </View>
 
             {/* AI Recommendations */}
             <View>
-                <Text className="mb-3 text-sm font-semibold text-zinc-400">
+                <ThemeText className="mb-3 text-sm font-poppins-semibold text-zinc-400">
                     Recommended Actions
-                </Text>
+                </ThemeText>
 
                 <View className="gap-2">
                     {suggestions.map(item => (
-                        <Pressable
+                        <PressableFeedback
                             key={item.id}
-                            className="flex-row items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.03] p-3"
+                            className="flex-row items-center gap-3 rounded-2xl border border-white/5 bg-white/3 p-3"
                         >
                             <View
                                 className="h-9 w-9 items-center justify-center rounded-xl"
@@ -195,13 +203,13 @@ export const AIStudyToolsCard = ({
                             </View>
 
                             <View className="flex-1">
-                                <Text className="font-medium text-white">
+                                <ThemeText className="font-poppins-medium text-sm text-white">
                                     {item.title}
-                                </Text>
+                                </ThemeText>
 
-                                <Text className="text-xs text-zinc-500">
+                                <ThemeText className="text-xs text-zinc-500">
                                     {item.subtitle}
-                                </Text>
+                                </ThemeText>
                             </View>
 
                             <MaterialIcons
@@ -209,7 +217,7 @@ export const AIStudyToolsCard = ({
                                 size={14}
                                 color="#71717A"
                             />
-                        </Pressable>
+                        </PressableFeedback>
                     ))}
                 </View>
             </View>
