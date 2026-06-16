@@ -10,6 +10,7 @@ import {
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
 import { HeroUINativeProvider } from 'heroui-native';
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { Uniwind } from "uniwind";
 
 Uniwind.setTheme("dark");
@@ -24,23 +25,25 @@ export default function Layout() {
       }}
     >
       <HeroUINativeProvider config={{ devInfo: { stylingPrinciples: false } }}>
-        <FontProvider>
-          <ThemeProvider value={DarkTheme}>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                animation: "fade",
-                contentStyle: {
-                  backgroundColor: "#000",
-                },
-              }}
-            >
-              <Stack.Screen name="(tab)" />
-              <Stack.Screen name="study" />
-              <Stack.Screen name="subject" />
-            </Stack>
-          </ThemeProvider>
-        </FontProvider>
+        <KeyboardProvider>
+          <FontProvider>
+            <ThemeProvider value={DarkTheme}>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  animation: "fade",
+                  contentStyle: {
+                    backgroundColor: "#000",
+                  },
+                }}
+              >
+                <Stack.Screen name="(tab)" />
+                <Stack.Screen name="study" />
+                <Stack.Screen name="subject" />
+              </Stack>
+            </ThemeProvider>
+          </FontProvider>
+        </KeyboardProvider>
       </HeroUINativeProvider>
     </GestureHandlerRootView>
   );

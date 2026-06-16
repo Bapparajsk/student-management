@@ -1,3 +1,4 @@
+import { setScrollTo } from '@/store/useScrollStore';
 import { MaterialIcons } from '@expo/vector-icons';
 import Feather from '@expo/vector-icons/Feather';
 import React, { useState } from 'react';
@@ -16,7 +17,7 @@ import {
     Tabs,
     TextField
 } from '../../hero-ui';
-import { AIStudyToolsCard } from './allContainer';
+import { AllContainer } from './allContainer';
 
 
 const tabs = [
@@ -70,21 +71,7 @@ export const SearchAndFilters = () => {
 
     return (
         <View className="mt-3">
-            <InputGroup>
-                <InputGroup.Prefix>
-                    <Feather
-                        name="search"
-                        size={18}
-                        color="#6B7280"
-                    />
-                </InputGroup.Prefix>
-
-                <InputGroup.Input
-                    placeholder="Enter text"
-                    className="font-poppins-medium text-sm bg-white/3 border border-white/10"
-                />
-            </InputGroup>
-
+            <SearchBar />
             <Tabs
                 value={activeTab}
                 onValueChange={handleTabChange}
@@ -123,13 +110,7 @@ export const SearchAndFilters = () => {
                         <AnimatedContentContainer
                             key="All"
                         >
-                            <AIStudyToolsCard
-                                context={{
-                                    subjectName: 'DBMS',
-                                    currentChapter: 'SQL Joins',
-                                    weakTopic: 'Normalization',
-                                }}
-                            />
+                            <AllContainer />
                         </AnimatedContentContainer>
                     </Tabs.Content>
 
@@ -233,3 +214,27 @@ export const SearchAndFilters = () => {
         </View>
     );
 };
+
+function SearchBar() {
+
+    return (
+        <InputGroup
+            onFocus={() => {
+                setScrollTo(400);
+            }}
+        >
+            <InputGroup.Prefix>
+                <Feather
+                    name="search"
+                    size={18}
+                    color="#6B7280"
+                />
+            </InputGroup.Prefix>
+
+            <InputGroup.Input
+                placeholder="Enter text"
+                className="font-poppins-medium text-sm bg-white/3 border border-white/10"
+            />
+        </InputGroup>
+    )
+}
