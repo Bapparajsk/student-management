@@ -13,11 +13,10 @@ import {
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Animated, {
-    SlideInLeft,
-    SlideInRight,
-    SlideOutLeft,
-    SlideOutRight
+    FadeIn,
+    FadeOut,
 } from 'react-native-reanimated';
+import { AIStudyToolsCard } from './allContainer';
 
 const TABS = [
     'All',
@@ -55,22 +54,12 @@ type Direction = 'left' | 'right';
 
 const AnimatedContentContainer = ({
     children,
-    direction,
 }: {
     children: React.ReactNode;
-    direction: Direction;
 }) => (
     <Animated.View
-        entering={
-            direction === 'right'
-                ? SlideInRight.duration(250)
-                : SlideInLeft.duration(250)
-        }
-        exiting={
-            direction === 'right'
-                ? SlideOutLeft.duration(250)
-                : SlideOutRight.duration(250)
-        }
+        entering={FadeIn.duration(250)}
+        exiting={FadeOut.duration(250)}
         className="gap-6"
     >
         {children}
@@ -79,28 +68,12 @@ const AnimatedContentContainer = ({
 
 export const SearchAndFilters = () => {
     const [activeTab, setActiveTab] = useState('All');
-    const [direction, setDirection] =
-        useState<Direction>('right');
 
     const [showSidebar, setShowSidebar] = useState(true);
     const [accountActivity, setAccountActivity] = useState(true);
     const [name, setName] = useState('');
 
     const handleTabChange = (nextTab: string) => {
-        const currentIndex = TABS.indexOf(
-            activeTab as (typeof TABS)[number]
-        );
-
-        const nextIndex = TABS.indexOf(
-            nextTab as (typeof TABS)[number]
-        );
-
-        setDirection(
-            nextIndex > currentIndex
-                ? 'right'
-                : 'left'
-        );
-
         setActiveTab(nextTab);
     };
 
@@ -158,31 +131,20 @@ export const SearchAndFilters = () => {
                     <Tabs.Content value="All">
                         <AnimatedContentContainer
                             key="All"
-                            direction={direction}
                         >
-                            <ControlField
-                                isSelected={showSidebar}
-                                onSelectedChange={setShowSidebar}
-                            >
-                                <ControlField.Indicator variant="checkbox" />
-
-                                <View className="flex-1">
-                                    <Label>
-                                        Show sidebar
-                                    </Label>
-
-                                    <Description>
-                                        Display the sidebar navigation panel
-                                    </Description>
-                                </View>
-                            </ControlField>
+                            <AIStudyToolsCard
+                                context={{
+                                    subjectName: 'DBMS',
+                                    currentChapter: 'SQL Joins',
+                                    weakTopic: 'Normalization',
+                                }}
+                            />
                         </AnimatedContentContainer>
                     </Tabs.Content>
 
                     <Tabs.Content value="Notes">
                         <AnimatedContentContainer
                             key="Notes"
-                            direction={direction}
                         >
                             <ControlField
                                 isSelected={accountActivity}
@@ -207,7 +169,6 @@ export const SearchAndFilters = () => {
                     <Tabs.Content value="PDFs">
                         <AnimatedContentContainer
                             key="PDFs"
-                            direction={direction}
                         >
                             <TextField isRequired>
                                 <Label>
@@ -234,7 +195,6 @@ export const SearchAndFilters = () => {
                     <Tabs.Content value="AI Notes">
                         <AnimatedContentContainer
                             key="AI Notes"
-                            direction={direction}
                         >
                             <ControlField
                                 isSelected={showSidebar}
@@ -258,7 +218,6 @@ export const SearchAndFilters = () => {
                     <Tabs.Content value="Saved">
                         <AnimatedContentContainer
                             key="Saved"
-                            direction={direction}
                         >
                             <ControlField
                                 isSelected={accountActivity}

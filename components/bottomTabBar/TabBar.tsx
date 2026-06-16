@@ -1,4 +1,3 @@
-import { colors } from "@/utils/theme";
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -20,13 +19,15 @@ export default function BottomTabBar({ state, descriptors, navigation }: BottomT
                 position: 'absolute',
                 alignSelf: 'center',
                 borderRadius: 999999,
-                backgroundColor: colors.background,
+                backgroundColor: "rgba(17,24,39,0.85)",
                 flexDirection: 'row',
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 paddingVertical: 3,
                 paddingHorizontal: 5,
                 width: 'auto',
+                borderWidth: 1,
+                borderColor: "rgba(255,255,255,0.08)",
             }, animatedStyle]}
         >
             {state.routes.map((route, index) => (

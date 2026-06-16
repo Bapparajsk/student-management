@@ -108,10 +108,7 @@ const Header = ({
                 ]}
             >
                 <Surface
-                    className="flex-row w-full items-center justify-between p-2"
-                // style={{
-                //     backgroundColor: "rgba(255, 255, 255)"
-                // }}
+                    className="flex-row w-full items-center justify-between p-2 bg-[#1a1a2b] border border-white/5"
                 >
                     {/* left item */}
                     {backButton ? (
