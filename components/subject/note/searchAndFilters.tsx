@@ -1,5 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import Feather from '@expo/vector-icons/Feather';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import Animated, {
+    FadeIn,
+    FadeOut,
+} from 'react-native-reanimated';
 import {
     Button,
     ControlField,
@@ -9,23 +15,9 @@ import {
     Label,
     Tabs,
     TextField
-} from 'heroui-native';
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import Animated, {
-    FadeIn,
-    FadeOut,
-} from 'react-native-reanimated';
+} from '../../hero-ui';
 import { AIStudyToolsCard } from './allContainer';
 
-const TABS = [
-    'All',
-    'Notes',
-    'PDFs',
-    'Slides',
-    'AI Notes',
-    'Saved'
-] as const;
 
 const tabs = [
     {
@@ -50,7 +42,6 @@ const tabs = [
     },
 ];
 
-type Direction = 'left' | 'right';
 
 const AnimatedContentContainer = ({
     children,

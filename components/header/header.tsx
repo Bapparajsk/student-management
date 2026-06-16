@@ -86,11 +86,24 @@ const Header = ({
 
     const onPressBack = () => {
         if (backButton?.href) {
-            router.push(backButton.href);
+            router.replace(backButton.href);
         } else {
             router.back();
         }
+
+
     }
+
+    // const onPressBack = () => {
+    //         if (router.canGoBack()) {
+    //             router.back();
+    //             return;
+    //         }
+
+    //         if (backButton?.href) {
+    //             router.replace(backButton.href);
+    //         }
+    //     };
 
     return (
         <>
@@ -111,7 +124,7 @@ const Header = ({
                     className="flex-row w-full items-center justify-between p-2 bg-[#1a1a2b] border border-white/5"
                 >
                     {/* left item */}
-                    {backButton ? (
+                    {backButton?.showBackButton ? (
                         <Button onPress={onPressBack} hitSlop={10} variant='ghost'>
                             <View className='flex-row gap-1 items-center'>
                                 <Feather name="arrow-left" size={24} color={colors.info} />
