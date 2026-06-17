@@ -3,7 +3,6 @@ import { colors } from '@/utils/theme';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Href, useRouter } from "expo-router";
 import { TouchableOpacity, View } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ThemeText from '../ui/ThemeText';
 import Tab from "./Tab";
@@ -21,23 +20,17 @@ export default function BottomTabBar({ state, descriptors, navigation, externalT
     const insets = useSafeAreaInsets();
     const router = useRouter();
 
-    const animatedStyle = useAnimatedStyle(() => {
-        return {
-            bottom: withTiming(15 + Math.round(insets.bottom)),
-        }
-    });
-
-
     return (
-        <Animated.View
+        <View
             style={[{
                 position: 'absolute',
                 alignSelf: 'center',
                 flexDirection: 'row',
                 alignItems: 'center',
                 width: 'auto',
+                bottom: 15 + insets.bottom
 
-            }, animatedStyle]}
+            }]}
         >
             {externalTab && (
                 <TouchableOpacity
@@ -86,7 +79,7 @@ export default function BottomTabBar({ state, descriptors, navigation, externalT
                     />
                 ))}
             </View>
-        </Animated.View>
+        </View>
 
     )
 }

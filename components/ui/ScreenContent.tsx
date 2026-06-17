@@ -6,9 +6,9 @@ import Animated, {
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useScrollStore } from "@/store/useScrollStore";
+import { ScrollContext } from '@/context/screenContent';
 import { Header } from "components/header";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { BackButtonProps } from "../header/header";
 
 interface ScreenContentProps {
@@ -36,8 +36,6 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
 }) => {
   const scrollY = useSharedValue(0);
   const aref = useAnimatedRef<Animated.ScrollView>();
-  const scrollTo = useScrollStore((state) => state.y);
-  const trigger = useScrollStore((state) => state.commandId);
 
 
   const onScroll = useAnimatedScrollHandler({
@@ -46,41 +44,43 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
     },
   });
 
-  useEffect(() => {
-    if (!aref.current) return;
-
-    aref.current.scrollTo({
-      y: scrollTo,
+  const scrollTo = (y: number) => {
+    aref.current?.scrollTo({
+      y,
       animated: true,
+
     });
-  }, [trigger]);
+  };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        overflow: "visible",
-        backgroundColor: "#050816",
-      }}
-      key={path}
-    >
-      <Header scrollY={scrollY} backButton={header?.backButton} pathName={path} />
-      <AnimatedScrollView
-        ref={aref}
-        onScroll={onScroll}
-        scrollEventThrottle={16}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingTop: 100,
-          paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
-          paddingBottom: 40 + bottomBarHeight,
-          position: "relative",
+    <ScrollContext.Provider value={{ scrollTo }}>
+
+      <SafeAreaView
+        style={{
+          flex: 1,
+          overflow: "visible",
+          backgroundColor: "#050816",
         }}
-        stickyHeaderIndices={stickyHeaderIndices}
+        key={path}
       >
-        {children}
-      </AnimatedScrollView>
-      {fab}
-    </SafeAreaView>
+        <Header scrollY={scrollY} backButton={header?.backButton} pathName={path} />
+        <AnimatedScrollView
+          ref={aref}
+          onScroll={onScroll}
+          scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingTop: 100,
+            paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
+            paddingBottom: 40 + bottomBarHeight,
+            position: "relative",
+          }}
+          stickyHeaderIndices={stickyHeaderIndices}
+        >
+          {children}
+        </AnimatedScrollView>
+        {fab}
+      </SafeAreaView>
+    </ScrollContext.Provider>
   );
 };

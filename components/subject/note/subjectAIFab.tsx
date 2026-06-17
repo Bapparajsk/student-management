@@ -142,6 +142,7 @@ export const getFabActions = (
 export const SubjectAIFab = ({
     fileType,
 }: SubjectAIFabProps) => {
+
     const [open, setOpen] = useState(false);
 
     const actions = useMemo(
@@ -149,8 +150,9 @@ export const SubjectAIFab = ({
         [fileType]
     );
 
+
     return (
-        <View className="absolute bottom-24 right-5 items-end">
+        <View className="absolute right-5 bottom-32 items-end" >
             {open && (
                 <Animated.View
                     layout={LinearTransition.springify()}

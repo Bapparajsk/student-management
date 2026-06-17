@@ -1,4 +1,3 @@
-import { setScrollTo } from '@/store/useScrollStore';
 import { MaterialIcons } from '@expo/vector-icons';
 import Feather from '@expo/vector-icons/Feather';
 import React, { useState } from 'react';
@@ -13,6 +12,10 @@ import {
 } from '../../hero-ui';
 import { AllContainer } from './allContainer';
 import { NotesSection } from './notesSection';
+
+import {
+    useScrollContext,
+} from '@/context/screenContent';
 
 
 const tabs = [
@@ -61,7 +64,7 @@ export const SearchAndFilters = () => {
             value={activeTab}
             onValueChange={handleTabChange}
             variant="secondary"
-            className='mt-3'
+            className='mt-2'
         >
             <Tabs.List>
                 <Tabs.ScrollView>
@@ -128,11 +131,13 @@ export const SearchAndFilters = () => {
 
 export function SearchBar() {
 
+    const { scrollTo } = useScrollContext();
+
     return (
-        <View className="mt-2">
+        <View className="mt-3">
             <InputGroup
                 onFocus={() => {
-                    setScrollTo(400);
+                    scrollTo(400);
                 }}
             >
                 <InputGroup.Prefix>
