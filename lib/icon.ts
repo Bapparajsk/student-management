@@ -36,14 +36,14 @@ export const iconMap: Record<string, RecordValueType> = {
             name: "calendar-outline"
         }
     },
-    setting: {
+    social: {
         active: {
-            Icon: Ionicons,
-            name: "settings-sharp"
+            Icon: FontAwesome5,
+            name: "users"
         },
         inactive: {
-            Icon: Ionicons,
-            name: "settings-outline"
+            Icon: FontAwesome5,
+            name: "users"
         }
     },
     subject: {
