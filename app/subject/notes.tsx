@@ -10,7 +10,6 @@ export default function SubjectNotesScreen() {
             <StudyProgressCard progress={90} />
             <SearchBar />
             <SearchAndFilters />
-
         </ScreenContent>
     )
 }

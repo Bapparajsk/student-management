@@ -154,7 +154,7 @@ export const SubjectAIFab = ({
             {open && (
                 <Animated.View
                     layout={LinearTransition.springify()}
-                    className="mb-3 gap-3"
+                    className="mb-3 gap-y-1.5"
                 >
                     {actions.map((action, index) => (
                         <Animated.View
