@@ -9,11 +9,10 @@ import Animated, {
   LinearTransition,
 } from 'react-native-reanimated';
 import {
-  ControlField,
-  Description,
-  Label,
   Tabs
 } from '../hero-ui';
+import CampusTab from './campusTab';
+import { ClubTab } from './clubTab';
 
 const AnimatedContentContainer = ({
   children,
@@ -32,8 +31,6 @@ const AnimatedContentContainer = ({
 export const TabNavigation = () => {
   const [activeTab, setActiveTab] = useState('campus');
 
-  const [showSidebar, setShowSidebar] = useState(true);
-  const [accountActivity, setAccountActivity] = useState(true);
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
@@ -44,48 +41,25 @@ export const TabNavigation = () => {
           {({ isSelected }) => (<TabTrigger Icon={MaterialIcons} name="apartment" isSelected={isSelected} value="Campus" />)}
         </Tabs.Trigger>
 
-        <Tabs.Trigger value="notifications" className='flex-1'>
+        <Tabs.Trigger value="club" className='flex-1'>
           {({ isSelected }) => (<TabTrigger Icon={Feather} name="layout" isSelected={isSelected} value="Club" />)}
         </Tabs.Trigger>
       </Tabs.List>
 
       <Animated.View
         layout={LinearTransition.duration(200)}
-        className="px-4 py-6 border border-border rounded-xl"
       >
         <Tabs.Content value="campus">
           <AnimatedContentContainer>
-            <ControlField
-              isSelected={showSidebar}
-              onSelectedChange={setShowSidebar}
-            >
-              <ControlField.Indicator variant="checkbox" />
-              <View className="flex-1">
-                <Label>Show sidebar</Label>
-                <Description>Display the sidebar navigation panel</Description>
-              </View>
-            </ControlField>
+            <CampusTab />
           </AnimatedContentContainer>
         </Tabs.Content>
 
-        <Tabs.Content value="notifications">
+        <Tabs.Content value="club">
           <AnimatedContentContainer>
-            <ControlField
-              isSelected={accountActivity}
-              onSelectedChange={setAccountActivity}
-            >
-              <ControlField.Indicator variant="checkbox" />
-              <View className="flex-1">
-                <Label>Account activity</Label>
-                <Description>
-                  Notifications about your account activity
-                </Description>
-              </View>
-            </ControlField>
+            <ClubTab />
           </AnimatedContentContainer>
         </Tabs.Content>
-
-
       </Animated.View>
     </Tabs>
   );

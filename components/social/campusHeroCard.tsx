@@ -83,7 +83,7 @@ const data: CommunityHeroData = {
     },
 }
 
-export const CommunityHeroCard = () => {
+export const CampusHeroCard = () => {
     const config = getHeroConfig(data.type);
 
     return (

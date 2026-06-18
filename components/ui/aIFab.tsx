@@ -7,7 +7,7 @@ import Animated, {
     FadeOutDown,
     LinearTransition
 } from 'react-native-reanimated';
-import { PressableFeedback } from '../../hero-ui';
+import { PressableFeedback } from '../hero-ui';
 
 export type FileType =
     | 'PDF'
@@ -139,7 +139,7 @@ export const getFabActions = (
     }
 };
 
-export const SubjectAIFab = ({
+export const AIFab = ({
     fileType,
 }: SubjectAIFabProps) => {
 
