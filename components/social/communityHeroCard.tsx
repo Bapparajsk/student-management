@@ -24,10 +24,6 @@ interface CommunityHeroData {
     };
 }
 
-interface Props {
-    data: CommunityHeroData;
-}
-
 const formatNumber = (value: number) => {
     if (value >= 1000) {
         return `${(value / 1000).toFixed(1)}k`;
@@ -70,12 +66,25 @@ const getHeroConfig = (
     }
 };
 
-export const CommunityHeroCard = ({
-    data,
-}: Props) => {
-    const config = getHeroConfig(
-        data.type
-    );
+const data: CommunityHeroData = {
+    type: 'event',
+
+    title: 'AI Hackathon 2026',
+    subtitle:
+        '127 participants • 42 teams',
+
+    cta: 'Register Now',
+
+    stats: {
+        online: 1240,
+        discussions: 342,
+        clubs: 24,
+        events: 12,
+    },
+}
+
+export const CommunityHeroCard = () => {
+    const config = getHeroConfig(data.type);
 
     return (
         <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-5">

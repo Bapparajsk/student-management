@@ -27,13 +27,46 @@ interface CommunityEvent {
     isFeatured?: boolean;
 }
 
-interface UpcomingEventsProps {
-    events: CommunityEvent[];
-}
+const events = [
+    {
+        id: '1',
+        title: 'AI Hackathon 2026',
+        category: 'Hackathon',
 
-export function UpcomingEvents({
-    events,
-}: UpcomingEventsProps) {
+        coverImage:
+            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3',
+
+        location: 'Main Auditorium',
+
+        date: 'Tomorrow',
+        time: '9:00 AM',
+
+        participants: 127,
+
+        isRegistered: false,
+        isFeatured: true,
+    },
+
+    {
+        id: '2',
+        title: 'Placement Workshop',
+        category: 'Career',
+
+        coverImage:
+            'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
+
+        location: 'Seminar Hall',
+
+        date: 'Friday',
+        time: '2:00 PM',
+
+        participants: 89,
+
+        isRegistered: true,
+    },
+];
+
+export function UpcomingEvents() {
     return (
         <View className="mt-6">
             {/* Header */}

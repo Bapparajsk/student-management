@@ -21,13 +21,51 @@ interface Club {
     isTrending?: boolean;
 }
 
-interface ActiveClubsProps {
-    clubs: Club[];
-}
 
-export function ActiveClubs({
-    clubs,
-}: ActiveClubsProps) {
+const clubs = [
+    {
+        id: '1',
+        name: 'AI Club',
+        category: 'Technology',
+        coverImage:
+            'https://images.unsplash.com/photo-1677442136019-21780ecad995',
+
+        members: 432,
+        activeToday: 23,
+
+        isJoined: false,
+        isTrending: true,
+    },
+
+    {
+        id: '2',
+        name: 'Open Source Club',
+        category: 'Development',
+        coverImage:
+            'https://images.unsplash.com/photo-1515879218367-8466d910aaa4',
+
+        members: 289,
+        activeToday: 15,
+
+        isJoined: true,
+    },
+
+    {
+        id: '3',
+        name: 'Photography Club',
+        category: 'Creative',
+        coverImage:
+            'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+
+        members: 186,
+        activeToday: 9,
+
+        isJoined: false,
+    },
+];
+
+
+export function ActiveClubs() {
     return (
         <View className="mt-6">
 

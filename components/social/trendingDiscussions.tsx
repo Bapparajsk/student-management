@@ -18,13 +18,39 @@ interface Discussion {
     trendingRank: number;
 }
 
-interface TrendingDiscussionsProps {
-    discussions: Discussion[];
-}
-
-export function TrendingDiscussions({
-    discussions,
-}: TrendingDiscussionsProps) {
+const discussions = [
+    {
+        id: '1',
+        title:
+            'Google Internship Preparation 2026',
+        comments: 256,
+        views: 1240,
+        category: 'Career',
+        timeAgo: '2h ago',
+        trendingRank: 1,
+    },
+    {
+        id: '2',
+        title:
+            'AI Hackathon Team Formation',
+        comments: 142,
+        views: 842,
+        category: 'Hackathon',
+        timeAgo: '4h ago',
+        trendingRank: 2,
+    },
+    {
+        id: '3',
+        title:
+            'DBMS Final Exam Discussion',
+        comments: 89,
+        views: 451,
+        category: 'Academics',
+        timeAgo: '6h ago',
+        trendingRank: 3,
+    },
+];
+export function TrendingDiscussions() {
     return (
         <View className="mt-6">
             {/* Header */}
