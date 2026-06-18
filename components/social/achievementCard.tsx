@@ -1,6 +1,8 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { Pressable, Text, View } from "react-native";
+import { View } from "react-native";
+import { PressableFeedback } from "../hero-ui";
+import ThemeText from "../ui/ThemeText";
 
 export interface AchievementPost {
     id: string;
@@ -69,7 +71,7 @@ export function AchievementCard({
     );
 
     return (
-        <View className="overflow-hidden rounded-[28px] border border-yellow-500/20 bg-gradient-to-br from-yellow-500/5 via-white/[0.04] to-cyan-500/5 p-5">
+        <View className="overflow-hidden rounded-[28px] border border-yellow-500/20 bg-linear-to-br from-yellow-500/5 via-white/4 to-cyan-500/5 p-5">
 
             {/* Header */}
             <View className="flex-row items-center">
@@ -82,18 +84,18 @@ export function AchievementCard({
                 />
 
                 <View className="ml-3 flex-1">
-                    <Text className="font-semibold text-white">
+                    <ThemeText>
                         {achievement.organization}
-                    </Text>
+                    </ThemeText>
 
-                    <Text
+                    <ThemeText
                         className="text-xs"
                         style={{
                             color: meta.color,
                         }}
                     >
                         {meta.label}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 <MaterialIcons
@@ -114,36 +116,36 @@ export function AchievementCard({
                     />
                 </View>
 
-                <Text className="mt-4 text-center text-2xl font-bold text-white">
+                <ThemeText className="mt-4 text-center text-xl font-poppins-semibold">
                     {achievement.title}
-                </Text>
+                </ThemeText>
 
-                <Text className="mt-2 text-center text-zinc-400">
+                <ThemeText numberOfLines={10} className="mt-2 text-sm text-center text-zinc-400">
                     {achievement.description}
-                </Text>
+                </ThemeText>
             </View>
 
             {/* Stats */}
             <View className="mt-5 flex-row justify-center gap-6">
 
-                <Text className="text-zinc-400">
+                <ThemeText className="text-xs text-zinc-400">
                     🎉 {achievement.celebrations}
-                </Text>
+                </ThemeText>
 
-                <Text className="text-zinc-400">
+                <ThemeText className="text-xs text-zinc-400">
                     ❤️ {achievement.reactions}
-                </Text>
+                </ThemeText>
 
             </View>
 
             {/* CTA */}
-            <Pressable className="mt-5 items-center rounded-2xl bg-yellow-500/15 py-3">
+            <PressableFeedback className="mt-5 items-center rounded-2xl bg-yellow-500/15 py-3">
 
-                <Text className="font-semibold text-yellow-400">
+                <ThemeText className="text-sm font-poppins-semibold text-yellow-400">
                     🎉 Celebrate
-                </Text>
+                </ThemeText>
 
-            </Pressable>
+            </PressableFeedback>
         </View>
     );
 }

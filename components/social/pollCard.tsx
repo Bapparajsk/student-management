@@ -1,5 +1,8 @@
+import { cn } from "@/utils/ch";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Pressable, Text, View } from "react-native";
+import { View } from "react-native";
+import { PressableFeedback } from "../hero-ui";
+import ThemeText from "../ui/ThemeText";
 
 export interface PollOption {
     id: string;
@@ -72,7 +75,7 @@ const poll = {
 
 export const PollCard = () => {
     return (
-        <View className="rounded-[28px] border border-white/10 bg-white/[0.04] p-4">
+        <View className="rounded-[28px] border border-white/10 bg-white/4 p-4">
 
             {/* Header */}
             <View className="flex-row items-center">
@@ -86,23 +89,23 @@ export const PollCard = () => {
                 </View>
 
                 <View className="ml-3 flex-1">
-                    <Text className="font-semibold text-white">
+                    <ThemeText className="text-sm font-poppins-semibold">
                         {poll.author.name}
-                    </Text>
+                    </ThemeText>
 
-                    <Text className="text-xs text-zinc-500">
+                    <ThemeText className="text-xs text-zinc-500">
                         Official Poll • {poll.endsIn}
-                    </Text>
+                    </ThemeText>
                 </View>
             </View>
 
             {/* Question */}
-            <Text className="mt-4 text-lg font-bold text-white">
+            <ThemeText numberOfLines={10} className="mt-4 font-poppins-semibold">
                 {poll.question}
-            </Text>
+            </ThemeText>
 
             {/* Options */}
-            <View className="mt-4 gap-3">
+            <View className="mt-4 gap-2">
                 {poll.options.map(option => (
                     <PollOptionRow
                         key={option.id}
@@ -116,9 +119,9 @@ export const PollCard = () => {
             </View>
 
             {/* Footer */}
-            <Text className="mt-4 text-xs text-zinc-500">
+            <ThemeText className="mt-4 text-xs text-zinc-500">
                 {poll.totalVotes} votes
-            </Text>
+            </ThemeText>
         </View>
     );
 }
@@ -133,7 +136,7 @@ function PollOptionRow({
     );
 
     return (
-        <Pressable className="overflow-hidden rounded-2xl border border-white/10">
+        <PressableFeedback className="overflow-hidden rounded-2xl border border-white/10">
 
             <View
                 className="absolute left-0 top-0 bottom-0 bg-cyan-500/10"
@@ -144,22 +147,23 @@ function PollOptionRow({
 
             <View className="flex-row items-center justify-between px-4 py-4">
 
-                <Text
-                    className={
+                <ThemeText
+                    className={cn(
+                        "text-sm",
                         selected
-                            ? 'font-semibold text-cyan-400'
-                            : 'text-white'
-                    }
+                            ? 'font-poppins-semibold text-cyan-400'
+                            : 'font-poppins-medium text-white'
+                    )}
                 >
                     {option.label}
-                </Text>
+                </ThemeText>
 
-                <Text className="text-cyan-400">
+                <ThemeText className="text-sm font-poppins-semibold text-cyan-400">
                     {percentage}%
-                </Text>
+                </ThemeText>
 
             </View>
 
-        </Pressable>
+        </PressableFeedback>
     );
 }

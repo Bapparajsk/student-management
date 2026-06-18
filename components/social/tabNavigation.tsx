@@ -31,7 +31,6 @@ const AnimatedContentContainer = ({
 export const TabNavigation = () => {
   const [activeTab, setActiveTab] = useState('campus');
 
-
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} variant="primary">
       <Tabs.List className="w-full flex-row bg-white/5 border border-white/10">

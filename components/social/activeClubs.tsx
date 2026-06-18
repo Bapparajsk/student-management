@@ -1,12 +1,14 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
 import {
     Image,
     Pressable,
     ScrollView,
-    Text,
-    View,
+    View
 } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
+import If from '../If';
+import { FetcherChip } from '../ui/fetcherChip';
+import { HeaderTitle } from '../ui/headerTitle';
+import ThemeText from '../ui/ThemeText';
 
 interface Club {
     id: string;
@@ -70,17 +72,10 @@ export function ActiveClubs() {
         <View className="mt-6">
 
             {/* Header */}
-            <View className="mb-4 flex-row items-center justify-between">
-                <Text className="text-xl font-bold text-white">
-                    Active Clubs
-                </Text>
-
-                <Pressable>
-                    <Text className="font-medium text-cyan-400">
-                        View All
-                    </Text>
-                </Pressable>
-            </View>
+            <HeaderTitle
+                leftText="Active Clubs"
+                rightText="see all"
+            />
 
             {/* Clubs */}
             <ScrollView
@@ -108,7 +103,7 @@ function ClubCard({
     club: Club;
 }) {
     return (
-        <Pressable className="w-72 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+        <Pressable className="w-72 overflow-hidden rounded-3xl border border-white/10 bg-white/4">
 
             {/* Cover */}
             <View className="relative h-32">
@@ -119,83 +114,77 @@ function ClubCard({
                     className="h-full w-full"
                 />
 
-                {club.isTrending && (
-                    <View className="absolute left-3 top-3 flex-row items-center rounded-full bg-orange-500/20 px-3 py-1">
-                        <MaterialIcons
-                            name="local-fire-department"
-                            size={14}
-                            color="#FB923C"
-                        />
-
-                        <Text className="ml-1 text-xs font-semibold text-orange-400">
-                            Trending
-                        </Text>
-                    </View>
-                )}
+                <View className='absolute left-3 top-3'>
+                    <If condition={club.isTrending === true}>
+                        <If.Then>
+                            <FetcherChip iconName={"local-fire-department"} text='Trending' />
+                        </If.Then>
+                    </If>
+                </View>
             </View>
 
             {/* Content */}
             <View className="p-4">
 
                 {/* Name */}
-                <Text
+                <ThemeText
                     numberOfLines={1}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-poppins-semibold"
                 >
                     {club.name}
-                </Text>
+                </ThemeText>
 
                 {/* Category */}
-                <Text className="mt-1 text-sm text-zinc-500">
+                <ThemeText className="text-sm text-zinc-500">
                     {club.category}
-                </Text>
+                </ThemeText>
 
                 {/* Stats */}
                 <View className="mt-4 flex-row items-center justify-between">
 
                     <View>
-                        <Text className="text-xs text-zinc-500">
+                        <ThemeText className="text-xs text-zinc-500">
                             Members
-                        </Text>
+                        </ThemeText>
 
-                        <Text className="font-semibold text-white">
+                        <ThemeText className="font-poppins-semibold">
                             {club.members}
-                        </Text>
+                        </ThemeText>
                     </View>
 
                     <View>
-                        <Text className="text-xs text-zinc-500">
+                        <ThemeText className="text-xs text-zinc-500">
                             Active Today
-                        </Text>
+                        </ThemeText>
 
-                        <Text className="font-semibold text-cyan-400">
+                        <ThemeText className="font-poppins-semibold text-cyan-400">
                             {club.activeToday}
-                        </Text>
+                        </ThemeText>
                     </View>
                 </View>
 
                 {/* Button */}
-                <Pressable
+                <PressableFeedback
                     className="mt-4 items-center rounded-2xl py-3"
                     style={{
                         backgroundColor: club.isJoined
                             ? 'rgba(255,255,255,0.08)'
                             : 'rgba(0,213,190,0.15)',
                     }}
+                    isDisabled={club.isJoined}
                 >
-                    <Text
+                    <ThemeText
                         style={{
                             color: club.isJoined
                                 ? '#A1A1AA'
                                 : '#00D5BE',
-                            fontWeight: '600',
                         }}
                     >
                         {club.isJoined
                             ? 'Joined'
                             : 'Join Club'}
-                    </Text>
-                </Pressable>
+                    </ThemeText>
+                </PressableFeedback>
             </View>
         </Pressable>
     );

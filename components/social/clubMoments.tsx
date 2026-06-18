@@ -1,13 +1,12 @@
-import React from 'react';
 import {
     Image,
-    Pressable,
     ScrollView,
-    Text,
-    View,
+    View
 } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
+import { PressableFeedback } from '../hero-ui';
+import ThemeText from '../ui/ThemeText';
 
 type Moment = {
     id: string;
@@ -134,7 +133,7 @@ function MomentItem({
 }) {
     if (moment.isMine) {
         return (
-            <Pressable className="items-center">
+            <PressableFeedback className="items-center">
                 <View className="h-18.5 w-18.5 items-center justify-center rounded-full border-2 border-dashed border-zinc-600">
 
                     <View className="h-15.5 w-15.5 items-center justify-center rounded-full bg-white/4">
@@ -146,13 +145,13 @@ function MomentItem({
                     </View>
                 </View>
 
-                <Text
+                <ThemeText
                     numberOfLines={1}
                     className="mt-2 w-20 text-center text-xs text-zinc-400"
                 >
                     Your Story
-                </Text>
-            </Pressable>
+                </ThemeText>
+            </PressableFeedback>
         );
     }
 
@@ -164,7 +163,7 @@ function MomentItem({
     const badge = getBadge(moment.type);
 
     return (
-        <Pressable className="items-center">
+        <PressableFeedback className="items-center">
 
             <View
                 className="items-center justify-center rounded-full p-0.75"
@@ -191,12 +190,12 @@ function MomentItem({
                 </View>
             </View>
 
-            <Text
+            <ThemeText
                 numberOfLines={1}
-                className="mt-2 w-20 text-center text-xs font-medium text-white"
+                className="mt-2 w-20 text-center text-xs"
             >
                 {moment.title}
-            </Text>
-        </Pressable>
+            </ThemeText>
+        </PressableFeedback>
     );
 }

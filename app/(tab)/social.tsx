@@ -6,11 +6,6 @@ export default function SocialScreen() {
     return (
         <ScreenContent path='(tab)/social' bottomBarHeight={80}>
             <TabNavigation />
-            {/* <CommunityHeroCard />
-            <TrendingDiscussions />
-            <ActiveClubs />
-            <UpcomingEvents />
-            <ConnectStudents /> */}
         </ScreenContent>
     )
 }

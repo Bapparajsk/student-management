@@ -1,12 +1,15 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
 import {
     Image,
     Pressable,
     ScrollView,
-    Text,
-    View,
+    View
 } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
+import If from '../If';
+import { FetcherChip } from '../ui/fetcherChip';
+import { HeaderTitle } from '../ui/headerTitle';
+import ThemeText from '../ui/ThemeText';
 
 interface CommunityEvent {
     id: string;
@@ -70,17 +73,11 @@ export function UpcomingEvents() {
     return (
         <View className="mt-6">
             {/* Header */}
-            <View className="mb-4 flex-row items-center justify-between">
-                <Text className="text-xl font-bold text-white">
-                    Upcoming Events
-                </Text>
+            <HeaderTitle
+                leftText="Upcoming Events"
+                rightText="see all"
+            />
 
-                <Pressable>
-                    <Text className="font-medium text-cyan-400">
-                        View All
-                    </Text>
-                </Pressable>
-            </View>
 
             {/* Events */}
             <ScrollView
@@ -108,7 +105,7 @@ function EventCard({
     event: CommunityEvent;
 }) {
     return (
-        <Pressable className="w-80 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04]">
+        <Pressable className="w-80 overflow-hidden rounded-3xl border border-white/10 bg-white/4">
 
             {/* Banner */}
             <View className="relative h-40">
@@ -119,19 +116,13 @@ function EventCard({
                     className="h-full w-full"
                 />
 
-                {event.isFeatured && (
-                    <View className="absolute left-3 top-3 flex-row items-center rounded-full bg-orange-500/20 px-3 py-1">
-                        <MaterialIcons
-                            name="local-fire-department"
-                            size={14}
-                            color="#FB923C"
-                        />
-
-                        <Text className="ml-1 text-xs font-semibold text-orange-400">
-                            Featured
-                        </Text>
-                    </View>
-                )}
+                <View className='absolute left-3 top-3'>
+                    <If condition={event.isFeatured === true}>
+                        <If.Then>
+                            <FetcherChip iconName={"local-fire-department"} text='Featured' />
+                        </If.Then>
+                    </If>
+                </View>
             </View>
 
             {/* Content */}
@@ -139,18 +130,18 @@ function EventCard({
 
                 {/* Category */}
                 <View className="mb-2 self-start rounded-full bg-cyan-400/10 px-3 py-1">
-                    <Text className="text-xs font-medium text-cyan-400">
+                    <ThemeText className="text-xs text-cyan-400">
                         {event.category}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 {/* Title */}
-                <Text
+                <ThemeText
                     numberOfLines={2}
-                    className="text-lg font-bold text-white"
+                    className="text-lg font-poppins-semibold"
                 >
                     {event.title}
-                </Text>
+                </ThemeText>
 
                 {/* Date */}
                 <View className="mt-3 flex-row items-center">
@@ -160,9 +151,9 @@ function EventCard({
                         color="#A1A1AA"
                     />
 
-                    <Text className="ml-2 text-sm text-zinc-400">
+                    <ThemeText className="ml-2 text-sm text-zinc-400">
                         {event.date} • {event.time}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 {/* Location */}
@@ -173,12 +164,12 @@ function EventCard({
                         color="#A1A1AA"
                     />
 
-                    <Text
+                    <ThemeText
                         numberOfLines={1}
                         className="ml-2 flex-1 text-sm text-zinc-400"
                     >
                         {event.location}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 {/* Bottom */}
@@ -191,12 +182,12 @@ function EventCard({
                             color="#00D5BE"
                         />
 
-                        <Text className="ml-2 font-medium text-cyan-400">
+                        <ThemeText className="ml-2 text-cyan-400">
                             {event.participants}
-                        </Text>
+                        </ThemeText>
                     </View>
 
-                    <Pressable
+                    <PressableFeedback
                         className="rounded-xl px-4 py-2"
                         style={{
                             backgroundColor:
@@ -204,20 +195,21 @@ function EventCard({
                                     ? 'rgba(255,255,255,0.08)'
                                     : 'rgba(0,213,190,0.15)',
                         }}
+                        isDisabled={event.isRegistered}
                     >
-                        <Text
+                        <ThemeText
                             style={{
                                 color: event.isRegistered
                                     ? '#A1A1AA'
                                     : '#00D5BE',
-                                fontWeight: '600',
+                                fontSize: 14,
                             }}
                         >
                             {event.isRegistered
                                 ? 'Registered'
                                 : 'Register'}
-                        </Text>
-                    </Pressable>
+                        </ThemeText>
+                    </PressableFeedback>
                 </View>
             </View>
         </Pressable>

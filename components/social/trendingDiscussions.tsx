@@ -1,10 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { PressableFeedback } from 'heroui-native';
-import React from 'react';
 import {
     ScrollView,
     View
 } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
 import { HeaderTitle } from '../ui/headerTitle';
 import ThemeText from '../ui/ThemeText';
 

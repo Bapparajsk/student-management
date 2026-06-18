@@ -1,11 +1,11 @@
 import {
     Pressable,
-    Text,
     View
 } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import { Avatar } from '../hero-ui';
+import { Avatar, PressableFeedback } from '../hero-ui';
+import ThemeText from '../ui/ThemeText';
 
 
 export function CreatePostCard() {
@@ -28,11 +28,11 @@ export function CreatePostCard() {
                     <Avatar.Fallback>JD</Avatar.Fallback>
                 </Avatar>
 
-                <Pressable className="ml-3 flex-1 rounded-full bg-white/4 px-4 py-3">
-                    <Text numberOfLines={1} className="text-zinc-500">
-                        Share with campus...
-                    </Text>
-                </Pressable>
+                <PressableFeedback className="ml-3 flex-1 rounded-full bg-white/4 px-4 py-3">
+                    <ThemeText numberOfLines={1} className="text-[12px] text-zinc-500">
+                        Share your thoughts
+                    </ThemeText>
+                </PressableFeedback>
 
                 <View className="ml-3 flex-row gap-2">
 

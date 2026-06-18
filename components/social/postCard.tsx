@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Image,
     Pressable,
@@ -8,7 +7,8 @@ import {
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Button, Popover } from 'heroui-native';
+import { Button, Popover } from '../hero-ui';
+import ThemeText from '../ui/ThemeText';
 
 export interface CommunityPost {
     id: string;
@@ -90,7 +90,7 @@ export function PostCard({
     post,
 }: Props) {
     return (
-        <View className="overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] p-4">
+        <View className="overflow-hidden rounded-[28px] border border-white/10 bg-white/4 p-4">
 
             {/* Header */}
             <View className="flex-row items-center">
@@ -103,39 +103,31 @@ export function PostCard({
                 />
 
                 <View className="ml-3 flex-1">
-                    <Text className="font-semibold text-white">
+                    <ThemeText className="font-poppins-semibold">
                         {post.author.name}
-                    </Text>
+                    </ThemeText>
 
-                    <Text className="mt-0.5 text-xs text-zinc-500">
+                    <ThemeText className="mt-0.5 text-xs text-zinc-500">
                         {post.author.role} • {post.createdAt}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 <PopoverExample />
-
-                {/* <Pressable className="h-9 w-9 items-center justify-center rounded-full">
-                    <MaterialIcons
-                        name="more-horiz"
-                        size={20}
-                        color="#71717A"
-                    />
-                </Pressable> */}
             </View>
 
             {/* Category */}
             {post.category && (
                 <View className="mt-4 self-start rounded-full bg-cyan-500/10 px-3 py-1">
-                    <Text className="text-xs font-medium text-cyan-400">
+                    <ThemeText className="text-xs text-cyan-400">
                         {post.category}
-                    </Text>
+                    </ThemeText>
                 </View>
             )}
 
             {/* Content */}
-            <Text className="mt-3 text-[15px] leading-6 text-zinc-200">
+            <ThemeText numberOfLines={10} className="mt-3 text-[15px] leading-6 text-zinc-200">
                 {post.content}
-            </Text>
+            </ThemeText>
 
             {/* Image */}
             {post.image && (
@@ -158,9 +150,9 @@ export function PostCard({
                         color="#FB7185"
                     />
 
-                    <Text className="ml-1 text-xs text-zinc-400">
+                    <ThemeText className="ml-1 text-xs text-zinc-400">
                         {post.likes}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 <View className="mr-4 flex-row items-center">
@@ -170,9 +162,9 @@ export function PostCard({
                         color="#818CF8"
                     />
 
-                    <Text className="ml-1 text-xs text-zinc-400">
+                    <ThemeText className="ml-1 text-xs text-zinc-400">
                         {post.comments}
-                    </Text>
+                    </ThemeText>
                 </View>
 
                 <View className="flex-row items-center">
@@ -182,9 +174,9 @@ export function PostCard({
                         color="#00D5BE"
                     />
 
-                    <Text className="ml-1 text-xs text-zinc-400">
+                    <ThemeText className="ml-1 text-xs text-zinc-400">
                         {post.views}
-                    </Text>
+                    </ThemeText>
                 </View>
             </View>
 
@@ -222,7 +214,7 @@ function PostAction({
     label: string;
 }) {
     return (
-        <Pressable className="flex-1 flex-row items-center justify-center py-2">
+        <Button variant="ghost" className="flex-1">
 
             <MaterialIcons
                 name={icon}
@@ -230,10 +222,10 @@ function PostAction({
                 color="#71717A"
             />
 
-            <Text className="ml-2 text-sm text-zinc-400">
+            <ThemeText className="text-sm text-zinc-400">
                 {label}
-            </Text>
+            </ThemeText>
 
-        </Pressable>
+        </Button>
     );
 }
