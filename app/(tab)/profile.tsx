@@ -1,4 +1,4 @@
-import { ProfileHeroCard } from '@/components/profile/profileHeroCard'
+import { AcademicOverview, AIAcademicPulseCard, DegreeProgressCard, ProfileHeroCard } from '@/components/profile'
 import { ScreenContent } from '@/components/ui/ScreenContent'
 
 export default function ProfileScreen() {
@@ -18,6 +18,9 @@ export default function ProfileScreen() {
                 // connections={124}
                 achievements={124}
             />
+            <AcademicOverview />
+            <DegreeProgressCard />
+            <AIAcademicPulseCard />
         </ScreenContent>
     )
 }

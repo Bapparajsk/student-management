@@ -1,10 +1,10 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { Button } from 'heroui-native';
 import {
     Image,
-    Pressable,
-    Text,
-    View,
+    View
 } from 'react-native';
+import ThemeText from '../ui/ThemeText';
 
 type ProfileHeroProps = {
     name: string;
@@ -45,16 +45,16 @@ function StatItem({
                 color={color}
             />
 
-            <Text
-                className="mt-1 text-base font-bold"
+            <ThemeText
+                className="mt-0.5 font-poppins-semibold"
                 style={{ color }}
             >
                 {value}
-            </Text>
+            </ThemeText>
 
-            <Text className="text-[10px] text-zinc-500">
+            <ThemeText className="text-[10px] text-zinc-500">
                 {label}
-            </Text>
+            </ThemeText>
         </View>
     );
 }
@@ -97,36 +97,61 @@ export function ProfileHeroCard({
 
                 <View className="ml-4 flex-1">
 
-                    <Text
+                    <ThemeText
                         numberOfLines={1}
-                        className="text-xl font-bold text-white"
+                        className="text-xl font-poppins-semibold"
                     >
                         {name}
-                    </Text>
+                    </ThemeText>
 
-                    <Text
+                    <ThemeText
                         numberOfLines={1}
-                        className="mt-0.5 text-sm text-zinc-300"
+                        className="mt-0.5 text-xs text-zinc-300"
                     >
                         {role}
-                    </Text>
+                    </ThemeText>
 
-                    <Text className="mt-0.5 text-xs text-zinc-500">
+                    <ThemeText className="mt-0.5 text-xs text-zinc-500">
                         {program} • Semester {semester}
-                    </Text>
+                    </ThemeText>
 
                     <View className="mt-2 self-start rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1">
-                        <Text className="text-[10px] font-semibold uppercase text-emerald-400">
+                        <ThemeText className="text-[10px] leading-tight font-semibold uppercase text-emerald-400">
                             ⭐ {status}
-                        </Text>
+                        </ThemeText>
                     </View>
 
                 </View>
 
             </View>
 
+            <View className="absolute right-4 top-4 z-10 flex-row gap-2">
+                <Button isIconOnly size='sm' variant='ghost' onPress={onEdit} className='bg-cyan-500/15'>
+                    <MaterialIcons
+                        name="edit"
+                        size={18}
+                        color="#00D5BE"
+                    />
+                </Button>
+                <Button isIconOnly size='sm' variant='outline' onPress={onShare} className='bg-white/3'>
+                    <MaterialIcons
+                        name="share"
+                        size={18}
+                        color="#A1A1AA"
+                    />
+                </Button>
+
+                {/* <Pressable
+                    onPress={onEdit}
+                    className="h-10 w-10 items-center justify-center rounded-full bg-cyan-500/15"
+                >
+                    
+                </Pressable> */}
+
+            </View>
+
             {/* Stats */}
-            <View className="mt-5 flex-row justify-around rounded-2xl border border-white/5 bg-white/[0.03] py-3">
+            <View className="mt-5 flex-row justify-around rounded-2xl border border-white/5 bg-white/3 py-2">
 
                 <StatItem
                     icon="school"
@@ -157,43 +182,6 @@ export function ProfileHeroCard({
                 />
 
             </View>
-
-            {/* Actions */}
-            <View className="mt-4 flex-row gap-2">
-
-                <Pressable
-                    onPress={onEdit}
-                    className="flex-1 flex-row items-center justify-center rounded-xl bg-cyan-500/15 py-3"
-                >
-                    <MaterialIcons
-                        name="edit"
-                        size={18}
-                        color="#00D5BE"
-                    />
-
-                    <Text className="ml-2 font-semibold text-cyan-400">
-                        Edit
-                    </Text>
-                </Pressable>
-
-                <Pressable
-                    onPress={onShare}
-                    className="flex-1 flex-row items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] py-3"
-                >
-                    <MaterialIcons
-                        name="share"
-                        size={18}
-                        color="#A1A1AA"
-                    />
-
-                    <Text className="ml-2 font-semibold text-zinc-300">
-                        Share
-                    </Text>
-                </Pressable>
-
-            </View>
-
-
         </View>
     );
 }
