@@ -1,6 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
 import { View } from 'react-native';
 import { ProgressRing } from '../ui/progressRing';
 import ThemeText from '../ui/ThemeText';

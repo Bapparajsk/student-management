@@ -8,9 +8,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ScrollContext } from '@/context/screenContent';
 import { Header } from "components/header";
-import { PortalHost } from "heroui-native";
 import { ReactNode } from "react";
+import AppFooter from "../footer";
 import { BackButtonProps } from "../header/header";
+import { PortalHost } from "../hero-ui";
 
 interface ScreenContentProps {
   path: string;
@@ -30,7 +31,7 @@ export const SCREEN_HORIZONTAL_PADDING = 16;
 export const ScreenContent: React.FC<ScreenContentProps> = ({
   path,
   children,
-  bottomBarHeight = 0,
+  bottomBarHeight = 80,
   header,
   stickyHeaderIndices,
   fab,
@@ -79,6 +80,7 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
           stickyHeaderIndices={stickyHeaderIndices}
         >
           {children}
+          <AppFooter />
         </AnimatedScrollView>
         <PortalHost name="aifab-host" />
       </SafeAreaView>

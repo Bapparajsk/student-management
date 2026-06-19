@@ -1,9 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Button } from 'heroui-native';
 import {
     Image,
     View
 } from 'react-native';
+import { Button } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
 type ProfileHeroProps = {

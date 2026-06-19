@@ -8,7 +8,7 @@ import ThemeText from '../ui/ThemeText'
 
 export type HeaderTitleProps = {
     leftText: string | ReactNode;
-    rightText?: string;
+    rightText?: string | ReactNode;
     onRightPress?: () => void;
     rightTextColor?: string;
     startIcon?: ReactNode
@@ -32,7 +32,7 @@ export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor,
                 </If>
             </View>
 
-            {rightText && (
+            {typeof rightText === 'string' ? (
                 <PressableFeedback onPress={onRightPress}>
                     <ThemeText
                         className='text-gray-500 mt-1'
@@ -41,6 +41,8 @@ export const HeaderTitle = ({ leftText, rightText, onRightPress, rightTextColor,
                         {rightText}
                     </ThemeText>
                 </PressableFeedback>
+            ) : (
+                rightText
             )}
         </View>
     )
