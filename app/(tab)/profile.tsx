@@ -1,25 +1,23 @@
-import type { StaticScreenProps } from '@react-navigation/native';
-import { ScreenContent } from 'components/ui/ScreenContent';
+import { ProfileHeroCard } from '@/components/profile/profileHeroCard'
+import { ScreenContent } from '@/components/ui/ScreenContent'
 
-import { StyleSheet, View } from 'react-native';
-
-type Props = StaticScreenProps<{
-    name: string;
-}>;
-
-export default function Classes({ route }: Props) {
+export default function ProfileScreen() {
     return (
-        <View style={styles.container}>
-            <ScreenContent
-                path="screens/classes.tsx"
+        <ScreenContent path='(tab)/profile' bottomBarHeight={80}>
+            <ProfileHeroCard
+                name="Bapparaj Sk"
+                role="Full Stack Developer"
+                program="BCA"
+                semester="4"
+                avatar="https://i.pravatar.cc/300?img=12"
+                coverImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+                status="Excellent Standing"
+                cgpa="8.7"
+                streak={14}
+                rank="#12"
+                // connections={124}
+                achievements={124}
             />
-        </View>
-    );
+        </ScreenContent>
+    )
 }
-
-export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-    },
-});

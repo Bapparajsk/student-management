@@ -8,9 +8,7 @@ import Animated, {
   FadeOut,
   LinearTransition,
 } from 'react-native-reanimated';
-import {
-  Tabs
-} from '../hero-ui';
+import { Tabs } from '../hero-ui';
 import CampusTab from './campusTab';
 import { ClubTab } from './clubTab';
 
