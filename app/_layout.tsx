@@ -9,9 +9,9 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
+import { ToastProvider } from 'heroui-native';
 import { HeroUINativeProviderRaw } from 'heroui-native/provider-raw';
-import { ToastProvider } from 'heroui-native/toast';
-import { KeyboardProvider } from "react-native-keyboard-controller";
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { Uniwind } from "uniwind";
 
 Uniwind.setTheme("dark");

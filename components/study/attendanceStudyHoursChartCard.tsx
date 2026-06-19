@@ -180,11 +180,11 @@ export const AttendanceStudyHoursChartCard = () => {
                 onOpenChange={setIsOpen}
                 value={{ label: activeOption, value: activeOption }}
                 onValueChange={(option) => setActiveOption(option?.label as StudyActivityTimeframe)}
-                presentation="dialog"
+                presentation="bottom-sheet"
             >
                 <Select.Portal>
                     <Select.Overlay />
-                    <Select.Content presentation="dialog">
+                    <Select.Content presentation="bottom-sheet">
                         <Select.ListLabel className="mb-2 font-poppins-medium">Choose a state</Select.ListLabel>
                         {options.map((state, index) => (
                             <Fragment key={state.label}>

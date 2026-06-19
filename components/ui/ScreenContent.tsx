@@ -11,7 +11,6 @@ import { Header } from "components/header";
 import { ReactNode } from "react";
 import AppFooter from "../footer";
 import { BackButtonProps } from "../header/header";
-import { PortalHost } from "../hero-ui";
 
 interface ScreenContentProps {
   path: string;
@@ -82,7 +81,7 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
           {children}
           <AppFooter />
         </AnimatedScrollView>
-        <PortalHost name="aifab-host" />
+        {/* <PortalHost name="aifab-host" /> */}
       </SafeAreaView>
     </ScrollContext.Provider>
   );

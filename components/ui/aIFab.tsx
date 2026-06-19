@@ -18,6 +18,7 @@ export type FileType =
 
 interface SubjectAIFabProps {
     fileType: FileType;
+    bottomOffset?: number;
 }
 
 
@@ -140,6 +141,7 @@ export const getFabActions = (
 };
 export const AIFab = ({
     fileType,
+    bottomOffset = 120,
 }: SubjectAIFabProps) => {
 
     const [open, setOpen] = useState(false);
@@ -171,7 +173,7 @@ export const AIFab = ({
                 style={{
                     position: 'absolute',
                     right: 20,
-                    bottom: 120,
+                    bottom: bottomOffset,
                     alignItems: 'flex-end',
                 }}
             >

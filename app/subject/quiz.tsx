@@ -1,31 +1,49 @@
-import { ScreenContent } from "@/components/ui/ScreenContent";
-import { Portal, PortalHost } from "heroui-native";
-import { Text, View } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { BottomSheet, Button } from 'heroui-native';
+import { useState } from 'react';
+import { View } from 'react-native';
+import { withUniwind } from 'uniwind';
 
-export default function AppLayout() {
+const StyledIonicons = withUniwind(Ionicons);
+
+export default function BottomSheetExample() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <ScreenContent path="quiz">
-            <View className="p-5">
-                <Text>Header Content</Text>
-            </View>
 
-            <View className="flex-1 p-5">
-                <Text>Main Content Area</Text>
-                <CustomNotification />
-            </View>
-
-            {/* Portal host positioned at the top of the screen */}
-            <PortalHost name="notification-host" />
-        </ScreenContent>
-    );
-}
-
-function CustomNotification() {
-    return (
-        <Portal name="notification-portal" hostName="notification-host">
-            <View className="absolute top-0 left-0 right-0 bg-blue-500 p-4">
-                <Text>This notification appears at the top via Portal</Text>
-            </View>
-        </Portal>
+        <BottomSheet isOpen={isOpen} onOpenChange={setIsOpen}>
+            <BottomSheet.Trigger asChild>
+                <Button variant="secondary">Open Bottom Sheet</Button>
+            </BottomSheet.Trigger>
+            <BottomSheet.Portal>
+                <BottomSheet.Overlay />
+                <BottomSheet.Content>
+                    <View className="items-center mb-5">
+                        <View className="size-20 items-center justify-center rounded-full bg-green-500/10">
+                            <StyledIonicons
+                                name="shield-checkmark"
+                                size={40}
+                                className="text-green-500"
+                            />
+                        </View>
+                    </View>
+                    <View className="mb-8 gap-2 items-center">
+                        <BottomSheet.Title className="text-center">
+                            Keep yourself safe
+                        </BottomSheet.Title>
+                        <BottomSheet.Description className="text-center">
+                            Update your software to the latest version for better security and
+                            performance.
+                        </BottomSheet.Description>
+                    </View>
+                    <View className="gap-3">
+                        <Button onPress={() => setIsOpen(false)}>Update Now</Button>
+                        <Button variant="tertiary" onPress={() => setIsOpen(false)}>
+                            Later
+                        </Button>
+                    </View>
+                </BottomSheet.Content>
+            </BottomSheet.Portal>
+        </BottomSheet>
     );
 }

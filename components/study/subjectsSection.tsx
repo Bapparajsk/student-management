@@ -10,6 +10,10 @@ const StyledIonicons = withUniwind(Ionicons);
 
 export const SubjectsSection = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    console.log(isOpen);
+
+
     return (
         <View className='mt-3'>
             <HeaderTitle
