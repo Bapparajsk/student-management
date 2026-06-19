@@ -129,7 +129,7 @@ export default function Tab({
                         <inactive.Icon
                             name={inactive.name}
                             size={22}
-                            color={colors.text}
+                            color={colors.textMuted}
                         />
                     </If.Else>
                 </If>}
@@ -138,7 +138,7 @@ export default function Tab({
                 className={cn(
                     'text-xs mt-0.5 font-poppins-semibold',
                 )}
-                style={{ color: isFocused ? colors.primary : colors.text }}
+                style={{ color: isFocused ? colors.primary : colors.textMuted }}
             >
                 {label.toString()}
             </ThemeText>

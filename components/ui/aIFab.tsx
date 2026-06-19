@@ -7,7 +7,7 @@ import Animated, {
     FadeOutDown,
     LinearTransition
 } from 'react-native-reanimated';
-import { PressableFeedback } from '../hero-ui';
+import { Portal, PressableFeedback } from '../hero-ui';
 
 export type FileType =
     | 'PDF'
@@ -138,7 +138,6 @@ export const getFabActions = (
             ];
     }
 };
-
 export const AIFab = ({
     fileType,
 }: SubjectAIFabProps) => {
@@ -150,68 +149,127 @@ export const AIFab = ({
         [fileType]
     );
 
-
     return (
-        <View className="absolute right-5 bottom-32 items-end" >
-            {open && (
-                <Animated.View
-                    layout={LinearTransition.springify()}
-                    className="mb-3 gap-y-1.5"
-                >
-                    {actions.map((action, index) => (
-                        <Animated.View
-                            key={action.id}
-                            entering={FadeInDown
-                                .delay((actions.length - 1 - index) * 80)
-                                .springify()
-                                .damping(14)
-                                .stiffness(120)}
-                            exiting={FadeOutDown.duration(150)}
-                        >
-                            <PressableFeedback className="flex-row items-center self-end rounded-full border border-white/10 bg-[#1a1a2b] px-4 py-3">
-                                <MaterialIcons
-                                    name={action.icon as any}
-                                    size={18}
-                                    color={action.color}
-                                />
+        <Portal name="aifab-portal" hostName="aifab-host">
 
-                                <Text className="ml-2 font-medium text-white">
-                                    {action.title}
-                                </Text>
-                            </PressableFeedback>
-                        </Animated.View>
-                    ))}
-                </Animated.View>
+            {/* Backdrop */}
+            {open && (
+                <PressableFeedback
+                    onPress={() => setOpen(false)}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                    }}
+                />
             )}
 
-            <PressableFeedback
-                onPress={() => setOpen(!open)}
-                className="h-14 w-14 items-center justify-center rounded-full"
+            {/* FAB Container */}
+            <View
                 style={{
-                    backgroundColor: '#818CF8',
-
+                    position: 'absolute',
+                    right: 20,
+                    bottom: 120,
+                    alignItems: 'flex-end',
                 }}
             >
-                <LinearGradient
-                    colors={['#00D5BE', '#3B82F6']}
-                    className="h-14 w-14 items-center justify-center"
-                    style={{
-                        borderRadius: 9999,
-                    }}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                {open && (
+                    <Animated.View
+                        layout={LinearTransition.springify()}
+                        style={{
+                            marginBottom: 12,
+                            gap: 6,
+                        }}
+                    >
+                        {actions.map(
+                            (action, index) => (
+                                <Animated.View
+                                    key={action.id}
+                                    entering={FadeInDown
+                                        .delay(
+                                            (actions.length -
+                                                1 -
+                                                index) * 80
+                                        )
+                                        .springify()}
+                                    exiting={
+                                        FadeOutDown.duration(
+                                            150
+                                        )
+                                    }
+                                >
+                                    <PressableFeedback
+                                        onPress={() => {
+                                            console.log(
+                                                action.id
+                                            );
+
+                                            setOpen(
+                                                false
+                                            );
+                                        }}
+                                        className="flex-row items-center self-end rounded-full border border-white/10 bg-[#1a1a2b] px-4 py-3"
+                                    >
+                                        <MaterialIcons
+                                            name={
+                                                action.icon as any
+                                            }
+                                            size={18}
+                                            color={
+                                                action.color
+                                            }
+                                        />
+
+                                        <Text className="ml-2 font-medium text-white">
+                                            {
+                                                action.title
+                                            }
+                                        </Text>
+                                    </PressableFeedback>
+                                </Animated.View>
+                            )
+                        )}
+                    </Animated.View>
+                )}
+
+                <PressableFeedback
+                    onPress={() =>
+                        setOpen(
+                            (prev) => !prev
+                        )
+                    }
+                    className="h-14 w-14 items-center justify-center rounded-full"
                 >
-                    <MaterialIcons
-                        name={
-                            open
-                                ? 'close'
-                                : 'auto-awesome'
-                        }
-                        size={28}
-                        color="white"
-                    />
-                </LinearGradient>
-            </PressableFeedback>
-        </View>
+                    <LinearGradient
+                        colors={[
+                            '#00D5BE',
+                            '#3B82F6',
+                        ]}
+                        style={{
+                            width: 56,
+                            height: 56,
+                            borderRadius: 9999,
+                            justifyContent:
+                                'center',
+                            alignItems:
+                                'center',
+                        }}
+                    >
+                        <MaterialIcons
+                            name={
+                                open
+                                    ? 'close'
+                                    : 'auto-awesome'
+                            }
+                            size={28}
+                            color="white"
+                        />
+                    </LinearGradient>
+                </PressableFeedback>
+            </View>
+
+        </Portal>
     );
 };

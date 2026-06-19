@@ -9,7 +9,7 @@ export default function SubjectLayout() {
         <Tabs
             tabBar={(props) => (
                 <BottomTabBar
-                    externalTab={{ href: "/(tab)", name: "Overview", Icon: <SimpleLineIcons name="graph" size={22} color={colors.textSecondary} /> }}
+                    externalTab={{ href: "/(tab)", name: "Overview", Icon: <SimpleLineIcons name="graph" size={22} color={colors.textMuted} /> }}
                     {...props}
                 />
             )}

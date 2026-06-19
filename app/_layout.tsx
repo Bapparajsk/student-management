@@ -9,11 +9,16 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
-import { HeroUINativeProvider } from 'heroui-native';
+import { HeroUINativeProviderRaw } from 'heroui-native/provider-raw';
+import { ToastProvider } from 'heroui-native/toast';
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { Uniwind } from "uniwind";
 
 Uniwind.setTheme("dark");
+
+const heroUiConfig = {
+  devInfo: { stylingPrinciples: false }
+}
 
 export default function Layout() {
 
@@ -24,27 +29,29 @@ export default function Layout() {
         backgroundColor: "#000",
       }}
     >
-      <HeroUINativeProvider config={{ devInfo: { stylingPrinciples: false } }}>
-        <KeyboardProvider>
+      <KeyboardProvider>
+        <HeroUINativeProviderRaw config={heroUiConfig}>
           <FontProvider>
             <ThemeProvider value={DarkTheme}>
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                  animation: "fade",
-                  contentStyle: {
-                    backgroundColor: "#000",
-                  },
-                }}
-              >
-                <Stack.Screen name="(tab)" />
-                <Stack.Screen name="study" />
-                <Stack.Screen name="subject" />
-              </Stack>
+              <ToastProvider>
+                <Stack
+                  screenOptions={{
+                    headerShown: false,
+                    animation: "fade",
+                    contentStyle: {
+                      backgroundColor: "#000",
+                    },
+                  }}
+                >
+                  <Stack.Screen name="(tab)" />
+                  <Stack.Screen name="study" />
+                  <Stack.Screen name="subject" />
+                </Stack>
+              </ToastProvider>
             </ThemeProvider>
           </FontProvider>
-        </KeyboardProvider>
-      </HeroUINativeProvider>
+        </HeroUINativeProviderRaw>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }

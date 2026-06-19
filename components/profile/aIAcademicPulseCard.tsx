@@ -1,5 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { PressableFeedback } from '../hero-ui';
+import ThemeText from '../ui/ThemeText';
 
 const insights = [
     {
@@ -36,7 +38,7 @@ function InsightRow({
     bg,
 }: (typeof insights)[0]) {
     return (
-        <View className="flex-row items-center rounded-2xl border border-white/5 bg-white/4 p-4">
+        <PressableFeedback className="flex-row items-center rounded-2xl border border-white/5 bg-white/4 p-3">
             <View className={`h-11 w-11 items-center justify-center rounded-2xl ${bg}`}>
                 <MaterialIcons
                     name={icon as any}
@@ -46,24 +48,24 @@ function InsightRow({
             </View>
 
             <View className="ml-3 flex-1">
-                <Text className="text-xs uppercase tracking-wider text-zinc-500">
+                <ThemeText className="text-xs uppercase tracking-wider text-zinc-500">
                     {title}
-                </Text>
+                </ThemeText>
 
-                <Text
+                <ThemeText
                     numberOfLines={1}
-                    className="mt-1 font-semibold text-white"
+                    className="mt-1"
                 >
                     {value}
-                </Text>
+                </ThemeText>
             </View>
-        </View>
+        </PressableFeedback>
     );
 }
 
 export const AIAcademicPulseCard = () => {
     return (
-        <View className="overflow-hidden rounded-[28px] border border-cyan-400/10 bg-white/[0.04] p-5">
+        <View className="overflow-hidden rounded-[28px] border border-cyan-400/10 bg-white/4 p-5 mt-3">
 
             {/* Glow */}
             <View className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/10" />
@@ -79,18 +81,18 @@ export const AIAcademicPulseCard = () => {
                 </View>
 
                 <View className="ml-3 flex-1">
-                    <Text className="text-lg font-bold text-white">
+                    <ThemeText className="text-lg font-poppins-semibold">
                         AI Academic Pulse
-                    </Text>
+                    </ThemeText>
 
-                    <Text className="text-sm text-zinc-500">
+                    <ThemeText className="text-sm text-zinc-500">
                         Personalized learning insights
-                    </Text>
+                    </ThemeText>
                 </View>
             </View>
 
             {/* Insights */}
-            <View className="gap-3">
+            <View className="gap-2">
                 {insights.map(item => (
                     <InsightRow
                         key={item.id}
@@ -98,7 +100,6 @@ export const AIAcademicPulseCard = () => {
                     />
                 ))}
             </View>
-
         </View>
     );
 }

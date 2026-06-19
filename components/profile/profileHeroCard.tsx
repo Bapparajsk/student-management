@@ -86,10 +86,10 @@ export function ProfileHeroCard({
             <View className="flex-row items-center">
 
                 <View className="rounded-4xl bg-linear-to-br from-cyan-500/20 to-indigo-500/60 p-1">
-                    <View className="overflow-hidden rounded-[28px]">
+                    <View className="rounded-[28px]">
                         <Image
                             source={require('../../assets/profile1.jpg')}
-                            className="h-20 w-20"
+                            className="h-20 w-20 rounded-[28px]"
                             resizeMode="cover"
                         />
                     </View>

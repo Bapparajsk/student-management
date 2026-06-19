@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ScrollContext } from '@/context/screenContent';
 import { Header } from "components/header";
+import { PortalHost } from "heroui-native";
 import { ReactNode } from "react";
 import { BackButtonProps } from "../header/header";
 
@@ -79,7 +80,7 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
         >
           {children}
         </AnimatedScrollView>
-        {fab}
+        <PortalHost name="aifab-host" />
       </SafeAreaView>
     </ScrollContext.Provider>
   );

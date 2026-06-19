@@ -1,4 +1,4 @@
-import { AcademicOverview, AIAcademicPulseCard, DegreeProgressCard, ProfileHeroCard } from '@/components/profile'
+import { AcademicOverview, AIAcademicPulseCard, DegreeProgressCard, ProfileHeroCard, UniversityInfoCard } from '@/components/profile'
 import { ScreenContent } from '@/components/ui/ScreenContent'
 
 export default function ProfileScreen() {
@@ -21,6 +21,13 @@ export default function ProfileScreen() {
             <AcademicOverview />
             <DegreeProgressCard />
             <AIAcademicPulseCard />
+            <UniversityInfoCard
+                universityName="XYZ University"
+                campus="North Campus • Block A-42"
+                department="Computer Science"
+                advisor="Dr. Helena Vance"
+                logo="https://your-logo-url.com/logo.png"
+            />
         </ScreenContent>
     )
 }
