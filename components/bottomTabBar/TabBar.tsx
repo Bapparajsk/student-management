@@ -4,6 +4,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Href, useRouter } from "expo-router";
 import { TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AIFab } from '../ui/aIFab';
 import ThemeText from '../ui/ThemeText';
 import Tab from "./Tab";
 
@@ -22,7 +23,7 @@ export default function BottomTabBar({ state, descriptors, navigation, externalT
 
     return (
         <>
-            {/* <AIFab fileType="AI_NOTE" bottomOffset={(26 + 56) + (15 + insets.bottom)} /> */}
+            <AIFab fileType="AI_NOTE" bottomOffset={(26 + 56) + (15 + insets.bottom)} />
             <View
                 style={[{
                     position: 'absolute',
