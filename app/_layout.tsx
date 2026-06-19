@@ -9,8 +9,7 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
-import { ToastProvider } from 'heroui-native';
-import { HeroUINativeProviderRaw } from 'heroui-native/provider-raw';
+import { ToastProvider, HeroUINativeProvider } from 'heroui-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { Uniwind } from "uniwind";
 
@@ -30,7 +29,7 @@ export default function Layout() {
       }}
     >
       <KeyboardProvider>
-        <HeroUINativeProviderRaw config={heroUiConfig}>
+        <HeroUINativeProvider config={heroUiConfig}>
           <FontProvider>
             <ThemeProvider value={DarkTheme}>
               <ToastProvider>
@@ -50,7 +49,7 @@ export default function Layout() {
               </ToastProvider>
             </ThemeProvider>
           </FontProvider>
-        </HeroUINativeProviderRaw>
+        </HeroUINativeProvider>
       </KeyboardProvider>
     </GestureHandlerRootView>
   );
