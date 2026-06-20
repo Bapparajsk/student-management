@@ -1,0 +1,1 @@
+export { QuizPerformanceHero } from "./quizPerformanceHero";
