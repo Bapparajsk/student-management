@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { View } from 'react-native'
 import { AchievementCard, AchievementPost } from './achievementCard'
 import { ClubMoments } from './clubMoments'
@@ -6,7 +6,7 @@ import { CreatePostCard } from './createPostCard'
 import { PollCard } from './pollCard'
 import { PostCard } from './postCard'
 
-export const ClubTab = () => {
+const ClubTab = () => {
     return (
         <View>
             <ClubMoments />
@@ -24,6 +24,8 @@ export const ClubTab = () => {
         </View>
     )
 }
+
+export default memo(ClubTab);
 
 export const achievements: AchievementPost[] = [
     {

@@ -4,8 +4,8 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Href, useRouter } from "expo-router";
 import { TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { AIFab } from '../ui/aIFab';
-import ThemeText from '../ui/ThemeText';
+import { AIFab } from '../../ui/aIFab';
+import ThemeText from '../../ui/ThemeText';
 import Tab from "./Tab";
 
 export type CustomBottomTabBarProps = BottomTabBarProps & {
@@ -16,7 +16,7 @@ export type CustomBottomTabBarProps = BottomTabBarProps & {
     }
 };
 
-export default function BottomTabBar({ state, descriptors, navigation, externalTab }: CustomBottomTabBarProps) {
+export const BottomTabBar = ({ state, descriptors, navigation, externalTab }: CustomBottomTabBarProps) => {
 
     const insets = useSafeAreaInsets();
     const router = useRouter();

@@ -1,1 +1,1 @@
-export { TabNavigation } from "./tabNavigation";
+export { SocialNavigation } from "./socialNavigation";

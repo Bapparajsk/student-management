@@ -1,6 +1,6 @@
 import { colors } from '@/utils/theme';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import BottomTabBar from 'components/bottomTabBar/TabBar';
+import { BottomTabBar } from 'components/navigation/bottomTabBar';
 import { Tabs } from "expo-router";
 
 export default function SubjectLayout() {

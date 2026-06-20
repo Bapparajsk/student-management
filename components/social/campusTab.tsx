@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { View } from 'react-native';
 import { ActiveClubs } from "./activeClubs";
 import { CampusHeroCard } from './campusHeroCard';
 import { TrendingDiscussions } from "./trendingDiscussions";
 import { UpcomingEvents } from "./upcomingEvents";
 
-export default function CampusTab() {
+const CampusTab = () => {
     return (
         <View>
             <CampusHeroCard />
@@ -14,3 +15,5 @@ export default function CampusTab() {
         </View>
     )
 }
+
+export default memo(CampusTab);
