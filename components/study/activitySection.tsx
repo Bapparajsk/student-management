@@ -4,10 +4,9 @@ import { AttendanceStudyHoursChartCard } from "./attendanceStudyHoursChartCard";
 import { RangingChartCard } from "./rangingChartCard";
 
 
-
 export const StudyActivitySection = () => {
     return (
-        <View className="">
+        <View>
             <AttendanceStudyHoursChartCard />
             <View className="flex-row items-center">
                 <View className="w-1/2 pr-2">

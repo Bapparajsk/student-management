@@ -2,12 +2,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-export type StudyActivityTimeframe = 'Today' | 'Last Week' | 'Last Month';
+import { FilterOption } from '@/components/popover/popover';
 
-export type StudyActivityOption = {
-	label: StudyActivityTimeframe;
-	active: boolean;
-};
+export type StudyActivityTimeframe =
+	| 'Today'
+	| 'Last Week'
+	| 'Last Month';
+
+export type StudyActivityOption =
+	FilterOption & {
+		active: boolean;
+	};
 
 type StudyActivityStore = {
 	options: StudyActivityOption[];
@@ -16,39 +21,35 @@ type StudyActivityStore = {
 
 const defaultOptions: StudyActivityOption[] = [
 	{
+		id: 'today',
 		label: 'Today',
 		active: false,
 	},
 	{
+		id: 'last-week',
 		label: 'Last Week',
 		active: true,
 	},
 	{
+		id: 'last-month',
 		label: 'Last Month',
 		active: false,
 	},
 ];
 
-const defaultActiveOption =
-	defaultOptions.find(
-		(option) => option.active
-	)?.label || 'Today';
+const defaultActiveOption: StudyActivityTimeframe =
+	'Last Week';
 
 export const useStudyActivityStore =
 	create<StudyActivityStore>()(
 		persist(
-			() => ({
+			(set) => ({
 				options: defaultOptions,
-
-				activeOption:
-					defaultActiveOption,
+				activeOption: defaultActiveOption,
 			}),
 			{
-				name: 'study-activity-storage',
-
-				storage: createJSONStorage(
-					() => AsyncStorage
-				),
+				name: 'study-activity-store-v1',
+				storage: createJSONStorage(() => AsyncStorage),
 			}
 		)
 	);
@@ -78,7 +79,6 @@ export const setActiveOption = (
 export const resetOptions = () => {
 	useStudyActivityStore.setState({
 		options: defaultOptions,
-
 		activeOption:
 			defaultActiveOption,
 	});

@@ -1,11 +1,9 @@
-import { setActiveOption, StudyActivityTimeframe, useStudyActivityStore } from '@/store/study';
+import { StudyActivityTimeframe, setActiveOption, useStudyActivityStore } from '@/store/study';
 import { getOptionByValue } from '@/utils/getOptionByValue';
 import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Fragment, useState } from 'react';
 import { Dimensions, View } from 'react-native';
-import Animated from 'react-native-reanimated';
-import { Button, Select, Separator } from '../hero-ui';
+import { FilterPopover } from '../popover/popover';
 import ThemeText from '../ui/ThemeText';
 import AreaChart from '../ui/areaChart';
 
@@ -83,129 +81,91 @@ const spacingOptions = [
 
 export const AttendanceStudyHoursChartCard = () => {
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const options = useStudyActivityStore(s => s.options);
     const activeOption = useStudyActivityStore(s => s.activeOption);
 
 
     return (
-        <>
 
-            <View className="mt-3 rounded-3xl border border-white/10 bg-white/5 p-5 overflow-hidden">
+        <View className="mt-3 rounded-3xl border border-white/10 bg-white/5 p-5">
 
-                {/* Header */}
-                <View className="mb-5 flex-row items-center justify-between">
-                    <ThemeText className="text-xl font-poppins-semibold">
-                        Study Activity
+            {/* Header */}
+            <View className="mb-5 flex-row items-center justify-between">
+                <ThemeText className="text-xl font-poppins-semibold">
+                    Study Activity
+                </ThemeText>
+                <FilterPopover
+                    items={options}
+                    itemStyle={{
+                        labelClassName: "text-sm"
+                    }}
+                    onSelect={(item) => setActiveOption(item.label as StudyActivityTimeframe)}
+                />
+
+            </View>
+
+            {/* Stats */}
+            <View className="mb-7 flex-row flex-wrap justify-start gap-x-5 gap-y-4">
+
+                {/* Completed */}
+                <View className="items-center">
+                    <View className="mb-1 flex-row items-center gap-1">
+                        <MaterialIcons
+                            name="check-circle-outline"
+                            size={12}
+                            color="#94A3B8"
+                        />
+
+                        <ThemeText className="text-[10px] text-zinc-400">
+                            Attendance
+                        </ThemeText>
+                    </View>
+
+                    <ThemeText className="text-lg font-poppins-semibold">
+                        24
                     </ThemeText>
-                    <Button variant="outline" onPress={() => setIsOpen((prev) => !prev)} >
-                        <ThemeText className="text-xs text-zinc-400">
-                            {activeOption}
-                        </ThemeText>
-
-                        <Animated.View>
-                            <MaterialIcons
-                                name="keyboard-arrow-down"
-                                size={16}
-                                color="#A1A1AA"
-                            />
-                        </Animated.View>
-                    </Button>
                 </View>
 
-                {/* Stats */}
-                <View className="mb-7 flex-row flex-wrap justify-start gap-x-5 gap-y-4">
+                {/* Study Hours */}
+                <View className="items-center">
+                    <View className="mb-1 flex-row items-center gap-1">
+                        <ThemeText className="text-[10px] text-yellow-400">
+                            ✨
+                        </ThemeText>
 
-                    {/* Completed */}
-                    <View className="items-center">
-                        <View className="mb-1 flex-row items-center gap-1">
-                            <MaterialIcons
-                                name="check-circle-outline"
-                                size={12}
-                                color="#94A3B8"
-                            />
-
-                            <ThemeText className="text-[10px] text-zinc-400">
-                                Attendance
-                            </ThemeText>
-                        </View>
-
-                        <ThemeText className="text-lg font-poppins-semibold">
-                            24
+                        <ThemeText className="text-[10px] text-zinc-400">
+                            Study Hours
                         </ThemeText>
                     </View>
 
-                    {/* Study Hours */}
-                    <View className="items-center">
-                        <View className="mb-1 flex-row items-center gap-1">
-                            <ThemeText className="text-[10px] text-yellow-400">
-                                ✨
-                            </ThemeText>
-
-                            <ThemeText className="text-[10px] text-zinc-400">
-                                Study Hours
-                            </ThemeText>
-                        </View>
-
-                        <ThemeText className="text-lg font-poppins-semibold">
-                            12.5h
-                        </ThemeText>
-                    </View>
-
+                    <ThemeText className="text-lg font-poppins-semibold">
+                        12.5h
+                    </ThemeText>
                 </View>
 
-                {/* Chart */}
-                <View className="w-full">
-                    <Chart activeOption={activeOption} />
+            </View>
 
-                    {/* Current Week */}
-                    <View className="mt-3 flex-row items-center justify-between px-1">
-                        <ThemeText className="text-[11px] text-zinc-500">
-                            12 May - 18 May
+            {/* Chart */}
+            <View className="w-full">
+                <Chart activeOption={activeOption} />
+
+                {/* Current Week */}
+                <View className="mt-3 flex-row items-center justify-between px-1">
+                    <ThemeText className="text-[11px] text-zinc-500">
+                        12 May - 18 May
+                    </ThemeText>
+
+                    <View className="flex-row items-center gap-1">
+                        <View className="h-2 w-2 rounded-full bg-sky-400" />
+
+                        <ThemeText className="text-[11px] text-zinc-400">
+                            Current Week
                         </ThemeText>
-
-                        <View className="flex-row items-center gap-1">
-                            <View className="h-2 w-2 rounded-full bg-sky-400" />
-
-                            <ThemeText className="text-[11px] text-zinc-400">
-                                Current Week
-                            </ThemeText>
-                        </View>
                     </View>
                 </View>
-            </View >
-            <Select
-                isOpen={isOpen}
-                onOpenChange={setIsOpen}
-                value={{ label: activeOption, value: activeOption }}
-                onValueChange={(option) => setActiveOption(option?.label as StudyActivityTimeframe)}
-                presentation="dialog"
-            >
-                <Select.Portal>
-                    <Select.Overlay />
-                    <Select.Content presentation="dialog">
-                        <Select.ListLabel className="mb-2 font-poppins-medium">Choose a state</Select.ListLabel>
-                        {options.map((state, index) => (
-                            <Fragment key={state.label}>
-                                <Select.Item value={state.label} label={state.label}>
-                                    {({ value, isSelected }) => (
-                                        <View className="flex-row items-center gap-2 px-3 py-1">
-                                            <View style={{ height: 8, width: 8, borderRadius: 9999, backgroundColor: isSelected ? '#0ea5e9' : 'transparent' }} />
-
-                                            <ThemeText className="text-xs">
-                                                {value}
-                                            </ThemeText>
-                                        </View>
-                                    )}
-                                </Select.Item>
-                                {index < options.length - 1 && <Separator />}
-                            </Fragment>
-                        ))}
-                    </Select.Content>
-                </Select.Portal>
-            </Select>
-        </>
+            </View>
+        </View >
     )
 }
 

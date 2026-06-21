@@ -3,6 +3,9 @@ import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
+import { cn } from '@/utils/ch';
+import { isValidValueOrDefault } from '@/utils/getOptionByValue';
+import { colors } from '@/utils/theme';
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
@@ -10,25 +13,35 @@ import ThemeText from '../ui/ThemeText';
 export type FilterOption = {
     id: string;
     label: string;
-    iconName: keyof typeof MaterialIcons.glyphMap;
+    iconName?: keyof typeof MaterialIcons.glyphMap;
 };
+
+export type FilterPopoverItemStyle = {
+    activeColor?: string;
+    inactiveColor?: string;
+    labelClassName?: string;
+}
 
 export type FilterPopoverProps = {
     items: FilterOption[];
     onSelect?: (item: FilterOption) => void;
+    activeItemId?: string;
+    itemStyle?: FilterPopoverItemStyle
 };
 
 export const FilterPopover = ({
     items,
     onSelect,
+    activeItemId,
+    itemStyle
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
     const [open, setOpen] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState<FilterOption | null>(null);
+    const [selectedFilter, setSelectedFilter] = useState<FilterOption>(items.find(item => item.id === activeItemId) || items[0]);
 
     return (
-        <View className="relative z-10 ">
+        <View className="relative z-10">
 
             {open && (
                 <PressableFeedback
@@ -37,6 +50,7 @@ export const FilterPopover = ({
                         width: 99999,
                         height: 99999,
                         top: -1000,
+                        left: -1000,
                     }}
                     onPress={() => setOpen(false)}
                 />
@@ -53,10 +67,7 @@ export const FilterPopover = ({
                 {/* Trigger */}
                 <PressableFeedback
                     onPress={() =>
-                        setOpen(
-                            prev =>
-                                !prev
-                        )
+                        setOpen(prev => !prev)
                     }
                     onLayout={e => {
                         triggerWidth.current =
@@ -67,35 +78,29 @@ export const FilterPopover = ({
                     }}
                     className="flex-row items-center px-4 py-3"
                 >
-                    <MaterialIcons
-                        name={
-                            selectedFilter
-                                ? selectedFilter.iconName
-                                : 'apps'
-                        }
-                        size={16}
-                        color="#22D3EE"
-                    />
+                    {selectedFilter.iconName && (
+                        <MaterialIcons
+                            name={selectedFilter.iconName}
+                            size={16}
+                            color="#22D3EE"
+                        />
+                    )}
 
-                    <ThemeText className="ml-2 font-semibold text-white">
-                        {selectedFilter
-                            ? selectedFilter.label
-                            : 'Filter'}
+                    <ThemeText className={cn("ml-2", itemStyle?.labelClassName)}>
+                        {selectedFilter.label}
                     </ThemeText>
 
                     <MaterialIcons
-                        name={
-                            open
-                                ? 'expand-less'
-                                : 'expand-more'
-                        }
+                        name={open ? 'expand-less' : 'expand-more'}
                         size={18}
                         color="#A1A1AA"
-                        style={{
-                            marginLeft: 8,
-                        }}
+                        style={{ marginLeft: 8 }}
                     />
                 </PressableFeedback>
+
+                {/* {open && (
+                    <Separator />
+                )} */}
 
                 {/* Content */}
                 {open && (
@@ -115,50 +120,32 @@ export const FilterPopover = ({
                                             filter.id
                                         }
                                         onPress={() => {
-                                            setSelectedFilter(
-                                                filter
-                                            );
-
-                                            setOpen(
-                                                false
-                                            );
-
-                                            onSelect?.(
-                                                filter
-                                            );
+                                            setSelectedFilter(filter);
+                                            setOpen(false);
+                                            onSelect?.(filter);
                                         }}
                                         className="flex-row items-center rounded-2xl px-3 py-3"
                                     >
-                                        <MaterialIcons
-                                            name={
-                                                filter.iconName
-                                            }
-                                            size={
-                                                18
-                                            }
-                                            color={
-                                                active
-                                                    ? '#22D3EE'
-                                                    : '#71717A'
-                                            }
-                                        />
+                                        {filter.iconName && (
+                                            <MaterialIcons
+                                                name={filter.iconName}
+                                                size={18}
+                                                color={active ? isValidValueOrDefault(itemStyle?.activeColor, '#22D3EE') : colors.textMuted}
+                                            />
+                                        )}
 
                                         <ThemeText
-                                            className={`mx-3 ${active
-                                                ? 'font-semibold text-cyan-400'
-                                                : 'text-zinc-300'
-                                                }`}
+                                            className={cn(`mx-3`, active && 'font-semibold', itemStyle?.labelClassName)}
+                                            style={{
+                                                color: active ? "#22D3EE" : colors.textMuted,
+                                            }}
                                         >
-                                            {
-                                                filter.label
-                                            }
+                                            {filter.label}
                                         </ThemeText>
                                         {active && (
                                             <MaterialIcons
                                                 name="check"
-                                                size={
-                                                    16
-                                                }
+                                                size={16}
                                                 color="#22D3EE"
                                             />
                                         )}
