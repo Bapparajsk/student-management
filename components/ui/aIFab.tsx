@@ -204,10 +204,6 @@ export const AIFab = ({
                                 >
                                     <PressableFeedback
                                         onPress={() => {
-                                            console.log(
-                                                action.id
-                                            );
-
                                             setOpen(
                                                 false
                                             );
