@@ -10,7 +10,7 @@ type Difficulty =
     | 'Hard'
     | 'Expert';
 
-type QuizCardProps = {
+export type QuizCardProps = {
     title: string;
     chapter: string;
 
@@ -118,10 +118,8 @@ export default function QuizCard({
         : 'refresh';
 
     return (
-        <PressableFeedback
-            onPress={onPress}
+        <View
             className="overflow-hidden rounded-[28px] border border-white/10 bg-white/4 p-4"
-            isDisabled={status === 'locked'}
         >
             {status === "locked" && (
                 <View className="absolute inset-0 z-10 flex-row items-center justify-center bg-black/25" />
@@ -270,9 +268,8 @@ export default function QuizCard({
 
                     <PressableFeedback
                         className="flex-row items-center rounded-full px-3 py-2 gap-x-1"
-                        style={{
-                            backgroundColor: 'rgba(34,211,238,0.12)'
-                        }}
+                        style={{ backgroundColor: 'rgba(34,211,238,0.12)' }}
+                        onPress={onPress}
                     >
                         <ThemeText className="text-sm text-cyan-400">
                             Start Quiz
@@ -355,6 +352,6 @@ export default function QuizCard({
 
                 </View>
             )}
-        </PressableFeedback>
+        </View>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ClassCard } from '../ui/classCard'
-import ClassesList from '../ui/classList'
+import ClassesList from '../ui/list'
 
 export const ClassesSection = () => {
     return (

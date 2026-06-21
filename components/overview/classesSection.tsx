@@ -2,8 +2,8 @@ import { colors } from "@/utils/theme";
 
 import { View } from 'react-native';
 import { ClassCard } from "../ui/classCard";
-import ClassesList from "../ui/classList";
 import { HeaderTitle } from "../ui/headerTitle";
+import ClassesList from "../ui/list";
 
 
 

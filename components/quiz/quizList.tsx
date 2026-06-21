@@ -1,0 +1,122 @@
+import { View } from 'react-native';
+
+import { MaterialIcons } from "@expo/vector-icons";
+import { useState } from 'react';
+import { Chip } from '../hero-ui';
+import { FilterPopover, type FilterOption } from '../popover';
+import List from '../ui/list';
+import ThemeText from '../ui/ThemeText';
+import QuizCard, { QuizCardProps } from './quizCard';
+
+
+
+const FILTERS: FilterOption[] = [
+    {
+        id: 'all',
+        label: 'All',
+        iconName: 'apps',
+    },
+    {
+        id: 'practice',
+        label: 'Practice',
+        iconName: 'edit-note',
+    },
+    {
+        id: 'mock',
+        label: 'Mock',
+        iconName: 'timer',
+    },
+    {
+        id: 'challenge',
+        label: 'Challenge',
+        iconName: 'emoji-events',
+    },
+    {
+        id: 'ai',
+        label: 'AI Quiz',
+        iconName: 'auto-awesome',
+    },
+];
+
+const QUIZZES: QuizCardProps[] = [
+    {
+        title: "SQL Joins Mastery",
+        chapter: "Chapter 4",
+        difficulty: "Hard",
+        questions: 20,
+        duration: 15,
+        xp: 120,
+        participants: 1248,
+        accuracy: 82,
+        badge: 'Trending',
+        status: "active"
+    },
+    {
+        title: "Normalization Rules",
+        chapter: "Chapter 5",
+        difficulty: "Medium",
+        questions: 15,
+        duration: 10,
+        xp: 90,
+        participants: 986,
+        accuracy: 95,
+        status: "completed",
+        score: 10
+    },
+    {
+        title: "Transaction Management",
+        chapter: "Chapter 8",
+        difficulty: "Expert",
+        questions: 25,
+        duration: 20,
+        xp: 250,
+        participants: 0,
+        accuracy: 0,
+        status: "locked"
+    }
+];
+
+export const QuizNavigator = () => {
+
+    const [activeFilter, setActiveFilter] = useState<FilterOption>(FILTERS[0]);
+
+    return (
+        <View className='mt-3'>
+            <View className='flex-row items-center justify-between mb-3'>
+                <View>
+                    <ThemeText className='text-xl font-poppins-semibold'>
+                        Quizzes
+                    </ThemeText>
+                    <Chip className='bg-white/4 border border-white/10'>
+                        <MaterialIcons name={activeFilter.iconName} size={16} color="#22D3EE" />
+                        <ThemeText className='font-poppins-medium text-xs'>
+                            20 {activeFilter.label}
+                        </ThemeText>
+                    </Chip>
+                </View>
+                <FilterPopover items={FILTERS} activeItemId={activeFilter.id} onSelect={setActiveFilter} />
+            </View>
+
+            <List
+                data={QUIZZES}
+                separatorSize={10}
+                estimatedItemSize={200}
+                renderItem={({ item }) => (
+                    <QuizCard
+                        title={item.title}
+                        chapter={item.chapter}
+                        difficulty={item.difficulty}
+                        questions={item.questions}
+                        duration={item.duration}
+                        xp={item.xp}
+                        participants={item.participants}
+                        accuracy={item.accuracy}
+                        badge={item.badge}
+                        status={item.status}
+                        score={item.score}
+                    />
+                )}
+            />
+        </View>
+    )
+}
