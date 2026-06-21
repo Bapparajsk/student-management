@@ -85,16 +85,23 @@ export const QuizPerformanceHero = () => {
                     {/* Stats */}
                     <View className="mt-4 flex-row justify-between">
                         <QuizStats
-                            iconName="emoji-events"
+                            iconName="stars"
                             iconColor="#FACC15"
-                            title="Rank"
-                            value="#12"
+                            title="XP"
+                            value="29.5k"
                         />
                         <QuizStats
                             iconName="local-fire-department"
                             iconColor="#FB923C"
                             title="Streak"
                             value="15"
+                        />
+
+                        <QuizStats
+                            iconName="emoji-events"
+                            iconColor="#FACC15"
+                            title="Rank"
+                            value="#12"
                         />
                         <QuizStats
                             iconName="verified"

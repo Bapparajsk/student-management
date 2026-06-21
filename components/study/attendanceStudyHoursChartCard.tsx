@@ -3,7 +3,7 @@ import { getOptionByValue } from '@/utils/getOptionByValue';
 import { colors } from '@/utils/theme';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Dimensions, View } from 'react-native';
-import { FilterPopover } from '../popover/popover';
+import { FilterPopover } from '../popover';
 import ThemeText from '../ui/ThemeText';
 import AreaChart from '../ui/areaChart';
 
