@@ -128,7 +128,7 @@ export const QuizNavigator = () => {
                     <Dialog.Content className='p-0'>
                         <QuizChallengeModal {...isOpen!} onStartChallenge={() => {
                             setIsOpen(null);
-                            router.push("/game" as any);
+                            router.push("/quiz_game/game_over" as any);
                         }} />
                     </Dialog.Content>
                 </Dialog.Portal>
