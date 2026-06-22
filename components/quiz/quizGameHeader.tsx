@@ -1,48 +1,36 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring
-} from 'react-native-reanimated';
 
 import ThemeText from '@/components/ui/ThemeText';
-import { useEffect } from 'react';
+import { useQuizNavigationStore } from 'store/quizGame/quizNavigactionStore';
+import ProgressLine from '../ui/progressLine';
 
 type QuizGameHeaderProps = {
     currentQuestion: number;
-    totalQuestions: number;
     timeLeft: string;
-    progress: number; // 0 - 100
 };
 
 export const QuizGameHeader = ({
     currentQuestion,
-    totalQuestions,
     timeLeft,
-    progress,
 }: QuizGameHeaderProps) => {
 
-    const progressWidth = useSharedValue(0);
+    const {
+        totalAnswered,
+        totalQuestions,
+    } = useQuizNavigationStore((state) => ({
+        totalAnswered: state.totalAnswered,
+        totalQuestions: state.totalQuestions,
+    }));
 
-    useEffect(() => {
-        progressWidth.value = withSpring(progress, { stiffness: 20, damping: 120, mass: 0.5 });
-    }, [progress]);
-
-    const progressStyle =
-        useAnimatedStyle(() => ({
-            width: `${progressWidth.value}%`,
-        }));
 
     return (
         <View className="px-4 pt-2 pb-4">
 
-            {/* Top Row */}
-
+            {/* Header Row */}
             <View className="mb-3 flex-row items-center justify-between">
 
                 <View>
-
                     <ThemeText className="text-xs uppercase tracking-wider text-zinc-500">
                         Question
                     </ThemeText>
@@ -55,10 +43,12 @@ export const QuizGameHeader = ({
                         </ThemeText>
                     </ThemeText>
 
+                    <ThemeText className="mt-1 text-xs text-zinc-500">
+                        {totalAnswered} / {totalQuestions} Answered
+                    </ThemeText>
                 </View>
 
                 {/* Timer */}
-
                 <View className="flex-row items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2">
 
                     <MaterialIcons
@@ -75,21 +65,7 @@ export const QuizGameHeader = ({
 
             </View>
 
-            {/* Progress */}
-
-            <View className="overflow-hidden rounded-full bg-white/5">
-
-                <View className="h-1.5">
-
-                    <Animated.View
-                        style={progressStyle}
-                        className="h-full rounded-full bg-cyan-400"
-
-                    />
-
-                </View>
-
-            </View>
+            <ProgressLine total={totalQuestions} current={totalAnswered} />
 
         </View>
     );

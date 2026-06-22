@@ -28,34 +28,15 @@ const ProgressDot = memo(
         index,
     }: ProgressDotProps) => {
 
-        const status =
-            useQuizNavigationStore(
-                state =>
-                    state.navigations[
-                        index
-                    ]?.status
-            );
+        const status = useQuizNavigationStore(state => state.navigations[index]?.status);
 
-        const width =
-            useSharedValue(
-                active ? 24 : 10
-            );
-
-        const scale =
-            useSharedValue(
-                active ? 1.1 : 1
-            );
+        const width = useSharedValue(active ? 24 : 10);
+        const scale = useSharedValue(active ? 1.1 : 1);
 
         useEffect(() => {
-            width.value =
-                withSpring(
-                    active ? 24 : 10
-                );
+            width.value = withSpring(active ? 24 : 10, { stiffness: 120, damping: 30, mass: 0.5 });
+            scale.value = withSpring(active ? 1.1 : 1, { stiffness: 120, damping: 30, mass: 0.5 });
 
-            scale.value =
-                withSpring(
-                    active ? 1.1 : 1
-                );
         }, [active]);
 
         const animatedStyle =

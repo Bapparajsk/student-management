@@ -11,6 +11,7 @@ type QuizNavigationStore = {
     currentQuestionIndex: number;
     totalQuestions: number;
     navigations: QuizNavigationType[];
+    totalAnswered: number;
 };
 
 export const useQuizNavigationStore =
@@ -18,6 +19,7 @@ export const useQuizNavigationStore =
         currentQuestionIndex: 0,
         totalQuestions: 0,
         navigations: [],
+        totalAnswered: 0,
     }));
 
 /**
@@ -39,6 +41,7 @@ export const setDefaultNavigations = (
                 selectedOption: undefined,
             })
         ),
+        totalAnswered: 0,
     });
 };
 
@@ -69,10 +72,10 @@ export const updateNavigation = ({
                 return state;
             }
 
-            const current =
-                state.navigations[index];
+            const current = state.navigations[index];
 
             if (
+                status === "unanswered" ||
                 current.status === status &&
                 current.selectedOption ===
                 selectedOption
@@ -92,6 +95,7 @@ export const updateNavigation = ({
 
             return {
                 navigations,
+                totalAnswered: state.totalAnswered + 1,
             };
         }
     );

@@ -113,35 +113,25 @@ export const QUIZ_DATA: QuizData[] = [
     },
 ];
 export const GameControl = () => {
-    const pagerRef =
-        useRef<PagerView>(null);
+    const pagerRef = useRef<PagerView>(null);
 
-    const currentQuestionIndex =
-        useQuizNavigationStore(
-            state =>
-                state.currentQuestionIndex
-        );
+    const currentQuestionIndex = useQuizNavigationStore(state => state.currentQuestionIndex);
 
-    const totalQuestions =
-        QUIZ_DATA.length;
+    const totalQuestions = QUIZ_DATA.length;
 
     useEffect(() => {
-        setDefaultNavigations(
-            totalQuestions
-        );
+        setDefaultNavigations(totalQuestions);
+
+        return () => {
+            console.log("back game screen");
+
+        }
+
     }, []);
 
     const handleNext = () => {
 
-        if (
-            currentQuestionIndex ===
-            totalQuestions - 1
-        ) {
-
-            console.log(
-                "Submit Quiz"
-            );
-
+        if (currentQuestionIndex === totalQuestions - 1) {
             return;
         }
 
@@ -154,21 +144,8 @@ export const GameControl = () => {
         <View className="h-full w-full px-4 py-4">
 
             <QuizGameHeader
-                currentQuestion={
-                    currentQuestionIndex +
-                    1
-                }
-                totalQuestions={
-                    totalQuestions
-                }
+                currentQuestion={currentQuestionIndex + 1}
                 timeLeft="05:00"
-                progress={
-                    (
-                        (currentQuestionIndex +
-                            1) /
-                        totalQuestions
-                    ) * 100
-                }
             />
 
             <PagerView
