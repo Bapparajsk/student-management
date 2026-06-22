@@ -1,13 +1,14 @@
 import { View } from 'react-native';
 
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Chip } from '../hero-ui';
+import { Chip, Dialog } from '../hero-ui';
 import { FilterPopover, type FilterOption } from '../popover';
 import List from '../ui/list';
 import ThemeText from '../ui/ThemeText';
 import QuizCard, { QuizCardProps } from './quizCard';
-
+import { QuizChallengeModal } from './quizChallengeModal';
 
 
 const FILTERS: FilterOption[] = [
@@ -79,6 +80,8 @@ const QUIZZES: QuizCardProps[] = [
 export const QuizNavigator = () => {
 
     const [activeFilter, setActiveFilter] = useState<FilterOption>(FILTERS[0]);
+    const [isOpen, setIsOpen] = useState<QuizCardProps | null>(null);
+    const router = useRouter();
 
     return (
         <View className='mt-3'>
@@ -114,9 +117,22 @@ export const QuizNavigator = () => {
                         badge={item.badge}
                         status={item.status}
                         score={item.score}
+                        onPress={() => setIsOpen(item)}
                     />
                 )}
             />
+
+            <Dialog isOpen={isOpen !== null} onOpenChange={(open) => !open && setIsOpen(null)}>
+                <Dialog.Portal>
+                    <Dialog.Overlay className='bg-black/10' />
+                    <Dialog.Content className='p-0'>
+                        <QuizChallengeModal {...isOpen!} onStartChallenge={() => {
+                            setIsOpen(null);
+                            router.push("/game" as any);
+                        }} />
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog>
         </View>
     )
 }

@@ -9,7 +9,7 @@ import {
   ThemeProvider
 } from "@react-navigation/native";
 import { Stack } from 'expo-router';
-import { ToastProvider, HeroUINativeProvider } from 'heroui-native';
+import { HeroUINativeProvider, ToastProvider } from 'heroui-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { Uniwind } from "uniwind";
 
@@ -45,6 +45,7 @@ export default function Layout() {
                   <Stack.Screen name="(tab)" />
                   <Stack.Screen name="study" />
                   <Stack.Screen name="subject" />
+                  <Stack.Screen name="game" />
                 </Stack>
               </ToastProvider>
             </ThemeProvider>

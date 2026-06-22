@@ -8,7 +8,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ScrollContext } from '@/context/screenContent';
 import { Header } from "components/header";
-import { ReactNode } from "react";
 import AppFooter from "../footer";
 import { BackButtonProps } from "../header/header";
 import { PortalHost } from "../hero-ui";
@@ -21,7 +20,6 @@ interface ScreenContentProps {
     backButton?: BackButtonProps;
   };
   stickyHeaderIndices?: number[];
-  fab?: ReactNode;
 }
 
 const AnimatedScrollView = Animated.createAnimatedComponent(Animated.ScrollView);
@@ -34,7 +32,6 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
   bottomBarHeight = 80,
   header,
   stickyHeaderIndices,
-  fab,
 }) => {
   const scrollY = useSharedValue(0);
   const aref = useAnimatedRef<Animated.ScrollView>();
