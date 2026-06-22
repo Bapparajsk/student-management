@@ -2,77 +2,108 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import Animated, {
     useAnimatedStyle,
+    useSharedValue,
     withSpring,
 } from 'react-native-reanimated';
 
+import { cn } from '@/utils/ch';
+import { memo, useEffect } from 'react';
+import { useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
 type QuizFooterProps = {
     currentQuestion: number;
-    totalQuestions: number;
     hasAnswered?: boolean;
     onPress?: () => void;
 };
 
 type ProgressDotProps = {
     active: boolean;
-    completed: boolean;
+    index: number;
 };
+const ProgressDot = memo(
+    ({
+        active,
+        index,
+    }: ProgressDotProps) => {
 
-const ProgressDot = ({
-    active,
-    completed,
-}: ProgressDotProps) => {
+        const status =
+            useQuizNavigationStore(
+                state =>
+                    state.navigations[
+                        index
+                    ]?.status
+            );
 
-    const animatedStyle =
-        useAnimatedStyle(() => ({
-            width: withSpring(
-                active ? 24 : 10,
-                {
-                    damping: 30,
-                    stiffness: 120,
-                }
-            ),
-            transform: [
-                {
-                    scale: withSpring(
-                        active ? 1.1 : 1,
-                        {
-                            damping: 30,
-                            stiffness: 120,
-                        }
-                    ),
-                },
-            ],
-        }));
+        const width =
+            useSharedValue(
+                active ? 24 : 10
+            );
 
-    return (
-        <Animated.View
-            style={animatedStyle}
-            className={`h-2.5 rounded-full ${active
-                ? 'bg-cyan-400'
-                : completed
-                    ? 'bg-emerald-400'
-                    : 'bg-white/10'
-                }`}
-        />
-    );
-};
+        const scale =
+            useSharedValue(
+                active ? 1.1 : 1
+            );
+
+        useEffect(() => {
+            width.value =
+                withSpring(
+                    active ? 24 : 10
+                );
+
+            scale.value =
+                withSpring(
+                    active ? 1.1 : 1
+                );
+        }, [active]);
+
+        const animatedStyle =
+            useAnimatedStyle(() => ({
+                width: width.value,
+                transform: [
+                    {
+                        scale:
+                            scale.value,
+                    },
+                ],
+            }));
+
+        return (
+            <Animated.View
+                style={animatedStyle}
+                className={cn(
+                    "h-2.5 rounded-full bg-white/20",
+                    {
+                        "bg-cyan-400":
+                            active,
+                        "bg-emerald-400":
+                            status ===
+                            "correct",
+                        "bg-rose-400":
+                            status ===
+                            "incorrect",
+                    }
+                )}
+            />
+        );
+    }
+);
 
 export const QuizFooter = ({
     currentQuestion,
-    totalQuestions,
     hasAnswered,
     onPress,
 }: QuizFooterProps) => {
 
+    const totalQuestions = useQuizNavigationStore(state => state.totalQuestions);
     const buttonText =
         currentQuestion === totalQuestions
             ? 'Finish Quiz'
             : hasAnswered
                 ? 'Next Question'
                 : 'Submit Answer';
+
 
     return (
         <View className="mt-auto pt-4">
@@ -87,10 +118,6 @@ export const QuizFooter = ({
                         length: totalQuestions,
                     }).map((_, index) => {
 
-                        const completed =
-                            index + 1 <
-                            currentQuestion;
-
                         const current =
                             index + 1 ===
                             currentQuestion;
@@ -99,7 +126,7 @@ export const QuizFooter = ({
                             <ProgressDot
                                 key={index}
                                 active={current}
-                                completed={completed}
+                                index={index}
                             />
                         );
                     })}

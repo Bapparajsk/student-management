@@ -1,11 +1,13 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import Animated, {
-    LinearTransition,
     useAnimatedStyle,
+    useSharedValue,
+    withSpring
 } from 'react-native-reanimated';
 
 import ThemeText from '@/components/ui/ThemeText';
+import { useEffect } from 'react';
 
 type QuizGameHeaderProps = {
     currentQuestion: number;
@@ -21,9 +23,15 @@ export const QuizGameHeader = ({
     progress,
 }: QuizGameHeaderProps) => {
 
+    const progressWidth = useSharedValue(0);
+
+    useEffect(() => {
+        progressWidth.value = withSpring(progress, { stiffness: 20, damping: 120, mass: 0.5 });
+    }, [progress]);
+
     const progressStyle =
         useAnimatedStyle(() => ({
-            width: `${progress}%`,
+            width: `${progressWidth.value}%`,
         }));
 
     return (
@@ -76,7 +84,7 @@ export const QuizGameHeader = ({
                     <Animated.View
                         style={progressStyle}
                         className="h-full rounded-full bg-cyan-400"
-                        layout={LinearTransition.springify()}
+
                     />
 
                 </View>

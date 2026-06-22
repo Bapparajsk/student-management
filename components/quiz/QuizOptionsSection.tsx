@@ -1,0 +1,130 @@
+import { updateNavigation, useQuizNavigationStore } from "@/store/quizGame/quizNavigactionStore";
+import { memo } from "react";
+import { View } from "react-native";
+import { QuizData } from "./gameControl";
+import { QuizOptionCard, QuizStatus } from "./QuizOptionCard";
+import { QuizPowerUps } from "./QuizPowerUps";
+import QuizQuestionCard from "./QuizQuestionCard";
+
+type QuizOptionsSectionProps =
+    QuizData & {
+        questionIndex: number;
+    };
+
+const QuizOptionsSection = ({
+    questionIndex,
+    ...quiz
+}: QuizOptionsSectionProps) => {
+
+    const navigation =
+        useQuizNavigationStore(
+            state =>
+                state.navigations[
+                questionIndex
+                ]
+        );
+
+    const status =
+        navigation?.status ??
+        "unanswered";
+
+    const selectedOption =
+        navigation?.selectedOption;
+
+    const handleSelect = (
+        optionIndex: number
+    ) => {
+        if (
+            status !== "unanswered"
+        ) {
+            return;
+        }
+
+        updateNavigation({
+            index: questionIndex,
+
+            selectedOption:
+                optionIndex,
+
+            status:
+                optionIndex ===
+                    quiz.correctAnswer
+                    ? "correct"
+                    : "incorrect",
+        });
+    };
+
+    return (
+        <View style={{ flex: 1 }}>
+
+            <QuizQuestionCard
+                chapter={quiz.chapter}
+                difficulty={
+                    quiz.difficulty
+                }
+                question={
+                    quiz.question
+                }
+            />
+
+            <QuizPowerUps />
+
+            {quiz.options.map(
+                (
+                    option,
+                    optionIndex
+                ) => {
+
+                    let optionStatus:
+                        QuizStatus =
+                        "unanswered";
+
+                    if (
+                        selectedOption !==
+                        undefined
+                    ) {
+                        if (
+                            optionIndex ===
+                            quiz.correctAnswer
+                        ) {
+                            optionStatus =
+                                "correct";
+                        } else if (
+                            optionIndex ===
+                            selectedOption
+                        ) {
+                            optionStatus =
+                                "incorrect";
+                        }
+                    }
+
+                    return (
+                        <QuizOptionCard
+                            key={
+                                optionIndex
+                            }
+                            letter={String.fromCharCode(
+                                65 +
+                                optionIndex
+                            )}
+                            text={option}
+                            status={
+                                optionStatus
+                            }
+                            onPress={() =>
+                                handleSelect(
+                                    optionIndex
+                                )
+                            }
+                        />
+                    );
+                }
+            )}
+
+        </View>
+    );
+};
+
+export default memo(
+    QuizOptionsSection
+);
