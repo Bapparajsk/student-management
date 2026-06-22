@@ -1,6 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
+import Animated, {
+    useAnimatedStyle,
+    withSpring,
+} from 'react-native-reanimated';
 
+import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
 type QuizFooterProps = {
@@ -10,10 +15,56 @@ type QuizFooterProps = {
     onPress?: () => void;
 };
 
+type ProgressDotProps = {
+    active: boolean;
+    completed: boolean;
+};
+
+const ProgressDot = ({
+    active,
+    completed,
+}: ProgressDotProps) => {
+
+    const animatedStyle =
+        useAnimatedStyle(() => ({
+            width: withSpring(
+                active ? 24 : 10,
+                {
+                    damping: 30,
+                    stiffness: 120,
+                }
+            ),
+            transform: [
+                {
+                    scale: withSpring(
+                        active ? 1.1 : 1,
+                        {
+                            damping: 30,
+                            stiffness: 120,
+                        }
+                    ),
+                },
+            ],
+        }));
+
+    return (
+        <Animated.View
+            style={animatedStyle}
+            className={`h-2.5 rounded-full ${active
+                ? 'bg-cyan-400'
+                : completed
+                    ? 'bg-emerald-400'
+                    : 'bg-white/10'
+                }`}
+        />
+    );
+};
+
 export const QuizFooter = ({
     currentQuestion,
     totalQuestions,
     hasAnswered,
+    onPress,
 }: QuizFooterProps) => {
 
     const buttonText =
@@ -28,7 +79,7 @@ export const QuizFooter = ({
 
             {/* Progress Tracker */}
 
-            <View className="mb-4 items-center">
+            <View className="mb-5 items-center">
 
                 <View className="flex-row items-center gap-2">
 
@@ -45,32 +96,26 @@ export const QuizFooter = ({
                             currentQuestion;
 
                         return (
-                            <View
+                            <ProgressDot
                                 key={index}
-                                className={`rounded-full ${current
-                                    ? 'h-2.5 w-6 bg-cyan-400'
-                                    : completed
-                                        ? 'h-2.5 w-2.5 bg-emerald-400'
-                                        : 'h-2.5 w-2.5 bg-white/10'
-                                    }`}
+                                active={current}
+                                completed={completed}
                             />
                         );
                     })}
 
                 </View>
 
-                <ThemeText className="mt-3 text-sm text-zinc-500">
-                    Question {currentQuestion} of {totalQuestions}
-                </ThemeText>
-
             </View>
 
             {/* Action Button */}
 
-            <View
-                className="h-14 flex-row items-center justify-center rounded-2xl bg-cyan-500"
+            <PressableFeedback
+                onPress={onPress}
+                className="h-14 flex-row items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-500 shadow-lg shadow-cyan-500/30"
             >
-                <ThemeText className="font-poppins-semibold text-white">
+
+                <ThemeText className="font-poppins-semibold">
                     {buttonText}
                 </ThemeText>
 
@@ -86,7 +131,9 @@ export const QuizFooter = ({
                         marginLeft: 8,
                     }}
                 />
-            </View>
+
+            </PressableFeedback>
+
         </View>
     );
 };

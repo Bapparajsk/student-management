@@ -21,7 +21,7 @@ export const QuizQuestionCard = () => {
 
             </View>
 
-            <ThemeText numberOfLines={10} className="text-xl font-poppins-semibold leading-8 text-white">
+            <ThemeText numberOfLines={10} className="text-xl font-poppins-semibold leading-8">
                 Which SQL statement is used to retrieve data from a database?
             </ThemeText>
 

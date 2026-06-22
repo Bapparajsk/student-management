@@ -21,22 +21,22 @@ export const QuizOptionCard = ({
         <PressableFeedback
             onPress={onPress}
             className={`mb-3 rounded-2xl border p-4 ${selected
-                    ? 'border-cyan-400 bg-cyan-500/10'
-                    : 'border-white/10 bg-white/[0.03]'
+                ? 'border-cyan-400 bg-cyan-500/10'
+                : 'border-white/10 bg-white/[0.03]'
                 }`}
         >
             <View className="flex-row items-center">
 
                 <View
                     className={`h-10 w-10 items-center justify-center rounded-full ${selected
-                            ? 'bg-cyan-500'
-                            : 'bg-white/5'
+                        ? 'bg-cyan-500'
+                        : 'bg-white/5'
                         }`}
                 >
                     <ThemeText
                         className={`font-poppins-semibold ${selected
-                                ? 'text-white'
-                                : 'text-zinc-400'
+                            ? 'text-white'
+                            : 'text-zinc-400'
                             }`}
                     >
                         {letter}
@@ -44,9 +44,10 @@ export const QuizOptionCard = ({
                 </View>
 
                 <ThemeText
+                    numberOfLines={2}
                     className={`ml-4 flex-1 text-base ${selected
-                            ? 'font-semibold text-white'
-                            : 'text-zinc-300'
+                        ? 'font-semibold text-white'
+                        : 'text-zinc-300'
                         }`}
                 >
                     {text}

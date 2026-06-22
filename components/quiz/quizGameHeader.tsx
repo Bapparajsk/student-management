@@ -1,6 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import Animated, {
+    LinearTransition,
     useAnimatedStyle,
 } from 'react-native-reanimated';
 
@@ -75,6 +76,7 @@ export const QuizGameHeader = ({
                     <Animated.View
                         style={progressStyle}
                         className="h-full rounded-full bg-cyan-400"
+                        layout={LinearTransition.springify()}
                     />
 
                 </View>
