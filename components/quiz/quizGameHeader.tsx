@@ -5,6 +5,23 @@ import ThemeText from '@/components/ui/ThemeText';
 import { useQuizNavigationStore } from 'store/quizGame/quizNavigactionStore';
 import ProgressLine from '../ui/progressLine';
 
+import { useEffect } from 'react';
+
+import {
+    tick,
+    useQuizTimerStore
+} from '@/store/quizGame/quizTimerStore';
+import { cn } from '@/utils/ch';
+import * as Haptics from 'expo-haptics';
+import Animated, {
+    useAnimatedStyle,
+    useSharedValue,
+    withRepeat,
+    withSequence,
+    withSpring,
+} from 'react-native-reanimated';
+
+
 type QuizGameHeaderProps = {
     currentQuestion: number;
     timeLeft: string;
@@ -49,24 +66,121 @@ export const QuizGameHeader = ({
                 </View>
 
                 {/* Timer */}
-                <View className="flex-row items-center rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2">
-
-                    <MaterialIcons
-                        name="timer"
-                        size={16}
-                        color="#22D3EE"
-                    />
-
-                    <ThemeText className="ml-2 font-poppins-semibold text-cyan-400">
-                        {timeLeft}
-                    </ThemeText>
-
-                </View>
+                <QuizTimer />
 
             </View>
 
             <ProgressLine total={totalQuestions} current={totalAnswered} />
 
         </View>
+    );
+};
+
+export const QuizTimer = () => {
+    const timeLeft = useQuizTimerStore(
+        state => state.timeLeft
+    );
+
+    const isRunning = useQuizTimerStore(
+        state => state.isRunning
+    );
+
+    const scale = useSharedValue(1);
+
+    const isWarning =
+        timeLeft > 0 &&
+        timeLeft <= 10;
+
+    useEffect(() => {
+        if (!isWarning) {
+            scale.value = withSpring(1);
+            return;
+        }
+
+        scale.value = withRepeat(
+            withSequence(
+                withSpring(1.15),
+                withSpring(1)
+            ),
+            -1,
+            false
+        );
+    }, [isWarning]);
+
+    useEffect(() => {
+        if (timeLeft === 10) {
+            Haptics.impactAsync(
+                Haptics.ImpactFeedbackStyle.Light
+            );
+        }
+
+        if (timeLeft === 0) {
+            Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Error
+            );
+        }
+    }, [timeLeft]);
+
+    useEffect(() => {
+        if (!isRunning) return;
+
+        const timer =
+            setInterval(() => {
+                tick();
+            }, 1000);
+
+        return () =>
+            clearInterval(timer);
+    }, [isRunning]);
+
+    const animatedStyle =
+        useAnimatedStyle(() => ({
+            transform: [
+                {
+                    scale: scale.value,
+                },
+            ],
+        }));
+
+    const minutes =
+        Math.floor(timeLeft / 60);
+
+    const seconds =
+        timeLeft % 60;
+
+    const formatted =
+        `${minutes
+            .toString()
+            .padStart(2, '0')}:${seconds
+                .toString()
+                .padStart(2, '0')}`;
+
+    return (
+        <Animated.View
+            style={animatedStyle}
+            className={cn("flex-row items-center rounded-full px-4 py-2 border", {
+                "border-rose-500/30 bg-rose-500/10": isWarning,
+                "border-cyan-500/20 bg-cyan-500/10": !isWarning,
+            })}
+        >
+            <MaterialIcons
+                name="timer"
+                size={16}
+                color={
+                    isWarning
+                        ? '#FB7185'
+                        : '#22D3EE'
+                }
+            />
+
+            <ThemeText
+                className={`ml-2 font-poppins-semibold ${isWarning
+                    ? 'text-rose-400'
+                    : 'text-cyan-400'
+                    }`}
+            >
+                {formatted}
+            </ThemeText>
+        </Animated.View>
     );
 };

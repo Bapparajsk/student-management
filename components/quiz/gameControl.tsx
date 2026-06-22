@@ -1,3 +1,7 @@
+import {
+    reset,
+    start
+} from '@/store/quizGame/quizTimerStore';
 import { useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import PagerView from 'react-native-pager-view';
@@ -120,12 +124,9 @@ export const GameControl = () => {
     const totalQuestions = QUIZ_DATA.length;
 
     useEffect(() => {
+        reset(30); // 5 min
+        start();
         setDefaultNavigations(totalQuestions);
-
-        return () => {
-            console.log("back game screen");
-
-        }
 
     }, []);
 

@@ -1,4 +1,5 @@
 import { updateNavigation, useQuizNavigationStore } from "@/store/quizGame/quizNavigactionStore";
+import * as Haptics from 'expo-haptics';
 import { memo } from "react";
 import { View } from "react-native";
 import { QuizData } from "./gameControl";
@@ -16,41 +17,38 @@ const QuizOptionsSection = ({
     ...quiz
 }: QuizOptionsSectionProps) => {
 
-    const navigation =
-        useQuizNavigationStore(
-            state =>
-                state.navigations[
-                questionIndex
-                ]
-        );
+    const navigation = useQuizNavigationStore(state => state.navigations[questionIndex]);
 
-    const status =
-        navigation?.status ??
-        "unanswered";
+    const status = navigation?.status ?? "unanswered";
 
-    const selectedOption =
-        navigation?.selectedOption;
+    const selectedOption = navigation?.selectedOption;
 
-    const handleSelect = (
-        optionIndex: number
-    ) => {
-        if (
-            status !== "unanswered"
-        ) {
+    const handleSelect = async (optionIndex: number) => {
+        if (status !== "unanswered") {
             return;
+        }
+
+        const isCorrect = optionIndex === quiz.correctAnswer;
+
+        if (isCorrect) {
+            await Haptics.impactAsync(
+                Haptics.ImpactFeedbackStyle.Light
+            );
+        } else {
+            await Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Error
+            );
         }
 
         updateNavigation({
             index: questionIndex,
 
-            selectedOption:
-                optionIndex,
+            selectedOption: optionIndex,
 
-            status:
-                optionIndex ===
-                    quiz.correctAnswer
-                    ? "correct"
-                    : "incorrect",
+            status: optionIndex ===
+                quiz.correctAnswer
+                ? "correct"
+                : "incorrect",
         });
     };
 
