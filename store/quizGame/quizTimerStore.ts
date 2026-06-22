@@ -21,6 +21,11 @@ export const start = () =>
 export const stop = () =>
     useQuizTimerStore.setState({ isRunning: false });
 
+export const addTime = (seconds: number) =>
+    useQuizTimerStore.setState((state) => ({
+        timeLeft: state.timeLeft + seconds,
+    }));
+
 export const reset = (seconds: number) =>
     useQuizTimerStore.setState({
         timeLeft: seconds,

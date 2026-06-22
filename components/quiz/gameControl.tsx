@@ -1,9 +1,6 @@
-import {
-    reset,
-    start
-} from '@/store/quizGame/quizTimerStore';
-import { useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import { reset, start } from '@/store/quizGame/quizTimerStore';
+import { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { QuizFooter } from './quizFooter';
@@ -116,23 +113,43 @@ export const QUIZ_DATA: QuizData[] = [
         correctAnswer: 0,
     },
 ];
+
+
+const fetchQuizData = async (): Promise<QuizData[]> => {
+    // Simulate a network request delay
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Return the quiz data
+    return QUIZ_DATA;
+};
+
 export const GameControl = () => {
-    const pagerRef = useRef<PagerView>(null);
 
     const currentQuestionIndex = useQuizNavigationStore(state => state.currentQuestionIndex);
 
-    const totalQuestions = QUIZ_DATA.length;
+    const pagerRef = useRef<PagerView>(null);
+    const [quizData, setQuizData] = useState<QuizData[]>([]);
 
-    useEffect(() => {
+
+    const initializeQuiz = (length: number) => {
         reset(30); // 5 min
         start();
-        setDefaultNavigations(totalQuestions);
+        setDefaultNavigations(length);
+    }
 
+    useEffect(() => {
+        const loadQuizData = async () => {
+            const data = await fetchQuizData();
+            setQuizData(data);
+            initializeQuiz(data.length);
+        };
+
+        loadQuizData();
     }, []);
 
-    const handleNext = () => {
 
-        if (currentQuestionIndex === totalQuestions - 1) {
+    const handleNext = () => {
+        if (currentQuestionIndex === quizData.length - 1) {
             return;
         }
 
@@ -140,6 +157,14 @@ export const GameControl = () => {
             currentQuestionIndex + 1
         );
     };
+
+    if (quizData.length === 0) {
+        return (
+            <View className="h-full w-full flex-1 items-center justify-center">
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <View className="h-full w-full px-4 py-4">
@@ -155,38 +180,23 @@ export const GameControl = () => {
                 offscreenPageLimit={1}
                 overdrag={false}
                 onPageSelected={(e) =>
-                    setCurrentQuestionIndex(
-                        e.nativeEvent
-                            .position
-                    )
+                    setCurrentQuestionIndex(e.nativeEvent.position)
                 }
             >
-                {QUIZ_DATA.map(
-                    (
-                        quiz,
-                        index
-                    ) => (
-                        <QuizOptionsSectionMemo
-                            key={quiz.id}
-                            questionIndex={
-                                index
-                            }
-                            {...quiz}
-                        />
-                    )
-                )}
+                {quizData.map((quiz, index) => (
+                    <QuizOptionsSectionMemo
+                        key={quiz.id}
+                        questionIndex={index}
+                        {...quiz}
+                    />
+                ))}
             </PagerView>
 
             <QuizFooter
-                currentQuestion={
-                    currentQuestionIndex +
-                    1
-                }
+                currentQuestion={currentQuestionIndex + 1}
                 onPress={handleNext}
                 hasAnswered={true}
-
             />
-
         </View>
     );
 };

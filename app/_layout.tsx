@@ -45,7 +45,7 @@ export default function Layout() {
                   <Stack.Screen name="(tab)" />
                   <Stack.Screen name="study" />
                   <Stack.Screen name="subject" />
-                  <Stack.Screen name="game" />
+                  <Stack.Screen name="quiz_game" />
                 </Stack>
               </ToastProvider>
             </ThemeProvider>

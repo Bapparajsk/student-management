@@ -13,6 +13,7 @@ import {
 } from '@/store/quizGame/quizTimerStore';
 import { cn } from '@/utils/ch';
 import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
@@ -22,12 +23,11 @@ import Animated, {
 } from 'react-native-reanimated';
 
 
-
-
 const QuizTimer = () => {
-    const timeLeft = useQuizTimerStore(
-        state => state.timeLeft
-    );
+
+    const router = useRouter();
+
+    const timeLeft = useQuizTimerStore(state => state.timeLeft);
 
     const isRunning = useQuizTimerStore(
         state => state.isRunning
@@ -66,6 +66,12 @@ const QuizTimer = () => {
             Haptics.notificationAsync(
                 Haptics.NotificationFeedbackType.Error
             );
+            router.replace({
+                pathname: "/quiz_game/game_over" as any,
+                params: {
+                    score: 8,
+                },
+            });
         }
     }, [timeLeft]);
 
