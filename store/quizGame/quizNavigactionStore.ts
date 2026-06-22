@@ -1,4 +1,4 @@
-import { QuizStatus } from "@/components/quiz/QuizOptionCard";
+import { QuizStatus } from "@/components/quiz/quizOptionCard";
 import { create } from "zustand";
 
 export type QuizNavigationType = {

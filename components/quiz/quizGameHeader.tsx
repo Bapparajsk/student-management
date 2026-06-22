@@ -22,61 +22,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 
-type QuizGameHeaderProps = {
-    currentQuestion: number;
-    timeLeft: string;
-};
-
-export const QuizGameHeader = ({
-    currentQuestion,
-    timeLeft,
-}: QuizGameHeaderProps) => {
-
-    const {
-        totalAnswered,
-        totalQuestions,
-    } = useQuizNavigationStore((state) => ({
-        totalAnswered: state.totalAnswered,
-        totalQuestions: state.totalQuestions,
-    }));
 
 
-    return (
-        <View className="px-4 pt-2 pb-4">
-
-            {/* Header Row */}
-            <View className="mb-3 flex-row items-center justify-between">
-
-                <View>
-                    <ThemeText className="text-xs uppercase tracking-wider text-zinc-500">
-                        Question
-                    </ThemeText>
-
-                    <ThemeText className="mt-1 text-lg font-poppins-semibold text-white">
-                        {currentQuestion}
-                        <ThemeText className="text-zinc-500">
-                            {' / '}
-                            {totalQuestions}
-                        </ThemeText>
-                    </ThemeText>
-
-                    <ThemeText className="mt-1 text-xs text-zinc-500">
-                        {totalAnswered} / {totalQuestions} Answered
-                    </ThemeText>
-                </View>
-
-                {/* Timer */}
-                <QuizTimer />
-
-            </View>
-
-            <ProgressLine total={totalQuestions} current={totalAnswered} />
-
-        </View>
-    );
-};
-
-export const QuizTimer = () => {
+const QuizTimer = () => {
     const timeLeft = useQuizTimerStore(
         state => state.timeLeft
     );
@@ -182,5 +130,57 @@ export const QuizTimer = () => {
                 {formatted}
             </ThemeText>
         </Animated.View>
+    );
+};
+
+type QuizGameHeaderProps = {
+    currentQuestion: number;
+};
+
+export const QuizGameHeader = ({
+    currentQuestion,
+}: QuizGameHeaderProps) => {
+
+    const {
+        totalAnswered,
+        totalQuestions,
+    } = useQuizNavigationStore((state) => ({
+        totalAnswered: state.totalAnswered,
+        totalQuestions: state.totalQuestions,
+    }));
+
+
+    return (
+        <View className="px-4 pt-2 pb-4">
+
+            {/* Header Row */}
+            <View className="mb-3 flex-row items-center justify-between">
+
+                <View>
+                    <ThemeText className="text-xs uppercase tracking-wider text-zinc-500">
+                        Question
+                    </ThemeText>
+
+                    <ThemeText className="mt-1 text-lg font-poppins-semibold text-white">
+                        {currentQuestion}
+                        <ThemeText className="text-zinc-500">
+                            {' / '}
+                            {totalQuestions}
+                        </ThemeText>
+                    </ThemeText>
+
+                    <ThemeText className="mt-1 text-xs text-zinc-500">
+                        {totalAnswered} / {totalQuestions} Answered
+                    </ThemeText>
+                </View>
+
+                {/* Timer */}
+                <QuizTimer />
+
+            </View>
+
+            <ProgressLine total={totalQuestions} current={totalAnswered} />
+
+        </View>
     );
 };

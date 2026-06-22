@@ -3,9 +3,9 @@ import * as Haptics from 'expo-haptics';
 import { memo } from "react";
 import { View } from "react-native";
 import { QuizData } from "./gameControl";
-import { QuizOptionCard, QuizStatus } from "./QuizOptionCard";
-import { QuizPowerUps } from "./QuizPowerUps";
-import QuizQuestionCard from "./QuizQuestionCard";
+import { QuizOptionCard, QuizStatus } from "./quizOptionCard";
+import { QuizPowerUps } from "./quizPowerUps";
+import QuizQuestionCard from "./quizQuestionCard";
 
 type QuizOptionsSectionProps =
     QuizData & {

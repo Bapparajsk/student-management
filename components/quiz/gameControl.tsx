@@ -6,9 +6,9 @@ import { useEffect, useRef } from 'react';
 import { View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
-import { QuizFooter } from './QuizFooter';
+import { QuizFooter } from './quizFooter';
 import { QuizGameHeader } from './quizGameHeader';
-import QuizOptionsSectionMemo from "./QuizOptionsSection";
+import QuizOptionsSectionMemo from "./quizOptionsSection";
 
 export type QuizData = {
     id: string;
@@ -146,7 +146,6 @@ export const GameControl = () => {
 
             <QuizGameHeader
                 currentQuestion={currentQuestionIndex + 1}
-                timeLeft="05:00"
             />
 
             <PagerView
