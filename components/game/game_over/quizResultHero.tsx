@@ -35,7 +35,7 @@ export const QuizResultHero = () => {
 
             {/* Trophy */}
 
-            <View className=" h-24 w-24 items-center justify-center rounded-full"
+            <View className="h-20 w-20 items-center justify-center rounded-full"
             >
 
                 <LinearGradient
@@ -78,7 +78,7 @@ export const QuizResultHero = () => {
             <AnimatedNumber
                 value='92'
                 suffix='%'
-                size="xl"
+                size="lg"
                 color="#22D3EE"
                 wrapperStyle={{ marginTop: 20 }}
             />
@@ -90,7 +90,7 @@ export const QuizResultHero = () => {
 
             {/* Badge */}
 
-            <View className="mt-3 flex-row items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
+            <View className="mt-1 flex-row items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
 
                 <MaterialIcons
                     name="verified"
@@ -106,9 +106,8 @@ export const QuizResultHero = () => {
 
             {/* XP + Streak */}
 
-            <View className="mt-4 flex-row gap-3">
-
-                <View className="flex-row items-center rounded-full bg-violet-500/10 px-3 py-2">
+            <View className="mt-3 flex-row items-center justify-center rounded-full bg-white/4 px-4 py-2 gap-x-4 border border-white/10">
+                <View className="flex-row items-center ">
 
                     <MaterialIcons
                         name="stars"
@@ -116,13 +115,13 @@ export const QuizResultHero = () => {
                         color="#A855F7"
                     />
 
-                    <ThemeText className="ml-2 text-violet-400">
+                    <ThemeText className="ml-1 text-violet-400">
                         +250 XP
                     </ThemeText>
 
                 </View>
 
-                <View className="flex-row items-center rounded-full bg-orange-500/10 px-3 py-2">
+                <View className="flex-row items-center">
 
                     <MaterialIcons
                         name="local-fire-department"
@@ -130,12 +129,11 @@ export const QuizResultHero = () => {
                         color="#FB923C"
                     />
 
-                    <ThemeText className="ml-2 text-orange-400">
+                    <ThemeText className="ml-1 text-orange-400">
                         +1 Streak
                     </ThemeText>
 
                 </View>
-
             </View>
 
         </View>

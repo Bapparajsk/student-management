@@ -1,13 +1,10 @@
-import { QuizPerformanceStats, QuizResultHero } from '@/components/game/game_over';
+import { QuizTimeoutModal } from '@/components/game/quizTimeoutModal';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
 
 export default function GameOver() {
     return (
         <View className="flex-1">
-
-            {/* Background */}
-
             <LinearGradient
                 colors={[
                     '#090E1A',
@@ -59,17 +56,14 @@ export default function GameOver() {
                 }}
             />
 
-            <View
-                className='w-full h-full justify-center px-4'
-            >
-
-                {/* Main Result Card */}
-
-                <QuizResultHero />
-
+            <View className='w-full h-full px-4 mt-20' >
+                {/* <QuizResultHero />
                 <QuizPerformanceStats />
+                <QuizResultActions /> */}
+                <QuizTimeoutModal />
 
             </View>
+
 
         </View>
     );
