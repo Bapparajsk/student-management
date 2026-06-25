@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
-    withSpring,
+    withSpring
 } from 'react-native-reanimated';
 
 import { cn } from '@/utils/ch';
@@ -19,51 +19,47 @@ type QuizFooterProps = {
 };
 
 type ProgressDotProps = {
-    active: boolean;
     index: number;
+    active: boolean;
 };
+
 const ProgressDot = memo(
     ({
-        active,
         index,
+        active,
     }: ProgressDotProps) => {
 
-        const status = useQuizNavigationStore(state => state.navigations[index]?.status);
+        const status = useQuizNavigationStore(
+            state => state.navigations[index]?.status
+        );
 
-        const width = useSharedValue(active ? 24 : 10);
-        const scale = useSharedValue(active ? 1.1 : 1);
+        const scale = useSharedValue(active ? 1.2 : 1);
 
         useEffect(() => {
-            width.value = withSpring(active ? 24 : 10, { stiffness: 120, damping: 30, mass: 0.5 });
-            scale.value = withSpring(active ? 1.1 : 1, { stiffness: 120, damping: 30, mass: 0.5 });
-
+            scale.value = withSpring(
+                active ? 1.2 : 1,
+                {
+                    stiffness: 220,
+                    damping: 20,
+                }
+            );
         }, [active]);
 
-        const animatedStyle =
-            useAnimatedStyle(() => ({
-                width: width.value,
-                transform: [
-                    {
-                        scale:
-                            scale.value,
-                    },
-                ],
-            }));
+        const animatedStyle = useAnimatedStyle(() => {
+            return {
+                transform: [{ scale: scale.value }],
+            };
+        });
 
         return (
             <Animated.View
                 style={animatedStyle}
                 className={cn(
-                    "h-2.5 rounded-full bg-white/20",
+                    "h-2.5 w-2.5 rounded-full bg-white/20",
                     {
-                        "bg-cyan-400":
-                            active,
-                        "bg-emerald-400":
-                            status ===
-                            "correct",
-                        "bg-rose-400":
-                            status ===
-                            "incorrect",
+                        "bg-cyan-400": active,
+                        "bg-emerald-400": status === "correct",
+                        "bg-rose-400": status === "incorrect",
                     }
                 )}
             />
@@ -99,15 +95,15 @@ export const QuizFooter = ({
                         length: totalQuestions,
                     }).map((_, index) => {
 
-                        const current =
-                            index + 1 ===
-                            currentQuestion;
 
                         return (
                             <ProgressDot
                                 key={index}
-                                active={current}
                                 index={index}
+                                active={
+                                    currentQuestion - 1 ===
+                                    index
+                                }
                             />
                         );
                     })}

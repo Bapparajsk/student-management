@@ -1,11 +1,14 @@
-import { reset, start } from '@/store/quizGame/quizTimerStore';
+import { reset, start, stop } from '@/store/quizGame/quizTimerStore';
+import { Dialog } from 'heroui-native';
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
+import { QuizTimeoutModal } from '../game/quizTimeoutModal';
 import { QuizFooter } from './quizFooter';
 import { QuizGameHeader } from './quizGameHeader';
 import QuizOptionsSectionMemo from "./quizOptionsSection";
+
 
 export type QuizData = {
     id: string;
@@ -129,10 +132,11 @@ export const GameControl = () => {
 
     const pagerRef = useRef<PagerView>(null);
     const [quizData, setQuizData] = useState<QuizData[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
 
 
     const initializeQuiz = (length: number) => {
-        reset(30); // 5 min
+        reset(300); // 5 min
         start();
         setDefaultNavigations(length);
     }
@@ -148,8 +152,11 @@ export const GameControl = () => {
     }, []);
 
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (currentQuestionIndex === quizData.length - 1) {
+            stop();
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay before showing the modal
+            setIsOpen(true);
             return;
         }
 
@@ -169,9 +176,7 @@ export const GameControl = () => {
     return (
         <View className="h-full w-full px-4 py-4">
 
-            <QuizGameHeader
-                currentQuestion={currentQuestionIndex + 1}
-            />
+            <QuizGameHeader currentQuestion={currentQuestionIndex + 1} />
 
             <PagerView
                 ref={pagerRef}
@@ -179,9 +184,8 @@ export const GameControl = () => {
                 initialPage={0}
                 offscreenPageLimit={1}
                 overdrag={false}
-                onPageSelected={(e) =>
-                    setCurrentQuestionIndex(e.nativeEvent.position)
-                }
+                onPageSelected={(e) => setCurrentQuestionIndex(e.nativeEvent.position)}
+
             >
                 {quizData.map((quiz, index) => (
                     <QuizOptionsSectionMemo
@@ -197,6 +201,14 @@ export const GameControl = () => {
                 onPress={handleNext}
                 hasAnswered={true}
             />
+            <Dialog isOpen={isOpen} animation={'disable-all'}>
+                <Dialog.Portal>
+                    <Dialog.Overlay className='bg-black/50' />
+                    <Dialog.Content className='p-0'>
+                        <QuizTimeoutModal />
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog>
         </View>
     );
 };

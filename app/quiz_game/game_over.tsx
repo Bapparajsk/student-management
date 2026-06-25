@@ -1,8 +1,17 @@
-import { QuizTimeoutModal } from '@/components/game/quizTimeoutModal';
+import { QuizPerformanceStats, QuizResultActions, QuizResultHero } from '@/components/game/game_over';
+import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export default function GameOver() {
+
+    useEffect(() => {
+        Haptics.impactAsync(
+            Haptics.ImpactFeedbackStyle.Heavy
+        );
+    }, [])
+
     return (
         <View className="flex-1">
             <LinearGradient
@@ -57,14 +66,10 @@ export default function GameOver() {
             />
 
             <View className='w-full h-full px-4 mt-20' >
-                {/* <QuizResultHero />
+                <QuizResultHero />
                 <QuizPerformanceStats />
-                <QuizResultActions /> */}
-                <QuizTimeoutModal />
-
+                <QuizResultActions />
             </View>
-
-
         </View>
     );
 }
