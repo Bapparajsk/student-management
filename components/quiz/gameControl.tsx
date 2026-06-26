@@ -1,10 +1,10 @@
 import { reset, start, stop } from '@/store/quizGame/quizTimerStore';
-import { Dialog } from 'heroui-native';
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { QuizTimeoutModal } from '../game/quizTimeoutModal';
+import { Dialog } from '../hero-ui';
 import { QuizFooter } from './quizFooter';
 import { QuizGameHeader } from './quizGameHeader';
 import QuizOptionsSectionMemo from "./quizOptionsSection";
@@ -155,7 +155,6 @@ export const GameControl = () => {
     const handleNext = async () => {
         if (currentQuestionIndex === quizData.length - 1) {
             stop();
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay before showing the modal
             setIsOpen(true);
             return;
         }
@@ -175,7 +174,6 @@ export const GameControl = () => {
 
     return (
         <View className="h-full w-full px-4 py-4">
-
             <QuizGameHeader currentQuestion={currentQuestionIndex + 1} />
 
             <PagerView
@@ -185,6 +183,7 @@ export const GameControl = () => {
                 offscreenPageLimit={1}
                 overdrag={false}
                 onPageSelected={(e) => setCurrentQuestionIndex(e.nativeEvent.position)}
+                pageMargin={20}
 
             >
                 {quizData.map((quiz, index) => (

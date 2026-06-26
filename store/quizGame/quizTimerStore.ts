@@ -6,7 +6,7 @@ type QuizTimerStore = {
 };
 
 export const useQuizTimerStore =
-    create<QuizTimerStore>((set) => ({
+    create<QuizTimerStore>(() => ({
         timeLeft: 300, // 5 min
         isRunning: false,
     }));

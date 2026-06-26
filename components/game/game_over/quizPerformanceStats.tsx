@@ -1,4 +1,5 @@
 import ThemeText from '@/components/ui/ThemeText';
+import { useQuizResultStore } from '@/store/quizGame/quizResultStore';
 import { cn } from '@/utils/ch';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
@@ -85,6 +86,10 @@ const StatCard = ({
 };
 
 export const QuizPerformanceStats = () => {
+
+    const score = useQuizResultStore(state => state.score);
+    const totalQuestions = useQuizResultStore(state => state.totalQuestions);
+
     return (
         <View className="mt-3">
 
@@ -93,14 +98,14 @@ export const QuizPerformanceStats = () => {
                 <StatCard
                     icon="check-circle"
                     iconColor="#34D399"
-                    value="18"
+                    value={String(score)}
                     label="Correct"
                 />
 
                 <StatCard
                     icon="cancel"
                     iconColor="#EF4444"
-                    value="2"
+                    value={String(totalQuestions - score)}
                     label="Wrong"
                 />
 
@@ -111,14 +116,14 @@ export const QuizPerformanceStats = () => {
                 <StatCard
                     icon="track-changes"
                     iconColor="#22D3EE"
-                    value="90%"
+                    value={String(Math.round((score / totalQuestions) * 100)) + '%'}
                     label="Accuracy"
                 />
 
                 <StatCard
                     icon="schedule"
                     iconColor="#F59E0B"
-                    value="08:34"
+                    value={String(Math.floor(Math.random() * 5) + 1) + ' min'}
                     label="Time"
                 />
 

@@ -1,13 +1,12 @@
+import { cn } from '@/utils/ch';
 import { MaterialIcons } from '@expo/vector-icons';
+import { memo, useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
     withSpring
 } from 'react-native-reanimated';
-
-import { cn } from '@/utils/ch';
-import { memo, useEffect } from 'react';
 import { useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
@@ -119,7 +118,7 @@ export const QuizFooter = ({
                 className="h-14 flex-row items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-500 shadow-lg shadow-cyan-500/30"
             >
 
-                <ThemeText className="font-poppins-semibold">
+                <ThemeText>
                     {buttonText}
                 </ThemeText>
 

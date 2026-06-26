@@ -1,5 +1,6 @@
 import { AnimatedNumber } from '@/components/ui/animatedCounter';
 import ThemeText from '@/components/ui/ThemeText';
+import { useQuizResultStore } from '@/store/quizGame/quizResultStore';
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect } from 'react';
@@ -9,15 +10,12 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 
 export const QuizResultHero = () => {
 
-    const trophyScale =
-        useSharedValue(0);
+    const trophyScale = useSharedValue(0);
+    const score = useQuizResultStore(state => state.score);
+    const totalQuestions = useQuizResultStore(state => state.totalQuestions);
 
     useEffect(() => {
-        trophyScale.value =
-            withSpring(1, {
-                damping: 12,
-                stiffness: 180,
-            });
+        trophyScale.value = withSpring(1, { damping: 12, stiffness: 180 });
     }, []);
 
     const trophyStyle =
@@ -71,12 +69,10 @@ export const QuizResultHero = () => {
 
             </View>
 
-
-
             {/* Score */}
 
             <AnimatedNumber
-                value='92'
+                value={String(Math.round((score / totalQuestions) * 100))}
                 suffix='%'
                 size="lg"
                 color="#22D3EE"

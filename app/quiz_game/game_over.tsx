@@ -3,6 +3,7 @@ import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { resetQuizResult } from "store/quizGame/quizResultStore";
 
 export default function GameOver() {
 
@@ -10,6 +11,8 @@ export default function GameOver() {
         Haptics.impactAsync(
             Haptics.ImpactFeedbackStyle.Heavy
         );
+
+        return () => resetQuizResult();
     }, [])
 
     return (
