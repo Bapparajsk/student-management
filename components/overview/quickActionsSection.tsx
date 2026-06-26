@@ -14,6 +14,18 @@ const actions = [
         Icon: Ionicons
     },
     {
+        label: 'Quiz',
+        name: 'sports-esports',
+        color: '#14B8A6',
+        Icon: MaterialIcons
+    },
+    {
+        label: 'Notes',
+        name: 'document-text',
+        color: '#7C4DFF',
+        Icon: Ionicons
+    },
+    {
         label: 'Dining',
         name: 'restaurant',
         color: '#14B8A6',
@@ -31,36 +43,26 @@ const actions = [
         color: '#14B8A6',
         Icon: MaterialIcons
     },
-    {
-        label: 'Market',
-        name: 'shopping-bag',
-        color: '#7C4DFF',
-        Icon: MaterialIcons
-    },
+
     {
         label: 'Events',
         name: 'event',
-        color: '#14B8A6',
+        color: '#7C4DFF',
         Icon: MaterialIcons
     },
     {
         label: 'Fees',
         name: 'payments',
-        color: '#7C4DFF',
+        color: '#14B8A6',
         Icon: MaterialIcons
     },
     {
         label: 'Health',
         name: 'medical-services',
-        color: '#14B8A6',
+        color: '#7C4DFF',
         Icon: MaterialIcons
     },
-    {
-        label: 'Clubs',
-        name: 'sports-esports',
-        color: '#14B8A6',
-        Icon: MaterialIcons
-    },
+
     {
         label: 'Map',
         color: '#14B8A6',
