@@ -1,13 +1,14 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useMemo, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
     FadeInDown,
     FadeOutDown,
     LinearTransition
 } from 'react-native-reanimated';
 import { Portal, PressableFeedback } from '../hero-ui';
+import ThemeText from './ThemeText';
 
 export type FileType =
     | 'PDF'
@@ -220,11 +221,11 @@ export const AIFab = ({
                                             }
                                         />
 
-                                        <Text className="ml-2 font-medium text-white">
+                                        <ThemeText className="ml-2 text-sm">
                                             {
                                                 action.title
                                             }
-                                        </Text>
+                                        </ThemeText>
                                     </PressableFeedback>
                                 </Animated.View>
                             )

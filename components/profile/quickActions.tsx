@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { Href, useRouter } from "expo-router";
 import { View } from 'react-native';
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
@@ -52,14 +53,21 @@ const ACTIONS: QuickAction[] = [
 
 function QuickActionCard({
     action,
-    onPress,
+    href
 }: {
     action: QuickAction;
-    onPress?: () => void;
+    href: Href;
 }) {
+
+    const router = useRouter();
+
+    const handlePress = () => {
+        router.push(href);
+    };
+
     return (
         <PressableFeedback
-            onPress={onPress}
+            onPress={handlePress}
             className="flex-1 items-center overflow-hidden rounded-[28px] border border-white/10 bg-white/4 px-3 py-5"
         >
             {/* Glow */}
@@ -99,15 +107,15 @@ export const QuickActionsGrid = () => {
             {/* Grid */}
             <View className="gap-3">
                 <View className="flex-row gap-3">
-                    <QuickActionCard action={ACTIONS[0]} />
-                    <QuickActionCard action={ACTIONS[1]} />
-                    <QuickActionCard action={ACTIONS[2]} />
+                    <QuickActionCard action={ACTIONS[0]} href={"/"} />
+                    <QuickActionCard action={ACTIONS[1]} href={"/"} />
+                    <QuickActionCard action={ACTIONS[2]} href={"/"} />
                 </View>
 
                 <View className="flex-row gap-3">
-                    <QuickActionCard action={ACTIONS[3]} />
-                    <QuickActionCard action={ACTIONS[4]} />
-                    <QuickActionCard action={ACTIONS[5]} />
+                    <QuickActionCard action={ACTIONS[3]} href={"/"} />
+                    <QuickActionCard action={ACTIONS[4]} href={"/"} />
+                    <QuickActionCard action={ACTIONS[5]} href={"/setting"} />
                 </View>
             </View>
         </View>

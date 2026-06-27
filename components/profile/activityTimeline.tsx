@@ -109,7 +109,7 @@ function ActivityItem({
 
                 {!isLast && (
                     <View
-                        className="mt-2 w-0.5 flex-1 bg-white/10"
+                        className="w-0.5 flex-1 bg-white/10"
                         style={{
                             minHeight: 40,
                         }}

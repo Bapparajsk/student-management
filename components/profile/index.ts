@@ -1,5 +1,5 @@
 export { AcademicOverview } from "./academicOverview";
-export { ActivityTimeline } from "./academicTimeline";
+export { ActivityTimeline } from "./activityTimeline";
 export { AIAcademicPulseCard } from "./aIAcademicPulseCard";
 export { BadgeGallery } from "./badgeGallery";
 export { DegreeProgressCard } from "./degreeProgressCard";
