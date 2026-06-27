@@ -98,10 +98,6 @@ export const FilterPopover = ({
                     />
                 </PressableFeedback>
 
-                {/* {open && (
-                    <Separator />
-                )} */}
-
                 {/* Content */}
                 {open && (
                     <Animated.View

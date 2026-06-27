@@ -1,5 +1,5 @@
+import { AccountSections, HeroHeaderCard, NotificationsSections } from '@/components/setting'
 import { ScreenContent } from '@/components/ui/ScreenContent'
-import ThemeText from '@/components/ui/ThemeText'
 
 const header = {
     backButton: {
@@ -11,7 +11,9 @@ const header = {
 export default function SettingScreen() {
     return (
         <ScreenContent path='/setting' header={header}>
-            <ThemeText>Setting Screen</ThemeText>
+            <HeroHeaderCard />
+            <AccountSections />
+            <NotificationsSections />
         </ScreenContent>
     )
 }
