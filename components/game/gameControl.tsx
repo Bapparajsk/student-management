@@ -1,8 +1,8 @@
+import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "@/store/quizGame/quizNavigationStore";
 import { reset, start, stop } from '@/store/quizGame/quizTimerStore';
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { Dialog } from '../hero-ui';
 import { QuizFooter } from './quizFooter';
 import { QuizGameHeader } from './quizGameHeader';
@@ -136,7 +136,7 @@ export const GameControl = () => {
 
 
     const initializeQuiz = (length: number) => {
-        reset(300); // 5 min
+        reset(300);
         start();
         setDefaultNavigations(length);
     }

@@ -1,4 +1,4 @@
-import { useQuizNavigationStore } from '@/store/quizGame/quizNavigactionStore';
+import { useQuizNavigationStore } from '@/store/quizGame/quizNavigationStore';
 import { useQuizTimerStore } from '@/store/quizGame/quizTimerStore';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';

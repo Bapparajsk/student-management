@@ -1,4 +1,4 @@
-import { updateNavigation, useQuizNavigationStore } from "@/store/quizGame/quizNavigactionStore";
+import { updateNavigation, useQuizNavigationStore } from "@/store/quizGame/quizNavigationStore";
 import * as Haptics from 'expo-haptics';
 import { memo } from "react";
 import { View } from "react-native";

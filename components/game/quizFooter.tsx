@@ -1,3 +1,4 @@
+import { useQuizNavigationStore } from "@/store/quizGame/quizNavigationStore";
 import { cn } from '@/utils/ch';
 import { MaterialIcons } from '@expo/vector-icons';
 import { memo, useEffect } from 'react';
@@ -7,7 +8,6 @@ import Animated, {
     useSharedValue,
     withSpring
 } from 'react-native-reanimated';
-import { useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 

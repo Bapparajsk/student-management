@@ -2,7 +2,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 
 import ThemeText from '@/components/ui/ThemeText';
-import { useQuizNavigationStore } from 'store/quizGame/quizNavigactionStore';
+import { useQuizNavigationStore } from '@/store/quizGame/quizNavigationStore';
 import ProgressLine from '../ui/progressLine';
 
 import { useEffect } from 'react';
