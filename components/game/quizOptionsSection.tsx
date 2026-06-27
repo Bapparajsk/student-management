@@ -2,10 +2,10 @@ import { updateNavigation, useQuizNavigationStore } from "@/store/quizGame/quizN
 import * as Haptics from 'expo-haptics';
 import { memo } from "react";
 import { View } from "react-native";
+import { QuizOptionCard, QuizStatus } from "../quiz/quizOptionCard";
+import { QuizPowerUps } from "../quiz/quizPowerUps";
+import QuizQuestionCard from "../quiz/quizQuestionCard";
 import { QuizData } from "./gameControl";
-import { QuizOptionCard, QuizStatus } from "./quizOptionCard";
-import { QuizPowerUps } from "./quizPowerUps";
-import QuizQuestionCard from "./quizQuestionCard";
 
 type QuizOptionsSectionProps =
     QuizData & {

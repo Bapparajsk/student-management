@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { setCurrentQuestionIndex, setDefaultNavigations, useQuizNavigationStore } from "store/quizGame/quizNavigactionStore";
-import { QuizTimeoutModal } from '../game/quizTimeoutModal';
 import { Dialog } from '../hero-ui';
 import { QuizFooter } from './quizFooter';
 import { QuizGameHeader } from './quizGameHeader';
 import QuizOptionsSectionMemo from "./quizOptionsSection";
+import { QuizTimeoutModal } from './quizTimeoutModal';
 
 
 export type QuizData = {
