@@ -1,6 +1,8 @@
-import React from 'react';
+import Feather from '@expo/vector-icons/Feather';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import { Image } from 'expo-image';
+import { Href, useRouter } from 'expo-router';
 import { View } from 'react-native';
-
 import Animated, {
     Extrapolation,
     interpolate,
@@ -8,16 +10,9 @@ import Animated, {
     useAnimatedStyle,
     withSpring
 } from 'react-native-reanimated';
-
-import Feather from '@expo/vector-icons/Feather';
-import Fontisto from '@expo/vector-icons/Fontisto';
-import { Image } from 'expo-image';
-import { Href, useRouter } from 'expo-router';
-import { Avatar } from 'heroui-native/avatar';
-import { Button } from 'heroui-native/button';
-import { Surface } from 'heroui-native/surface';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from "utils/theme";
+import { Avatar, Button, Surface } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
 export type BackButtonProps = {
@@ -93,17 +88,6 @@ const Header = ({
 
 
     }
-
-    // const onPressBack = () => {
-    //         if (router.canGoBack()) {
-    //             router.back();
-    //             return;
-    //         }
-
-    //         if (backButton?.href) {
-    //             router.replace(backButton.href);
-    //         }
-    //     };
 
     return (
         <>
