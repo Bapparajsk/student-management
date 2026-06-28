@@ -7,7 +7,7 @@ import Animated, {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ScrollContext } from '@/context/screenContent';
-import { Header } from "components/header";
+import { Header, HeaderFab } from "components/header";
 import AppFooter from "../footer";
 import { BackButtonProps } from "../header/header";
 import { PortalHost } from "../hero-ui";
@@ -62,20 +62,21 @@ export const ScreenContent: React.FC<ScreenContentProps> = ({
         }}
         key={path}
       >
-        <Header scrollY={scrollY} backButton={header?.backButton} pathName={path} />
+        <HeaderFab scrollY={scrollY} backButton={header?.backButton} pathName={path} />
         <AnimatedScrollView
           ref={aref}
           onScroll={onScroll}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            paddingTop: 100,
+            paddingTop: 10,
             paddingHorizontal: SCREEN_HORIZONTAL_PADDING,
             paddingBottom: 40 + bottomBarHeight,
             position: "relative",
           }}
           stickyHeaderIndices={stickyHeaderIndices}
         >
+          <Header backButton={header?.backButton} pathName={path} />
           {children}
           <AppFooter />
         </AnimatedScrollView>
