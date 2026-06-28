@@ -23,7 +23,6 @@ export const NotificationsSections = () => {
                     key={item.id}
                     className="flex-row items-center justify-between px-4 py-2"
                     onPress={() => toggleNotification(item.id)}
-                    animation="disable-all"
                 >
 
                     <View className="h-10 w-10 items-center justify-center rounded-xl bg-white/4">

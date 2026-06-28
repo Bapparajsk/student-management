@@ -20,8 +20,6 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
 
     const animatedWidth = useSharedValue(64);
     const right = useSharedValue(-100);
-    const scale = useSharedValue(0.8);
-    const opacity = useSharedValue(0);
 
     useEffect(() => {
         animatedWidth.value = withSpring(
@@ -48,27 +46,17 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
             right.value = withSpring(
                 show ? SCREEN_HORIZONTAL_PADDING : -100,
                 {
-                    stiffness: 100,
+                    stiffness: 200,
                     mass: 0.5,
-                    damping: 60,
+                    damping: 20,
                 }
             );
-
-            scale.value = withSpring(show ? 1 : 0.8);
-
-            opacity.value = withSpring(show ? 1 : 0);
         }
     );
 
     const SearchButtonStyle =
         useAnimatedStyle(() => ({
             right: right.value,
-            opacity: opacity.value,
-            transform: [
-                {
-                    scale: scale.value,
-                },
-            ],
         }));
 
 
@@ -114,7 +102,8 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
                         </Animated.View>
                     )}
                     {!isExpanded && (
-                        <PressableFeedback onPress={handlePress} className='size-16 items-center justify-center'>
+
+                        <PressableFeedback entering={FadeIn.delay(250)} onPress={handlePress} className='size-16 items-center justify-center'>
                             <Feather
                                 name="arrow-left-circle"
                                 size={24}

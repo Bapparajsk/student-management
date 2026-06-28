@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { Href, useRouter } from 'expo-router';
 import { View } from 'react-native';
 import { PressableFeedback } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
@@ -7,6 +8,7 @@ export type AccountItem = {
     icon: string;
     title: string;
     subtitle: string[];
+    href: Href;
 };
 
 const ACCOUNT_ITEMS: AccountItem[] = [
@@ -14,20 +16,26 @@ const ACCOUNT_ITEMS: AccountItem[] = [
         icon: 'person',
         title: 'Personal Info',
         subtitle: ["Name", "Email", "Phone"],
+        href: "/setting/personalInfo" as Href,
     },
     {
         icon: 'school',
         title: 'Academic Profile',
         subtitle: ["Semester", "Department", "University"],
+        href: "/setting/academicProfile" as Href,
     },
     {
         icon: 'security',
         title: 'Security & Privacy',
         subtitle: ["Password", "Devices", "Data Privacy"],
+        href: "/setting/securityPrivacy" as Href,
     },
 ];
 
 export const AccountSections = () => {
+
+    const router = useRouter();
+
     return (
         <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 mt-3">
 
@@ -41,6 +49,7 @@ export const AccountSections = () => {
                 <PressableFeedback
                     key={item.title}
                     className="flex-row items-center px-4 py-4 overflow-hidden"
+                    onPress={() => router.push(item.href)}
                 >
                     <View className="h-10 w-10 items-center justify-center rounded-xl bg-white/4">
 
