@@ -9,11 +9,15 @@ import Animated, {
 type ProgressLineProps = {
     current: number;
     total: number;
+    color?: string;
+    height?: number;
 };
 
 export default function ProgressLine({
     total,
     current,
+    color = '#22D3EE',
+    height = 6,
 }: ProgressLineProps) {
 
     const progressWidth = useSharedValue(0);
@@ -40,10 +44,10 @@ export default function ProgressLine({
 
     return (
         <View className="overflow-hidden rounded-full bg-white/5">
-            <View className="h-1.5">
+            <View style={{ height }}>
                 <Animated.View
-                    style={progressStyle}
-                    className="h-full rounded-full bg-cyan-400"
+                    style={[progressStyle, { backgroundColor: color }]}
+                    className="h-full rounded-full"
                 />
             </View>
         </View>

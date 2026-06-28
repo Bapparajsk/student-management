@@ -80,9 +80,6 @@ export const useNotificationStore =
 export const toggleNotification = (
     id: NotificationItemId
 ) => {
-
-    console.log('Toggling notification:', id);
-
     useNotificationStore.setState(
         (state) => ({
             enabled: {

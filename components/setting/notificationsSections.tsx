@@ -10,7 +10,7 @@ export const NotificationsSections = () => {
     const enabled = useNotificationStore(state => state.enabled);
 
     return (
-        <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 mt-3">
+        <View className="overflow-hidden rounded-3xl border border-white/10 bg-white/3 mt-3 pb-2">
 
             <View className="px-4 py-3">
                 <ThemeText className="text-xs font-poppins-semibold uppercase tracking-widest text-cyan-400">
@@ -51,6 +51,7 @@ export const NotificationsSections = () => {
                         isSelected={enabled[item.id]}
                         className="w-13 h-7"
                         onSelectedChange={() => toggleNotification(item.id)}
+
                     >
                         <Switch.Thumb
                             className="size-5"

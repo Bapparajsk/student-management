@@ -1,4 +1,4 @@
-import { AccountSections, HeroHeaderCard, NotificationsSections } from '@/components/setting'
+import { AccountSections, HeroHeaderCard, NotificationsSections, StudyInsightsCard, SupportCard } from '@/components/setting'
 import { ScreenContent } from '@/components/ui/ScreenContent'
 
 const header = {
@@ -14,6 +14,8 @@ export default function SettingScreen() {
             <HeroHeaderCard />
             <AccountSections />
             <NotificationsSections />
+            <StudyInsightsCard />
+            <SupportCard />
         </ScreenContent>
     )
 }
