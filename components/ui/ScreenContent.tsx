@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollContext } from '@/context/screenContent';
 import { Header, HeaderFab } from "components/header";
 import AppFooter from "../footer";
-import { BackButtonProps } from "../header/header";
+import { BackButtonProps } from "../header/leftHeader";
 import { PortalHost } from "../hero-ui";
 
 interface ScreenContentProps {

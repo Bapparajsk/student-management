@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { Dimensions, View } from "react-native";
 import Animated, { FadeIn, SharedValue, useAnimatedReaction, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { PressableFeedback } from '../hero-ui';
-import { SCREEN_HORIZONTAL_PADDING } from '../ui/ScreenContent';
-import { HeaderLeftComponent, HeaderProps, HeaderRightComponent } from "./header";
+import { HeaderLeftComponent, HeaderProps } from './leftHeader';
+import { HeaderRightComponent } from './rightHeader';
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get('screen');
 
+const SCREEN_HORIZONTAL_PADDING = 16;
 const headerWidth = width - SCREEN_HORIZONTAL_PADDING * 2;
 
 export type HeaderFabProps = HeaderProps & {
