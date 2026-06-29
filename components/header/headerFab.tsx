@@ -10,6 +10,8 @@ const { width } = Dimensions.get('screen');
 
 const SCREEN_HORIZONTAL_PADDING = 16;
 const headerWidth = width - SCREEN_HORIZONTAL_PADDING * 2;
+const RightOffset = -500;
+const AnimationDelay = 250;
 
 export type HeaderFabProps = HeaderProps & {
     scrollY: SharedValue<number>;
@@ -19,7 +21,7 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
     const [isExpanded, setIsExpanded] = useState(false);
 
     const animatedWidth = useSharedValue(64);
-    const right = useSharedValue(-100);
+    const right = useSharedValue(RightOffset);
 
     useEffect(() => {
         animatedWidth.value = withSpring(
@@ -44,7 +46,7 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
             if (show === prev) return;
 
             right.value = withSpring(
-                show ? SCREEN_HORIZONTAL_PADDING : -100,
+                show ? SCREEN_HORIZONTAL_PADDING : RightOffset,
                 {
                     stiffness: 200,
                     mass: 0.5,
@@ -79,7 +81,7 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
             >
                 {isExpanded && (
                     <Animated.View
-                        entering={FadeIn.delay(250)}
+                        entering={FadeIn.delay(AnimationDelay)}
                         className="pl-3"
                     >
                         <HeaderLeftComponent backButton={backButton} pathName={pathName} />
@@ -89,7 +91,7 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
                     {isExpanded && (
                         <Animated.View
                             className={"justify-center flex-row items-center"}
-                            entering={FadeIn.delay(250)}
+                            entering={FadeIn.delay(AnimationDelay)}
                         >
                             <HeaderRightComponent />
                             <PressableFeedback onPress={handlePress} className='size-16 items-center justify-center border-l border-white/10'>
@@ -103,7 +105,7 @@ export const HeaderFab = ({ scrollY, backButton, pathName }: HeaderFabProps) => 
                     )}
                     {!isExpanded && (
 
-                        <PressableFeedback entering={FadeIn.delay(250)} onPress={handlePress} className='size-16 items-center justify-center'>
+                        <PressableFeedback entering={FadeIn.delay(AnimationDelay)} onPress={handlePress} className='size-16 items-center justify-center'>
                             <Feather
                                 name="arrow-left-circle"
                                 size={24}
