@@ -7,6 +7,7 @@ export default function SettingLayout() {
         >
             <Stack.Screen name="index" />
             <Stack.Screen name="personalInfo" />
+            <Stack.Screen name="academicProfile" />
         </Stack>
     );
 }
