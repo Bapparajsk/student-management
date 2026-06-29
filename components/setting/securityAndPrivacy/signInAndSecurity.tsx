@@ -31,6 +31,7 @@ export const SignInAndSecurity = () => {
                     iconColor="#34D399"
                     title="Two-Factor Authentication"
                     subtitle="Enabled"
+                    href={"/setting/securityPrivacy/twoFactorAuthentication"}
                 />
 
                 <View className="ml-17 h-px bg-white/5" />
