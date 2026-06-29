@@ -1,17 +1,18 @@
+import { PasswordSecurityAlert, PasswordSecurityHero } from '@/components/setting/securityAndPrivacy/password'
 import { ScreenContent } from '@/components/ui/ScreenContent'
-import { Text } from 'react-native'
 
 const header = {
     backButton: {
         showBackButton: true,
-        title: "Password"
+        title: "Password & Security"
     }
 }
 
 export default function PasswordScreen() {
     return (
         <ScreenContent path='/setting/securityPrivacy/password' header={header}>
-            <Text>password</Text>
+            <PasswordSecurityHero />
+            <PasswordSecurityAlert />
         </ScreenContent>
     )
 }
