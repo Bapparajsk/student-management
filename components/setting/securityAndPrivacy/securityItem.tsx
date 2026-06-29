@@ -3,13 +3,14 @@ import { View } from 'react-native';
 
 import { PressableFeedback } from '@/components/hero-ui';
 import ThemeText from '@/components/ui/ThemeText';
+import { Href, useRouter } from 'expo-router';
 
 type SecurityItemProps = {
     icon: keyof typeof MaterialIcons.glyphMap;
     iconColor: string;
     title: string;
     subtitle: string;
-    onPress?: () => void;
+    href?: Href;
 };
 
 export const SecurityItem = ({
@@ -17,11 +18,20 @@ export const SecurityItem = ({
     iconColor,
     title,
     subtitle,
-    onPress,
+    href
 }: SecurityItemProps) => {
+
+    const router = useRouter();
+
+    const handelPress = () => {
+        if (href) {
+            router.push(href);
+        }
+    };
+
     return (
         <PressableFeedback
-            onPress={onPress}
+            onPress={handelPress}
             className="flex-row items-center px-4 py-4"
         >
             <View

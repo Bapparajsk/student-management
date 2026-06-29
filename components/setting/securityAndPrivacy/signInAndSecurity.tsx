@@ -21,6 +21,7 @@ export const SignInAndSecurity = () => {
                     iconColor="#22D3EE"
                     title="Password"
                     subtitle="Strong • Updated 30 days ago"
+                    href={"/setting/securityPrivacy/password"}
                 />
 
                 <View className="ml-17 h-px bg-white/5" />
