@@ -27,13 +27,15 @@ export type FilterPopoverProps = {
     onSelect?: (item: FilterOption) => void;
     activeItemId?: string;
     itemStyle?: FilterPopoverItemStyle
+    zIndex?: number;
 };
 
 export const FilterPopover = ({
     items,
     onSelect,
     activeItemId,
-    itemStyle
+    itemStyle,
+    zIndex
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
@@ -41,7 +43,7 @@ export const FilterPopover = ({
     const [selectedFilter, setSelectedFilter] = useState<FilterOption>(items.find(item => item.id === activeItemId) || items[0]);
 
     return (
-        <View className="relative z-10">
+        <View className="relative" style={{ zIndex: zIndex || 10 }}>
 
             {open && (
                 <PressableFeedback
