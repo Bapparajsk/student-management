@@ -4,7 +4,7 @@ import { RecoveryMethodsCard } from './recoveryMethodsCard'
 import { TwoFactorDetailsCard } from './twoFactorDetailsCard'
 import { TwoFactorHero } from './twoFactorHero'
 
-const isEnabled = false;
+const isEnabled = true;
 
 export const TowFactorComponentController = () => {
     return (

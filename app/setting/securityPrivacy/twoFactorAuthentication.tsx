@@ -1,4 +1,4 @@
-import { TowFactorComponentController } from '@/components/setting/securityAndPrivacy/twoFactorAuthentication/towFactorComponentController';
+import { TowFactorComponentController } from '@/components/setting/securityAndPrivacy/twoFactorAuthentication';
 import { ScreenContent } from '@/components/ui/ScreenContent';
 
 const header = {
