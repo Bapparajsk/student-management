@@ -41,6 +41,7 @@ export const SignInAndSecurity = () => {
                     iconColor="#F59E0B"
                     title="Recovery Options"
                     subtitle="Backup email & phone"
+                    href={"/setting/securityPrivacy/recoveryOptions"}
                 />
 
             </View>

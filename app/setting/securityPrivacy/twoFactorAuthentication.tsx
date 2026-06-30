@@ -1,4 +1,4 @@
-import { TwoFactorHero } from '@/components/setting/securityAndPrivacy/twoFactorAuthentication';
+import { TowFactorComponentController } from '@/components/setting/securityAndPrivacy/twoFactorAuthentication/towFactorComponentController';
 import { ScreenContent } from '@/components/ui/ScreenContent';
 
 const header = {
@@ -11,7 +11,7 @@ const header = {
 export default function TwoFactorAuthenticationScreen() {
     return (
         <ScreenContent path='/setting/securityPrivacy/twoFactorAuthentication' header={header}>
-            <TwoFactorHero enabled={false} />
+            <TowFactorComponentController />
         </ScreenContent>
     )
 }

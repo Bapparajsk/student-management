@@ -59,15 +59,11 @@ export const TwoFactorHero = ({
 
     return (
         <View
-            className={cn("overflow-hidden rounded-3xl border p-5",
-                config.border, config.bg
-            )}
+            className={cn("overflow-hidden rounded-3xl border p-5", config.border, config.bg)}
         >
             {/* Glow */}
 
-            <View
-                className={cn("absolute -right-10 -top-10 h-40 w-40 rounded-full", config.glow)}
-            />
+            <View className={cn("absolute -right-10 -top-10 h-40 w-40 rounded-full", config.glow)} />
 
             {/* Header */}
 
@@ -147,7 +143,6 @@ export const TwoFactorHero = ({
                     <ThemeText className="ml-2 font-poppins-semibold text-amber-400">
                         Enable Two-Factor Authentication
                     </ThemeText>
-
                 </PressableFeedback>
             )}
         </View>
