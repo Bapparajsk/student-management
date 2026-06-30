@@ -6,6 +6,7 @@ export default function SettingLayout() {
             <Stack.Screen name="index" />
             <Stack.Screen name="password" />
             <Stack.Screen name="twoFactorAuthentication" />
+            <Stack.Screen name="recoveryOptions" />
         </Stack>
     );
 }

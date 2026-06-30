@@ -1,5 +1,5 @@
 import ThemeText from '@/components/ui/ThemeText';
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PressableFeedback } from 'components/hero-ui';
 import { View } from 'react-native';

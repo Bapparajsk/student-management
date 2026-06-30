@@ -1,4 +1,4 @@
-import { cn } from '@/utils/ch'
+import { cn } from '@/utils/cn'
 import { colors } from '@/utils/theme'
 import { PressableFeedback } from 'heroui-native'
 import { ReactNode } from 'react'

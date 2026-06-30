@@ -1,4 +1,4 @@
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { ReactNode, useEffect } from 'react';
 import { Text, View, ViewProps } from 'react-native';
 import Animated, {

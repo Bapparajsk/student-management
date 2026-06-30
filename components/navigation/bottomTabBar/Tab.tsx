@@ -15,9 +15,9 @@ import Animated, {
 
 import If from '@/components/If';
 import getIcon from '@/lib/icon';
+import { cn } from '@/utils/cn';
 import ThemeText from 'components/ui/ThemeText';
 import { Image } from 'expo-image';
-import { cn } from 'utils/ch';
 
 export type TabProps =
     Pick<

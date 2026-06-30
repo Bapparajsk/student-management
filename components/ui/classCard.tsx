@@ -1,4 +1,4 @@
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { colors } from '@/utils/theme';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';

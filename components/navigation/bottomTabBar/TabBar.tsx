@@ -1,4 +1,4 @@
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { colors } from '@/utils/theme';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Href, useRouter } from "expo-router";

@@ -1,4 +1,4 @@
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { format, getCurrentWeekDays } from '@/utils/date';
 import { useMemo } from 'react';
 import { View } from 'react-native';

@@ -11,7 +11,7 @@ import {
     tick,
     useQuizTimerStore
 } from '@/store/quizGame/quizTimerStore';
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import Animated, {

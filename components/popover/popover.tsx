@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
-import { cn } from '@/utils/ch';
+import { cn } from '@/utils/cn';
 import { isValidValueOrDefault } from '@/utils/getOptionByValue';
 import { colors } from '@/utils/theme';
 import { PressableFeedback } from '../hero-ui';

@@ -1,5 +1,5 @@
+import { cn } from '@/utils/cn';
 import { Text, TextProps } from 'react-native';
-import { cn } from 'utils/ch';
 
 export type ThemeTextProps = TextProps & {
     children: React.ReactNode;
