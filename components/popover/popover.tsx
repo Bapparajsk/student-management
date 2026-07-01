@@ -6,7 +6,7 @@ import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 import { cn } from '@/utils/cn';
 import { isValidValueOrDefault } from '@/utils/getOptionByValue';
 import { colors } from '@/utils/theme';
-import { PressableFeedback } from '../hero-ui';
+import { PressableFeedback, Separator } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
 
@@ -38,6 +38,7 @@ export type FilterPopoverProps = {
     activeIsOpenText?: string;
     showActiveIcon?: boolean;
     showActiveColor?: boolean;
+    triggerClassName?: string;
 };
 
 export const FilterPopover = ({
@@ -49,8 +50,8 @@ export const FilterPopover = ({
     activeContent,
     activeIsOpenText,
     showActiveIcon = true,
-    showActiveColor = true
-
+    showActiveColor = true,
+    triggerClassName
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
@@ -83,17 +84,12 @@ export const FilterPopover = ({
             >
                 {/* Trigger */}
                 <PressableFeedback
-                    onPress={() =>
-                        setOpen(prev => !prev)
-                    }
+                    onPress={() => setOpen(prev => !prev)}
                     onLayout={e => {
                         triggerWidth.current =
-                            e
-                                .nativeEvent
-                                .layout
-                                .width;
+                            e.nativeEvent.layout.width;
                     }}
-                    className="flex-row items-center px-4 py-3"
+                    className={cn("flex-row items-center px-4 py-3", triggerClassName)}
                 >
                     {activeContent ? (
                         <Fragment>
@@ -131,11 +127,15 @@ export const FilterPopover = ({
 
                 </PressableFeedback>
 
+                {open && (
+                    <Animated.View entering={FadeIn.delay(100)}>
+                        <Separator />
+                    </Animated.View>
+                )}
+
                 {/* Content */}
                 {open && (
-                    <Animated.View
-                        className="mb-3 gap-1 px-2"
-                    >
+                    <Animated.View className="mb-3 gap-1 px-2 mt-1.5" >
                         {items.map(filter => {
                             const active = selectedFilter?.id === filter.id;
 

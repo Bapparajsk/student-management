@@ -56,9 +56,7 @@ export const CurrentDeviceCard = () => {
                         View Details
                     </ThemeText>
                 </PressableFeedback>
-
             </View>
-
         </View>
     );
 };

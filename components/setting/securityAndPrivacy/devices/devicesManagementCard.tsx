@@ -4,8 +4,9 @@ import { CurrentDeviceCard } from './currentDeviceCard'
 import { DeviceItem } from './deviceItem'
 
 export const DevicesManagementCard = () => {
+
     return (
-        <View className="gap-3">
+        <View className="gap-y-2 mt-3">
 
             <CurrentDeviceCard />
 
@@ -15,6 +16,9 @@ export const DevicesManagementCard = () => {
                 location="Kolkata, India"
                 lastActive="Active 2 hours ago"
                 index={2}
+                onLongPress={() => {
+                    console.log("item press");
+                }}
             />
 
             <DeviceItem

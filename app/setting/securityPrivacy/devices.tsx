@@ -1,4 +1,4 @@
-import { DeviceActivityCard, DeviceSecurityHero, DevicesManagementCard } from '@/components/setting/securityAndPrivacy/devices'
+import { DeviceActivityCard, DeviceSecurityHero, DevicesManagementCard, SignOutAllDevicesCard } from '@/components/setting/securityAndPrivacy/devices'
 import { ScreenContent } from '@/components/ui/ScreenContent'
 
 const header = {
@@ -14,6 +14,7 @@ export default function DevicesScreen() {
             <DeviceSecurityHero totalDevices={3} suspiciousDevices={1} />
             <DeviceActivityCard />
             <DevicesManagementCard />
+            <SignOutAllDevicesCard />
         </ScreenContent>
     )
 }

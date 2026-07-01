@@ -20,7 +20,7 @@ export const DeviceActivityCard = () => {
                     label="Current Device"
                     value="MacBook Air • Active Now"
                     classNames={{
-                        value: "text-base"
+                        value: "text-sm"
                     }}
                 />
 
@@ -30,7 +30,7 @@ export const DeviceActivityCard = () => {
                     label="Last Login"
                     value="Today, 09:41 AM"
                     classNames={{
-                        value: "text-base"
+                        value: "text-sm"
                     }}
                 />
 
@@ -40,7 +40,7 @@ export const DeviceActivityCard = () => {
                     label="Recent Logins"
                     value="5 in last 7 days"
                     classNames={{
-                        value: "text-base"
+                        value: "text-sm"
                     }}
                 />
 
