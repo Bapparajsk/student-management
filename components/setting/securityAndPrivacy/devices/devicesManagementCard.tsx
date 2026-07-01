@@ -14,6 +14,7 @@ export const DevicesManagementCard = () => {
                 platform="Chrome"
                 location="Kolkata, India"
                 lastActive="Active 2 hours ago"
+                index={2}
             />
 
             <DeviceItem
@@ -22,6 +23,7 @@ export const DevicesManagementCard = () => {
                 location="Delhi, India"
                 lastActive="Active Yesterday"
                 trusted
+                index={1}
             />
 
         </View>

@@ -9,6 +9,7 @@ type DeviceItemProps = {
     location: string;
     lastActive: string;
     trusted?: boolean;
+    index: number;
 };
 
 export const DeviceItem = ({
@@ -17,6 +18,7 @@ export const DeviceItem = ({
     location,
     lastActive,
     trusted,
+    index
 }: DeviceItemProps) => {
     return (
         <View className="flex-row items-center rounded-2xl border border-white/5 bg-white/3 px-4 py-3">
@@ -72,18 +74,35 @@ export const DeviceItem = ({
                         color="#A1A1AA"
                     />
                 }
+                activeIsOpenText="Actions"
+                zIndex={index * 10}
+                showActiveIcon={false}
+                showActiveColor={false}
                 items={[
                     {
                         id: "view-details",
                         label: "View Details",
-                        iconName: "info"
+                        iconName: "info",
+                        classNames: {
+                            container: "bg-blue-500/10",
+                            label: "text-blue-500",
+                            startIconColor: "#3B82F6",
+                        }
                     },
                     {
                         id: "remove-device",
                         label: "Remove Device",
-                        iconName: "delete"
+                        iconName: "delete",
+                        classNames: {
+                            container: "bg-red-500/10",
+                            label: "text-red-500",
+                            startIconColor: "#EF4444",
+                        }
                     }
                 ]}
+                itemStyle={{
+                    labelClassName: "text-sm"
+                }}
             />
         </View>
     );

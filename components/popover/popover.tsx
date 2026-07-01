@@ -1,7 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fragment, ReactNode, useRef, useState } from 'react';
 import { View } from 'react-native';
-import Animated, { LinearTransition } from 'react-native-reanimated';
+import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
 
 import { cn } from '@/utils/cn';
 import { isValidValueOrDefault } from '@/utils/getOptionByValue';
@@ -14,6 +14,12 @@ export type FilterOption = {
     id: string;
     label: string;
     iconName?: keyof typeof MaterialIcons.glyphMap;
+    classNames?: {
+        container?: string;
+        label?: string;
+        startIconColor?: string;
+        endIconColor?: string;
+    }
 };
 
 export type FilterPopoverItemStyle = {
@@ -29,6 +35,9 @@ export type FilterPopoverProps = {
     itemStyle?: FilterPopoverItemStyle
     zIndex?: number;
     activeContent?: ReactNode;
+    activeIsOpenText?: string;
+    showActiveIcon?: boolean;
+    showActiveColor?: boolean;
 };
 
 export const FilterPopover = ({
@@ -37,7 +46,11 @@ export const FilterPopover = ({
     activeItemId,
     itemStyle,
     zIndex,
-    activeContent
+    activeContent,
+    activeIsOpenText,
+    showActiveIcon = true,
+    showActiveColor = true
+
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
@@ -82,7 +95,18 @@ export const FilterPopover = ({
                     }}
                     className="flex-row items-center px-4 py-3"
                 >
-                    {activeContent || (
+                    {activeContent ? (
+                        <Fragment>
+                            {activeContent}
+                            {open && activeIsOpenText && (
+                                <Animated.View entering={FadeIn}>
+                                    <ThemeText className="ml-2 text-zinc-400">
+                                        {activeIsOpenText}
+                                    </ThemeText>
+                                </Animated.View>
+                            )}
+                        </Fragment>
+                    ) : (
                         <Fragment>
                             {selectedFilter.iconName && (
                                 <MaterialIcons
@@ -110,53 +134,51 @@ export const FilterPopover = ({
                 {/* Content */}
                 {open && (
                     <Animated.View
-                        layout={LinearTransition.springify()}
                         className="mb-3 gap-1 px-2"
                     >
-                        {items.map(
-                            filter => {
-                                const active =
-                                    selectedFilter?.id ===
-                                    filter.id;
+                        {items.map(filter => {
+                            const active = selectedFilter?.id === filter.id;
 
-                                return (
+                            return (
+                                <Animated.View key={filter.id} entering={FadeIn.delay(100)}>
                                     <PressableFeedback
-                                        key={
-                                            filter.id
-                                        }
                                         onPress={() => {
                                             setSelectedFilter(filter);
                                             setOpen(false);
                                             onSelect?.(filter);
                                         }}
-                                        className="flex-row items-center rounded-2xl px-3 py-3"
+                                        className={cn("flex-row items-center rounded-2xl px-3 py-3", filter.classNames?.container)}
                                     >
                                         {filter.iconName && (
                                             <MaterialIcons
                                                 name={filter.iconName}
                                                 size={18}
-                                                color={active ? isValidValueOrDefault(itemStyle?.activeColor, '#22D3EE') : colors.textMuted}
+                                                color={filter.classNames?.startIconColor || (showActiveColor && active ? isValidValueOrDefault(itemStyle?.activeColor, '#22D3EE') : colors.textMuted)}
                                             />
                                         )}
 
                                         <ThemeText
-                                            className={cn(`mx-3`, active && 'font-semibold', itemStyle?.labelClassName)}
-                                            style={{
-                                                color: active ? "#22D3EE" : colors.textMuted,
-                                            }}
+                                            className={cn(`mx-2 font-poppins-semibold`,
+                                                `text-[#64748B]`,
+                                                { "text-[#22D3EE]": showActiveColor && active },
+                                                itemStyle?.labelClassName,
+                                                filter.classNames?.label
+                                            )}
                                         >
                                             {filter.label}
                                         </ThemeText>
-                                        {active && (
+
+                                        {showActiveIcon && active && (
                                             <MaterialIcons
                                                 name="check"
                                                 size={16}
-                                                color="#22D3EE"
+                                                color={isValidValueOrDefault(filter.classNames?.endIconColor, "#22D3EE")}
                                             />
                                         )}
                                     </PressableFeedback>
-                                );
-                            }
+                                </Animated.View>
+                            );
+                        }
                         )}
                     </Animated.View>
                 )}
