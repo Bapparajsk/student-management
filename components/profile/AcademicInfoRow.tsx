@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { MaterialIcons } from "@expo/vector-icons";
 import { View } from "react-native";
 import ThemeText from "../ui/ThemeText";
@@ -34,9 +35,13 @@ export type StatCardProps = {
     value: string;
     icon: keyof typeof MaterialIcons.glyphMap;
     color: string;
+    classNames?: {
+        value?: string;
+        label?: string;
+    };
 };
 
-export const StatCard = ({ label, value, icon, color }: StatCardProps) => {
+export const StatCard = ({ label, value, icon, color, classNames }: StatCardProps) => {
     return (
         <View className="flex-1 flex-row items-center rounded-2xl border border-white/5 bg-white/4 p-3">
 
@@ -54,11 +59,11 @@ export const StatCard = ({ label, value, icon, color }: StatCardProps) => {
             </View>
 
             <View className="ml-3 flex-1">
-                <ThemeText className="text-lg font-poppins-semibold">
+                <ThemeText className={cn("text-lg font-poppins-semibold", classNames?.value)}>
                     {value}
                 </ThemeText>
 
-                <ThemeText className="text-xs text-zinc-500">
+                <ThemeText className={cn("text-xs text-zinc-500", classNames?.label)}>
                     {label}
                 </ThemeText>
             </View>

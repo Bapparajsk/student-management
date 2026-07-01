@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { useRef, useState } from 'react';
+import { Fragment, ReactNode, useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
@@ -28,6 +28,7 @@ export type FilterPopoverProps = {
     activeItemId?: string;
     itemStyle?: FilterPopoverItemStyle
     zIndex?: number;
+    activeContent?: ReactNode;
 };
 
 export const FilterPopover = ({
@@ -35,7 +36,8 @@ export const FilterPopover = ({
     onSelect,
     activeItemId,
     itemStyle,
-    zIndex
+    zIndex,
+    activeContent
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
@@ -80,24 +82,29 @@ export const FilterPopover = ({
                     }}
                     className="flex-row items-center px-4 py-3"
                 >
-                    {selectedFilter.iconName && (
-                        <MaterialIcons
-                            name={selectedFilter.iconName}
-                            size={16}
-                            color="#22D3EE"
-                        />
+                    {activeContent || (
+                        <Fragment>
+                            {selectedFilter.iconName && (
+                                <MaterialIcons
+                                    name={selectedFilter.iconName}
+                                    size={16}
+                                    color="#22D3EE"
+                                />
+                            )}
+
+                            <ThemeText className={cn("ml-2", itemStyle?.labelClassName)}>
+                                {selectedFilter.label}
+                            </ThemeText>
+
+                            <MaterialIcons
+                                name={open ? 'expand-less' : 'expand-more'}
+                                size={18}
+                                color="#A1A1AA"
+                                style={{ marginLeft: 8 }}
+                            />
+                        </Fragment>
                     )}
 
-                    <ThemeText className={cn("ml-2", itemStyle?.labelClassName)}>
-                        {selectedFilter.label}
-                    </ThemeText>
-
-                    <MaterialIcons
-                        name={open ? 'expand-less' : 'expand-more'}
-                        size={18}
-                        color="#A1A1AA"
-                        style={{ marginLeft: 8 }}
-                    />
                 </PressableFeedback>
 
                 {/* Content */}

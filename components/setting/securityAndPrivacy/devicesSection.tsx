@@ -1,9 +1,13 @@
 import ThemeText from '@/components/ui/ThemeText'
 import { PressableFeedback } from 'components/hero-ui'
+import { useRouter } from 'expo-router'
 import { View } from 'react-native'
 import { DeviceItem } from './deviceItem'
 
 export const DevicesSection = () => {
+
+    const router = useRouter()
+
     return (
         <View className="mb-5">
 
@@ -44,6 +48,7 @@ export const DevicesSection = () => {
 
                     <PressableFeedback
                         className="flex-row items-center justify-center py-4"
+                        onPress={() => router.push('/setting/securityPrivacy/devices')}
                     >
                         <ThemeText className="font-poppins-medium text-cyan-400">
                             View All Devices
