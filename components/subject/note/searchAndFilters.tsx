@@ -137,7 +137,7 @@ export function SearchBar() {
         <View className="mt-3">
             <InputGroup
                 onFocus={() => {
-                    scrollTo(400);
+                    scrollTo(385);
                 }}
             >
                 <InputGroup.Prefix>

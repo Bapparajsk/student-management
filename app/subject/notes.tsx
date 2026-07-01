@@ -5,7 +5,7 @@ import { ScreenContent } from '@/components/ui/ScreenContent';
 export default function SubjectNotesScreen() {
 
     return (
-        <ScreenContent stickyHeaderIndices={[1]} path={"subject/notes"} bottomBarHeight={80} header={{ backButton: { showBackButton: false } }}>
+        <ScreenContent stickyHeaderIndices={[2]} path={"subject/notes"} bottomBarHeight={80} header={{ backButton: { showBackButton: false } }}>
             <StudyProgressCard progress={90} />
             <SearchBar />
             <SearchAndFilters />
