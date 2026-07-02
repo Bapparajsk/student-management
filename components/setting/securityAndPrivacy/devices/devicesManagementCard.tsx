@@ -16,9 +16,6 @@ export const DevicesManagementCard = () => {
                 location="Kolkata, India"
                 lastActive="Active 2 hours ago"
                 index={2}
-                onLongPress={() => {
-                    console.log("item press");
-                }}
             />
 
             <DeviceItem

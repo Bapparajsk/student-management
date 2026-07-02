@@ -1,11 +1,11 @@
+import { cn } from '@/utils/cn';
+import { isValidValueOrDefault } from '@/utils/getOptionByValue';
+import { colors } from '@/utils/theme';
+import { areAllValid } from '@/utils/validation';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fragment, ReactNode, useRef, useState } from 'react';
 import { View } from 'react-native';
 import Animated, { FadeIn, LinearTransition } from 'react-native-reanimated';
-
-import { cn } from '@/utils/cn';
-import { isValidValueOrDefault } from '@/utils/getOptionByValue';
-import { colors } from '@/utils/theme';
 import { PressableFeedback, Separator } from '../hero-ui';
 import ThemeText from '../ui/ThemeText';
 
@@ -30,28 +30,30 @@ export type FilterPopoverItemStyle = {
 
 export type FilterPopoverProps = {
     items: FilterOption[];
-    onSelect?: (item: FilterOption) => void;
     activeItemId?: string;
     itemStyle?: FilterPopoverItemStyle
     zIndex?: number;
     activeContent?: ReactNode;
+    activeIsOpenTextPosition?: "left" | "right";
     activeIsOpenText?: string;
     showActiveIcon?: boolean;
     showActiveColor?: boolean;
     triggerClassName?: string;
+    onSelect?: (item: FilterOption) => void;
 };
 
 export const FilterPopover = ({
     items,
-    onSelect,
     activeItemId,
     itemStyle,
     zIndex,
     activeContent,
     activeIsOpenText,
+    activeIsOpenTextPosition = "right",
     showActiveIcon = true,
     showActiveColor = true,
-    triggerClassName
+    triggerClassName,
+    onSelect,
 }: FilterPopoverProps) => {
 
     const triggerWidth = useRef(120);
@@ -93,8 +95,15 @@ export const FilterPopover = ({
                 >
                     {activeContent ? (
                         <Fragment>
+                            {areAllValid(open, activeIsOpenText, activeIsOpenTextPosition === "left") && (
+                                <Animated.View entering={FadeIn}>
+                                    <ThemeText className="ml-2 text-zinc-400">
+                                        {activeIsOpenText}
+                                    </ThemeText>
+                                </Animated.View>
+                            )}
                             {activeContent}
-                            {open && activeIsOpenText && (
+                            {areAllValid(open, activeIsOpenText, activeIsOpenTextPosition === "right") && (
                                 <Animated.View entering={FadeIn}>
                                     <ThemeText className="ml-2 text-zinc-400">
                                         {activeIsOpenText}
@@ -124,7 +133,6 @@ export const FilterPopover = ({
                             />
                         </Fragment>
                     )}
-
                 </PressableFeedback>
 
                 {open && (
